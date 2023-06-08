@@ -3,15 +3,15 @@ package com.projeto_mc322.api.models.user;
 import java.util.UUID;
 
 public abstract class User {
-    private final UUID id = new UUID();
+    private final UUID id = UUID.randomUUID();
     private String nome;
-    private String cpf;
+    private final String cpf;
     private String email;
     private String senha;
 
     public User(String nome, String cpf, String email, String senha) {
         setNome(nome);
-        setCpf(cpf);
+        this.cpf = cpf;
         setEmail(email);
         setSenha(senha);
     }
@@ -26,10 +26,6 @@ public abstract class User {
 
     public String getCpf() {
         return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf.trim();
     }
 
     public String getEmail() {
