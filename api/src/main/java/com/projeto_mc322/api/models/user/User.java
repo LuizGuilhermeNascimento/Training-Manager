@@ -1,5 +1,6 @@
 package com.projeto_mc322.api.models.user;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public abstract class User {
@@ -14,6 +15,10 @@ public abstract class User {
         this.cpf = cpf;
         setEmail(email);
         setSenha(senha);
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public String getNome() {
@@ -42,5 +47,12 @@ public abstract class User {
 
     public void setSenha(String senha) {
         this.senha = senha.trim();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User user)) return false;
+        return Objects.equals(id, user.getId()) || Objects.equals(getCpf(), user.getCpf()) || Objects.equals(getEmail(), user.getEmail());
     }
 }
