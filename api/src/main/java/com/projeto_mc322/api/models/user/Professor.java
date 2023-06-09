@@ -25,8 +25,10 @@ public class Professor extends User{
 
     public boolean excluirSecao(Secao secao){
         if (secoes.remove(secao)){
-
+            secao.apagarSecao();
+            return true;
         }
+        return false;
     }
 
     public String getCref() {
