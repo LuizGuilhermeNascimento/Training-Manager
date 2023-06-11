@@ -4,6 +4,10 @@ import com.projeto_mc322.api.models.acompanhamento.Acompanhamento;
 import com.projeto_mc322.api.models.secao.Secao;
 import com.projeto_mc322.api.models.treino.Treino;
 
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +16,19 @@ public class Aluno extends User{
     private List<Secao> secoesAgendadas = new ArrayList<>();
     public Aluno(String nome, String cpf, String email, String senha, Acompanhamento acompanhamento) {
         super(nome, cpf, email, senha);
+    }
+
+    @Override
+    public JsonObject writeJson() {
+        JsonObject jsonObject = super.writeJson();
+        JsonArrayBuilder jsonArrayBuilderSecoesAgendadas = Json.createArrayBuilder();
+        secoesAgendadas.forEach(secao -> jsonArrayBuilderSecoesAgendadas.add(secao.getId().toString()));
+        JsonObjectBuilder jsonObjectBuilder =  Json.createObjectBuilder();
+        jsonObjectBuilder
+                .add("acompanhamento", getAcompanhamento().getId().toString())
+                .add("secoesAgendadas", jsonArrayBuilderSecoesAgendadas.build());
+        jsonObject.keySet().forEach(key -> jsonObjectBuilder.add(key, jsonObject.get(key)));
+        return jsonObjectBuilder.build();
     }
 
     public Treino proximoTreino(){

@@ -1,9 +1,14 @@
 package com.projeto_mc322.api.models.user;
 
+import com.datapersistence.JsonSerializable;
+
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class User {
+public abstract class User implements JsonSerializable {
     private final UUID id = UUID.randomUUID();
     private String nome;
     private final String cpf;
@@ -17,6 +22,18 @@ public abstract class User {
         setSenha(senha);
     }
 
+    @Override
+    public JsonObject writeJson() {
+        return Json.createObjectBuilder()
+                .add("nome", getNome())
+                .add("cpf", getCpf())
+                .add("id", getId().toString())
+                .add("email", getEmail())
+                .add("senha", getSenha())
+                .build();
+    }
+
+    @Override
     public UUID getId() {
         return id;
     }
