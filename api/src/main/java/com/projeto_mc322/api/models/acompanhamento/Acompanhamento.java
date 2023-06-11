@@ -1,14 +1,18 @@
 package com.projeto_mc322.api.models.acompanhamento;
 
+import com.datapersistence.JsonSerializable;
 import com.projeto_mc322.api.models.treino.Treino;
 import com.projeto_mc322.api.models.user.Aluno;
 import com.projeto_mc322.api.models.user.Professor;
 
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Acompanhamento {
+public class Acompanhamento implements JsonSerializable {
     private final UUID id = UUID.randomUUID();
     private Professor professor;
     private Aluno aluno;
@@ -22,6 +26,25 @@ public class Acompanhamento {
         setTreinosMeta(treinosMeta);
     }
 
+    @Override
+    public JsonObject writeJson() {
+        JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
+        treinos.forEach(treino -> jsonArrayBuilder.add(treino.writeJson()));
+        return Json.createObjectBuilder()
+                .add("id", getId().toString())
+                .add("alunoId", getAluno().getId().toString())
+                .add("professorId", getProfessor().getId().toString())
+                .add("treinos", jsonArrayBuilder.build())
+                .add("treinosMeta", getTreinosMeta())
+                .add("treinosRealizados", getTreinosRealizados())
+                .build();
+    }
+
+    @Override
+    public UUID getId() {
+        return id;
+    }
+
     public Treino exibirProximoTreino(){
         Integer num = treinos.size();
         return treinos.get(treinosRealizados % num);
@@ -29,10 +52,6 @@ public class Acompanhamento {
 
     public void realizarTreino(){
         treinosRealizados++;
-    }
-
-    public UUID getId() {
-        return id;
     }
 
     public Professor getProfessor() {
