@@ -14,7 +14,7 @@ import java.util.List;
 public class Aluno extends User{
     private Acompanhamento acompanhamento;
     private List<Secao> secoesAgendadas = new ArrayList<>();
-    public Aluno(String nome, String cpf, String email, String senha, Acompanhamento acompanhamento) {
+    public Aluno(String nome, String cpf, String email, String senha) {
         super(nome, cpf, email, senha);
     }
 
@@ -24,10 +24,14 @@ public class Aluno extends User{
         JsonArrayBuilder jsonArrayBuilderSecoesAgendadas = Json.createArrayBuilder();
         secoesAgendadas.forEach(secao -> jsonArrayBuilderSecoesAgendadas.add(secao.getId().toString()));
         JsonObjectBuilder jsonObjectBuilder =  Json.createObjectBuilder();
-        jsonObjectBuilder
-                .add("acompanhamento", getAcompanhamento().getId().toString())
-                .add("secoesAgendadas", jsonArrayBuilderSecoesAgendadas.build());
+        String acompanhamentoString = "";
+        if (getAcompanhamento() != null){
+            acompanhamentoString = getAcompanhamento().getId().toString();
+        }
         jsonObject.keySet().forEach(key -> jsonObjectBuilder.add(key, jsonObject.get(key)));
+        jsonObjectBuilder
+                .add("acompanhamento", acompanhamentoString)
+                .add("secoesAgendadas", jsonArrayBuilderSecoesAgendadas);
         return jsonObjectBuilder.build();
     }
 

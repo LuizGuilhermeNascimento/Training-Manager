@@ -8,13 +8,14 @@ import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Professor extends User{
     private final String cref;
-    private List<Acompanhamento> acompanhamentos;
-    private List<Secao> secoes;
+    private List<Acompanhamento> acompanhamentos = new ArrayList<>();
+    private List<Secao> secoes = new ArrayList<>();
 
     public Professor(String nome, String cpf, String cref, String email, String senha) {
         super(nome, cpf, email, senha);
@@ -29,11 +30,11 @@ public class Professor extends User{
         secoes.forEach(secao -> jsonArrayBuilderSecoes.add(secao.getId().toString()));
         acompanhamentos.forEach(acompanhamento -> jsonArrayBuilderAcompanhamentos.add(acompanhamento.getId().toString()));
         JsonObjectBuilder jsonObjectBuilder =  Json.createObjectBuilder();
-        jsonObjectBuilder
-                .add("acompanhamentos", jsonArrayBuilderAcompanhamentos.build())
-                .add("secoes", jsonArrayBuilderSecoes.build())
-                .build();
         jsonObject.keySet().forEach(key -> jsonObjectBuilder.add(key, jsonObject.get(key)));
+        jsonObjectBuilder
+                .add("cref", getCref())
+                .add("acompanhamentos", jsonArrayBuilderAcompanhamentos.build())
+                .add("secoes", jsonArrayBuilderSecoes.build());
         return jsonObjectBuilder.build();
     }
 
