@@ -34,6 +34,11 @@ public class JsonManager {
             e.printStackTrace();
         }
     }
+
+    public static boolean excluirArquivo(String path){
+        return new File(path).delete();
+    }
+
     public static JsonObject readFile(String path) throws NullPointerException, FileNotFoundException {
         File file = new File(path);
         JsonReader jsonReader = Json.createReader(new FileReader(file));
