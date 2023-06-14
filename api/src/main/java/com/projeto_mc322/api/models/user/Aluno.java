@@ -5,7 +5,7 @@ import com.projeto_mc322.api.models.treino.Treino;
 
 public class Aluno extends User{
     private Acompanhamento acompanhamento;
-    public Aluno(String nome, String cpf, String email, String senha, Acompanhamento acompanhamento) {
+    public Aluno(String nome, String cpf, String email, String senha) {
         super(nome, cpf, email, senha);
     }
 

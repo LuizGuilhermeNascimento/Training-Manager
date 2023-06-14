@@ -3,34 +3,36 @@ package com.projeto_mc322.api.services;
 
 import com.projeto_mc322.api.dtos.CreateAlunoDTO;
 import com.projeto_mc322.api.dtos.CreateProfessorDTO;
-import com.projeto_mc322.api.exceptions.CPFIndisponivel;
-import com.projeto_mc322.api.exceptions.CREFIndisponivel;
-import com.projeto_mc322.api.exceptions.EmailIndisponivel;
-import com.projeto_mc322.api.exceptions.LoginInvalido;
+import com.projeto_mc322.api.dtos.CreateUserDTO;
+import com.projeto_mc322.api.exceptions.*;
 import com.projeto_mc322.api.models.user.Aluno;
 import com.projeto_mc322.api.models.user.User;
+import com.projeto_mc322.api.repositories.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
 public class UserService {
-    public User login(String email, String senha) throws LoginInvalido {
-        // TODO: 08/06/2023
-        throw new LoginInvalido("Login Inválido");
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public User save(CreateAlunoDTO createAlunoDTO) throws CPFIndisponivel, EmailIndisponivel {
-        // TODO: 08/06/2023
-        return new Aluno(createAlunoDTO.getNome(),
-                                createAlunoDTO.getCpf(),
-                                createAlunoDTO.getEmail(),
-                                createAlunoDTO.getSenha());
+    public User login(String email, String senha) throws HttpException {
+        User user = userRepository.findByEmail(email);
+        if (user.getSenha().equals(senha)){
+            return user;
+        }
+        throw new HttpException("Credenciais inválidas", HttpStatus.UNAUTHORIZED);
     }
 
-    public User save(CreateProfessorDTO createProfessorDTO) throws CPFIndisponivel, CREFIndisponivel, EmailIndisponivel {
-        // TODO: 08/06/2023
-        throw new CPFIndisponivel();
+    public User create(CreateUserDTO createUserDTO) throws HttpException {
+        User user = createUserDTO.create();
+        userRepository.create(user);
+        return user;
     }
 
     public boolean delete(UUID id) {

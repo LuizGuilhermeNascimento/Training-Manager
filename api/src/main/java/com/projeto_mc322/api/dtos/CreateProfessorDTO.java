@@ -1,13 +1,27 @@
 package com.projeto_mc322.api.dtos;
 
-public class CreateProfessorDTO extends CreateUserDTO {
-    private String creaf;
+import com.projeto_mc322.api.models.user.Professor;
+import com.projeto_mc322.api.models.user.User;
 
-    public String getCreaf() {
-        return creaf;
+public class CreateProfessorDTO extends CreateUserDTO {
+    private String cref;
+
+    public String getCref() {
+        return cref;
     }
 
-    public void setCreaf(String creaf) {
-        this.creaf = creaf;
+    public void setCref(String cref) {
+        this.cref = cref;
+    }
+
+    @Override
+    public User create() {
+        return new Professor(
+                getNome(),
+                getCpf(),
+                getCref(),
+                getEmail(),
+                getSenha()
+        );
     }
 }

@@ -1,10 +1,14 @@
 package com.projeto_mc322.api.dtos;
 
+import com.projeto_mc322.api.models.user.User;
+
 public abstract class CreateUserDTO {
     private String nome;
     private String cpf;
     private String email;
     private String senha;
+
+    public abstract User create();
 
     public String getNome() {
         return nome;
@@ -21,7 +25,6 @@ public abstract class CreateUserDTO {
     public void setCpf(String cpf) {
         this.cpf = cpf.trim();
     }
-
 
     public String getEmail() {
         return email;
