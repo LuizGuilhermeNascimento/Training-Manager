@@ -2,7 +2,12 @@ package com.projeto_mc322.api.models.user;
 
 import com.projeto_mc322.api.models.acompanhamento.Acompanhamento;
 
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,7 +20,21 @@ public class Professor extends User {
         this.cref = cref;
     }
 
-    public boolean deleteAcompanhamento(Acompanhamento acompanhamento){
+    @Override
+    public JsonObject writeJson() {
+        JsonObject jsonObject = super.writeJson();
+        JsonArrayBuilder jsonArrayBuilderAcompanhamentos = Json.createArrayBuilder();
+        acompanhamentos.forEach(acompanhamento -> jsonArrayBuilderAcompanhamentos.add(acompanhamento.getId().toString()));
+        JsonObjectBuilder jsonObjectBuilder =  Json.createObjectBuilder();
+        jsonObject.keySet().forEach(key -> jsonObjectBuilder.add(key, jsonObject.get(key)));
+        jsonObjectBuilder
+                .add("cref", getCref())
+                .add("acompanhamentos", jsonArrayBuilderAcompanhamentos.build())
+        return jsonObjectBuilder.build();
+    }
+
+
+    public boolean deleteAcompanhamento(Acompanhamento acompanhamento) {
         return acompanhamentos.remove(acompanhamento);
     }
 
