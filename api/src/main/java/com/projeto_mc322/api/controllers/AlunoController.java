@@ -5,7 +5,6 @@ import com.projeto_mc322.api.models.acompanhamento.Acompanhamento;
 import com.projeto_mc322.api.models.treino.Treino;
 import com.projeto_mc322.api.services.AlunoService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

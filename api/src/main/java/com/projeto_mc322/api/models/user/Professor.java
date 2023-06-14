@@ -1,37 +1,51 @@
 package com.projeto_mc322.api.models.user;
 
 import com.projeto_mc322.api.models.acompanhamento.Acompanhamento;
-import com.projeto_mc322.api.models.sala.Sala;
-import com.projeto_mc322.api.models.secao.Secao;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-public class Professor extends User{
+public class Professor extends User {
     private final String cref;
-    private List<Acompanhamento> acompanhamentos;
-    private List<Secao> secoes;
+    private List<Acompanhamento> acompanhamentos = new ArrayList<>();
 
     public Professor(String nome, String cpf, String cref, String email, String senha) {
         super(nome, cpf, email, senha);
         this.cref = cref;
     }
 
-    public Secao criarSecao(String titulo, String descricao, Integer capacidade, Sala sala, Date data, Integer duracao){
-        Secao secao = new Secao(this, titulo, descricao, capacidade, sala, data, duracao);
-        secoes.add(secao);
-        return secao;
+    public boolean deleteAcompanhamento(Acompanhamento acompanhamento){
+        return acompanhamentos.remove(acompanhamento);
     }
 
-    public boolean excluirSecao(Secao secao){
-        if (secoes.remove(secao)){
-            secao.apagarSecao();
-            return true;
+    public boolean deleteAcompanhamento(UUID acompanhamentoId){
+        try{
+            Acompanhamento acompanhamento = findAcompanhamentoById(acompanhamentoId);
+            return deleteAcompanhamento(acompanhamento);
+        }catch(Exception e){
+            return false;
         }
-        return false;
+    }
+
+    private Acompanhamento findAcompanhamentoById(UUID id) throws Exception{
+        for (Acompanhamento acompanhamento : getAcompanhamentos()){
+            if (acompanhamento.getId().equals(id)){
+                return acompanhamento;
+            }
+        }
+        throw new Exception();
     }
 
     public String getCref() {
         return cref;
+    }
+
+    public List<Acompanhamento> getAcompanhamentos() {
+        return this.acompanhamentos;
+    }
+
+    public void setAcompanhamentos(List<Acompanhamento> acompanhamentos) {
+        this.acompanhamentos = acompanhamentos;
     }
 }

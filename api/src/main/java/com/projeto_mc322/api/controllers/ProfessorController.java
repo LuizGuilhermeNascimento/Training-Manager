@@ -44,9 +44,14 @@ public class ProfessorController {
     @DeleteMapping("/acompanhamento/{professorId}/{acompanhamentoId}")
     public ResponseEntity<Object> deleteAcompanhamento(@PathVariable(name = "professorId") UUID professorId,
                                                        @PathVariable(name = "acompanhamentoId") UUID acompanhamentoId){
-        if (professorService.deleteAcompanhamento(professorId, acompanhamentoId)){
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body("Acompanhamento " + acompanhamentoId + " excluído.");
+        try{
+            if (professorService.deleteAcompanhamento(professorId, acompanhamentoId)){
+                return ResponseEntity.status(HttpStatus.ACCEPTED).body("Acompanhamento " + acompanhamentoId + " excluído.");
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Acompanhamento " + acompanhamentoId + " não existe");
+        }catch(HttpException e){
+            return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Acompanhamento " + acompanhamentoId + " não existe");
+        
     }
 }
