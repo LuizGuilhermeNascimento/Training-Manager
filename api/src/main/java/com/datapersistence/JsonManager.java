@@ -15,22 +15,22 @@ import java.util.Objects;
 
 public class JsonManager {
     public static void main(String[] args) {
-        try{
-            Professor professor = new Professor("Kratos", "23866461536", "51629996", "eafad", "adfasdf");
-            Aluno aluno = new Aluno("eADFADFA", "Q2342Q4", "ADFADFAS", "adfadsfadf");
-            Secao secao = professor.criarSecao("ADFDASFASDFASDF", "AAAAAAAAAAAAAAAAAAAA", 20, new Sala(), new Date(), 60);
-            secao.getAlunos().add(aluno);
-            writeFile(professor);
-            writeFile(secao);
-            writeFile(aluno);
-            System.out.println(readFile("dados/Aluno/" + aluno.getId() + ".json"));
-            System.out.println(readFile("dados/Professor/" + professor.getId() + ".json"));
-            System.out.println(readFile("dados/Secao/" + secao.getId() + ".json"));
-//            readFile("data/exemplo.json");
-//            System.out.println(crefUnico("51629996"));
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+//        try{
+//            Professor professor = new Professor("Kratos", "23866461536", "51629996", "eafad", "adfasdf");
+//            Aluno aluno = new Aluno("eADFADFA", "Q2342Q4", "ADFADFAS", "adfadsfadf");
+//            Secao secao = professor.criarSecao("ADFDASFASDFASDF", "AAAAAAAAAAAAAAAAAAAA", 20, new Sala(), new Date(), 60);
+//            secao.getAlunos().add(aluno);
+//            writeFile(professor);
+//            writeFile(secao);
+//            writeFile(aluno);
+//            System.out.println(readFile("dados/Aluno/" + aluno.getId() + ".json"));
+//            System.out.println(readFile("dados/Professor/" + professor.getId() + ".json"));
+//            System.out.println(readFile("dados/Secao/" + secao.getId() + ".json"));
+////            readFile("data/exemplo.json");
+////            System.out.println(crefUnico("51629996"));
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
     }
 
     public static boolean excluirArquivo(String path){
@@ -45,20 +45,21 @@ public class JsonManager {
         return jsonObject;
     }
 
-    public static void writeFile(String path, JsonObject jsonObject) {
+    public static boolean writeFile(String path, JsonObject jsonObject) {
         createFolderIfNotExists(path);
         try (FileWriter fileWriter = new FileWriter(path)){
             JsonWriter jsonWriter = Json.createWriter(fileWriter);
             jsonWriter.writeObject(jsonObject);
             jsonWriter.close();
-        }catch (Exception e){
-            e.printStackTrace();
+            return true;
+        }catch (Exception ignore){
+            return false;
         }
     }
 
-    public static void writeFile(JsonSerializable jsonSerializable) throws Exception {
+    public static boolean writeFile(JsonSerializable jsonSerializable) {
         String path = "dados/" + jsonSerializable.getClass().getSimpleName() + "/" + jsonSerializable.getId() + ".json";
-        writeFile(path, jsonSerializable.writeJson());
+        return writeFile(path, jsonSerializable.writeJson());
     }
 
     private static String getPath(JsonSerializable jsonSerializable){
@@ -80,14 +81,18 @@ public class JsonManager {
     }
 
     public static boolean campoUnico(String pasta, String campo, String valor){
-        for (File file: Objects.requireNonNull(new File(pasta).listFiles())){
-            try{
-                JsonObject jsonObject = readFile(file.getPath());
-                if (jsonObject.getString(campo).equals(valor)){
-                    return false;
+        try {
+            for (File file : Objects.requireNonNull(new File(pasta).listFiles())) {
+                try {
+                    JsonObject jsonObject = readFile(file.getPath());
+                    if (jsonObject.getString(campo).equals(valor)) {
+                        return false;
+                    }
+                } catch (Exception ignored) {
                 }
-            } catch (Exception ignored) {
             }
+        }catch (Exception ignored){
+            return true;
         }
         return true;
     }
@@ -107,5 +112,18 @@ public class JsonManager {
             return false;
         }
         return campoUnico("dados/Aluno", "email", email);
+    }
+
+    public static JsonObject buscarPorCampo(String pasta, String campo, String valor) throws Exception{
+        for (File file : Objects.requireNonNull(new File(pasta).listFiles())) {
+            try {
+                JsonObject jsonObject = readFile(file.getPath());
+                if (jsonObject.getString(campo).equals(valor)) {
+                    return jsonObject;
+                }
+            } catch (Exception ignored) {
+            }
+        }
+        throw new Exception();
     }
 }

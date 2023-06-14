@@ -5,11 +5,8 @@ import com.projeto_mc322.api.models.acompanhamento.Acompanhamento;
 import com.projeto_mc322.api.models.treino.Treino;
 
 import javax.json.Json;
-import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Aluno extends User{
     private Acompanhamento acompanhamento;
@@ -27,10 +24,9 @@ public class Aluno extends User{
             acompanhamentoString = getAcompanhamento().getId().toString();
         }
         jsonObject.keySet().forEach(key -> jsonObjectBuilder.add(key, jsonObject.get(key)));
-        jsonObjectBuilder
+        return jsonObjectBuilder
                 .add("acompanhamento", acompanhamentoString)
-                .add("secoesAgendadas", jsonArrayBuilderSecoesAgendadas);
-        return jsonObjectBuilder.build();
+                .build();
     }
 
     public Treino proximoTreino(){

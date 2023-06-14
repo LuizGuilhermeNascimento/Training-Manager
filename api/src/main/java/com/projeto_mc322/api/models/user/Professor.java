@@ -7,7 +7,6 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,10 +26,10 @@ public class Professor extends User {
         acompanhamentos.forEach(acompanhamento -> jsonArrayBuilderAcompanhamentos.add(acompanhamento.getId().toString()));
         JsonObjectBuilder jsonObjectBuilder =  Json.createObjectBuilder();
         jsonObject.keySet().forEach(key -> jsonObjectBuilder.add(key, jsonObject.get(key)));
-        jsonObjectBuilder
+        return jsonObjectBuilder
                 .add("cref", getCref())
                 .add("acompanhamentos", jsonArrayBuilderAcompanhamentos.build())
-        return jsonObjectBuilder.build();
+                .build();
     }
 
 
