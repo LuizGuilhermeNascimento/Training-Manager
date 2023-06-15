@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.UUID;
 
 public class Acompanhamento implements JsonSerializable {
-    private final UUID id = UUID.randomUUID();
+    private final UUID id;
     private Professor professor;
     private Aluno aluno;
-    private List<Treino> treinos = new ArrayList<>();
+    private List<Treino> treinos;
     private Integer treinosRealizados = 0;
     private Integer treinosMeta; // quantas vezes o aluno deve realizar uma seção completa de treinos
 
@@ -24,6 +24,15 @@ public class Acompanhamento implements JsonSerializable {
         setProfessor(professor);
         setAluno(aluno);
         setTreinosMeta(treinosMeta);
+        treinos = new ArrayList<>();
+        id = UUID.randomUUID();
+    }
+
+    public Acompanhamento(UUID id, Integer treinosRealizados, Integer treinosMeta) {
+        setTreinosRealizados(treinosRealizados);
+        setTreinosMeta(treinosMeta);
+        treinos = new ArrayList<>();
+        this.id = id;
     }
 
     @Override

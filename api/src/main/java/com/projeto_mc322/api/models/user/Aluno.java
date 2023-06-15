@@ -16,9 +16,8 @@ public class Aluno extends User{
         super(nome, cpf, email, senha);
     }
 
-    public Aluno(UUID uuid, String nome, String cpf, String email, String senha, Acompanhamento acompanhamento) {
+    public Aluno(UUID uuid, String nome, String cpf, String email, String senha) {
         super(uuid, nome, cpf, email, senha);
-        setAcompanhamento(acompanhamento);
     }
 
     @Override
