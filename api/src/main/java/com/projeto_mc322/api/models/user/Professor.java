@@ -12,11 +12,25 @@ import java.util.UUID;
 
 public class Professor extends User {
     private final String cref;
-    private List<Acompanhamento> acompanhamentos = new ArrayList<>();
+    private List<Acompanhamento> acompanhamentos;
 
     public Professor(String nome, String cpf, String cref, String email, String senha) {
         super(nome, cpf, email, senha);
         this.cref = cref;
+        acompanhamentos = new ArrayList<>();
+    }
+
+    public Professor(UUID id, String nome, String cpf, String email, String senha, String cref) {
+        super(id, nome, cpf, email, senha);
+        this.cref = cref;
+        acompanhamentos = new ArrayList<>();
+    }
+
+
+    public Professor(UUID uuid, String nome, String cpf, String email, String senha, String cref, List<Acompanhamento> acompanhamentos) {
+        super(uuid, nome, cpf, email, senha);
+        this.cref = cref;
+        this.acompanhamentos = acompanhamentos;
     }
 
     @Override

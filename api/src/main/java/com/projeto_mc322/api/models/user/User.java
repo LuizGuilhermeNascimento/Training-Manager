@@ -9,13 +9,22 @@ import java.util.Objects;
 import java.util.UUID;
 
 public abstract class User implements JsonSerializable {
-    private final UUID id = UUID.randomUUID();
+    private final UUID id;
     private String nome;
     private final String cpf;
     private String email;
     private String senha;
 
     public User(String nome, String cpf, String email, String senha) {
+        this.id = UUID.randomUUID();
+        setNome(nome);
+        this.cpf = cpf;
+        setEmail(email);
+        setSenha(senha);
+    }
+
+    public User(UUID uuid, String nome, String cpf, String email, String senha) {
+        this.id = uuid;
         setNome(nome);
         this.cpf = cpf;
         setEmail(email);

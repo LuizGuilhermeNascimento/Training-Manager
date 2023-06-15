@@ -7,12 +7,18 @@ import com.projeto_mc322.api.models.treino.Treino;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
+import java.util.UUID;
 
 public class Aluno extends User{
     private Acompanhamento acompanhamento;
 
     public Aluno(String nome, String cpf, String email, String senha) {
         super(nome, cpf, email, senha);
+    }
+
+    public Aluno(UUID uuid, String nome, String cpf, String email, String senha, Acompanhamento acompanhamento) {
+        super(uuid, nome, cpf, email, senha);
+        setAcompanhamento(acompanhamento);
     }
 
     @Override
