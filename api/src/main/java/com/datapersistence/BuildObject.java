@@ -8,6 +8,7 @@ import com.projeto_mc322.api.models.user.Professor;
 import javax.json.JsonObject;
 import javax.json.JsonString;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.UUID;
 
 public class BuildObject {
@@ -119,11 +120,11 @@ public class BuildObject {
         visitados.put(aluno.getId().toString(), aluno);
 
         if (visitados.containsKey(jsonObject.getString("acompanhamento"))){
-            aluno.setAcompanhamento((Acompanhamento) visitados.get(jsonObject.getString("acompanhamento")));
+            aluno.setAcompanhamento(Optional.of((Acompanhamento) visitados.get(jsonObject.getString("acompanhamento"))));
         }else{
             try{
                 JsonObject jsonObject1 = JsonManager.readFile("dados/Acompanhamento/" + jsonObject.getString("acompanhamento") + ".json");
-                aluno.setAcompanhamento(buildAcompanhamento(jsonObject1, visitados));
+                aluno.setAcompanhamento(Optional.of(buildAcompanhamento(jsonObject1, visitados)));
             }catch (Exception ignored) {
             }
         }

@@ -7,10 +7,11 @@ import com.projeto_mc322.api.models.treino.Treino;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
+import java.util.Optional;
 import java.util.UUID;
 
 public class Aluno extends User{
-    private Acompanhamento acompanhamento;
+    private Optional<Acompanhamento> acompanhamento = Optional.empty();
 
     public Aluno(String nome, String cpf, String email, String senha) {
         super(nome, cpf, email, senha);
@@ -25,8 +26,8 @@ public class Aluno extends User{
         JsonObject jsonObject = super.writeJson();
         JsonObjectBuilder jsonObjectBuilder =  Json.createObjectBuilder();
         String acompanhamentoString = "";
-        if (getAcompanhamento() != null){
-            acompanhamentoString = getAcompanhamento().getId().toString();
+        if (getAcompanhamento().isPresent()){
+            acompanhamentoString = getAcompanhamento().get().getId().toString();
         }
         jsonObject.keySet().forEach(key -> jsonObjectBuilder.add(key, jsonObject.get(key)));
         return jsonObjectBuilder
@@ -34,21 +35,22 @@ public class Aluno extends User{
                 .build();
     }
 
-    public Treino proximoTreino(){
-        return acompanhamento.exibirProximoTreino();
+    public Treino proximoTreino() throws Exception{
+        if (acompanhamento.isPresent()){
+            return acompanhamento.get().exibirProximoTreino();
+        }
+        throw new Exception();
     }
 
     public void realizarTreino(){
-        if (acompanhamento != null){
-            acompanhamento.realizarTreino();
-        }
+        acompanhamento.ifPresent(Acompanhamento::realizarTreino);
     }
 
-    public Acompanhamento getAcompanhamento() {
+    public Optional<Acompanhamento> getAcompanhamento() {
         return acompanhamento;
     }
 
-    public void setAcompanhamento(Acompanhamento acompanhamento) {
+    public void setAcompanhamento(Optional<Acompanhamento> acompanhamento) {
         this.acompanhamento = acompanhamento;
     }
 }

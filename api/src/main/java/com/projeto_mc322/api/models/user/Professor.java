@@ -1,6 +1,7 @@
 package com.projeto_mc322.api.models.user;
 
 import com.projeto_mc322.api.models.acompanhamento.Acompanhamento;
+import com.projeto_mc322.api.models.treino.Treino;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -8,6 +9,7 @@ import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class Professor extends User {
@@ -44,6 +46,14 @@ public class Professor extends User {
                 .add("cref", getCref())
                 .add("acompanhamentos", jsonArrayBuilderAcompanhamentos.build())
                 .build();
+    }
+
+    public Acompanhamento createAcompanhamento(Aluno aluno, List<Treino> treinos, Integer treinosMeta){
+        Acompanhamento acompanhamento = new Acompanhamento(this, aluno, treinosMeta);
+        acompanhamento.setTreinos(treinos);
+        acompanhamentos.add(acompanhamento);
+        aluno.setAcompanhamento(Optional.of(acompanhamento));
+        return acompanhamento;
     }
 
 

@@ -4,6 +4,7 @@ package com.projeto_mc322.api.controllers;
 import com.projeto_mc322.api.dtos.CreateAlunoDTO;
 import com.projeto_mc322.api.dtos.CreateProfessorDTO;
 import com.projeto_mc322.api.dtos.LoginDTO;
+import com.projeto_mc322.api.dtos.UserResponseDTO;
 import com.projeto_mc322.api.exceptions.*;
 import com.projeto_mc322.api.models.user.User;
 import com.projeto_mc322.api.services.UserService;
@@ -26,7 +27,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody LoginDTO loginDTO){
         try{
-            User user = userService.login(loginDTO.getEmail(), loginDTO.getSenha());
+            UserResponseDTO user = userService.login(loginDTO.getEmail(), loginDTO.getSenha());
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
         } catch (HttpException e){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
@@ -36,7 +37,7 @@ public class UserController {
     @PostMapping("/aluno/sign-up")
     public ResponseEntity<Object> signUp(@RequestBody CreateAlunoDTO createAlunoDTO){
         try{
-            User aluno = userService.create(createAlunoDTO);
+            UserResponseDTO aluno = userService.create(createAlunoDTO);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(aluno);
         }catch (HttpException e){
             return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
@@ -46,7 +47,7 @@ public class UserController {
     @PostMapping("/professor/sign-up")
     public ResponseEntity<Object> signUp(@RequestBody CreateProfessorDTO createProfessorDTO){
         try{
-            User professor = userService.create(createProfessorDTO);
+            UserResponseDTO professor = userService.create(createProfessorDTO);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(professor);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(e.getMessage());

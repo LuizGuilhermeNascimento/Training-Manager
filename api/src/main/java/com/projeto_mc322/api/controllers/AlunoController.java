@@ -20,23 +20,23 @@ public class AlunoController {
         this.alunoService = alunoService;
     }
 
-    @GetMapping("/acompanhamento/{alunoId}")
-    public ResponseEntity<Object> getAcompanhamento(@PathVariable(name = "alunoId") UUID alunoId){
-        try {
-            Acompanhamento acompanhamento = alunoService.getAcompanhamento(alunoId);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(acompanhamento);
-        } catch (HttpException e){
-            return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
-        }
-    }
-
-    @GetMapping("/proximo-treino/{alunoId}")
-    public ResponseEntity<Object> getProximoTreino(@PathVariable(name = "alunoId") UUID alunoId){
-        try {
-            Treino treino = alunoService.getProximoTreino(alunoId);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(treino);
-        } catch (HttpException e){
-            return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
-        }
-    }
+//    @GetMapping("/acompanhamento/{alunoId}")
+//    public ResponseEntity<Object> getAcompanhamento(@PathVariable(name = "alunoId") UUID alunoId){
+//        try {
+//            Acompanhamento acompanhamento = alunoService.getAcompanhamento(alunoId);
+//            return ResponseEntity.status(HttpStatus.ACCEPTED).body(acompanhamento);
+//        } catch (HttpException e){
+//            return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
+//        }
+//    }
+//
+//    @GetMapping("/proximo-treino/{alunoId}")
+//    public ResponseEntity<Object> getProximoTreino(@PathVariable(name = "alunoId") UUID alunoId){
+//        try {
+//            Treino treino = alunoService.getProximoTreino(alunoId);
+//            return ResponseEntity.status(HttpStatus.ACCEPTED).body(treino);
+//        } catch (HttpException e){
+//            return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
+//        }
+//    }
 }

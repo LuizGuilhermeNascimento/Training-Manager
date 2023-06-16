@@ -1,5 +1,6 @@
 package com.projeto_mc322.api.repositories;
 
+import com.datapersistence.BuildObject;
 import com.datapersistence.JsonManager;
 import com.projeto_mc322.api.exceptions.HttpException;
 import com.projeto_mc322.api.models.user.Professor;
@@ -7,6 +8,7 @@ import com.projeto_mc322.api.models.user.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
+import javax.json.Json;
 import javax.json.JsonObject;
 import java.util.UUID;
 
@@ -14,7 +16,17 @@ import java.util.UUID;
 public class UserRepository implements IRepository<User> {
     @Override
     public User find(UUID id) throws HttpException {
-        return null;
+        try{
+            JsonObject jsonObject = JsonManager.readFile("dados/Aluno/" + id.toString() + ".json");
+            return BuildObject.buildAluno(jsonObject);
+        }catch (Exception e){
+            try{
+                JsonObject jsonObject = JsonManager.readFile("dados/Professor/" + id.toString() + ".json");
+                return BuildObject.buildProfessor(jsonObject);
+            } catch (Exception e1){
+                throw new HttpException("Usuário não encontrado", HttpStatus.NOT_FOUND);
+            }
+        }
     }
 
     @Override
@@ -24,7 +36,7 @@ public class UserRepository implements IRepository<User> {
 
     @Override
     public boolean save(User user) {
-        return false;
+        return JsonManager.writeFile(user);
     }
 
     public void create(User user) throws HttpException {
@@ -43,22 +55,24 @@ public class UserRepository implements IRepository<User> {
     }
 
     public User findByEmail(String email) throws HttpException {
-//        try {
-//            JsonObject jsonObject = JsonManager.buscarPorCampo("dados/Professor", "email", email);
-//
-//        } catch (Exception e){
-//            try{
-//                JsonObject jsonObject = JsonManager.buscarPorCampo("dados/Aluno", "email", email);
-//
-//            }catch (Exception ignore){
-//                throw new HttpException("Usuario não encontrado", HttpStatus.NOT_FOUND);
-//            }
-//        }
-        // TODO: 14/06/2023
-        return null;
+        return buscarPorCampo("email", email);
     }
 
     public User findByCpf(String cpf) throws HttpException{
-        return null;
+        return buscarPorCampo("cpf", cpf);
+    }
+
+    private User buscarPorCampo(String campo, String valor) throws HttpException {
+        try {
+            JsonObject jsonObject = JsonManager.buscarPorCampo("dados/Professor", campo, valor);
+            return BuildObject.buildProfessor(jsonObject);
+        } catch (Exception e){
+            try{
+                JsonObject jsonObject = JsonManager.buscarPorCampo("dados/Aluno", campo, valor);
+                return BuildObject.buildAluno(jsonObject);
+            }catch (Exception ignore){
+                throw new HttpException("Usuario não encontrado", HttpStatus.NOT_FOUND);
+            }
+        }
     }
 }

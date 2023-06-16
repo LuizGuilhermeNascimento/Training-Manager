@@ -21,19 +21,19 @@ public class AlunoService {
         this.alunoRepository = alunoRepository;
     }
 
-    public Acompanhamento getAcompanhamento(UUID id) throws HttpException {
-        Aluno aluno = alunoRepository.find(id);
-        return aluno.getAcompanhamento();
-    }
+//    public Acompanhamento getAcompanhamento(UUID id) throws HttpException {
+//        Aluno aluno = alunoRepository.find(id);
+//        return aluno.getAcompanhamento();
+//    }
 
-    public Treino getProximoTreino(UUID id) throws HttpException{
-        Aluno aluno = alunoRepository.find(id);
-        return proximoTreino(aluno);
-    }
-
-    private Treino proximoTreino(Aluno aluno){
-        List<Treino> treinos = aluno.getAcompanhamento().getTreinos();
-        Integer num = treinos.size();
-        return treinos.get(aluno.getAcompanhamento().getTreinosRealizados() % num);
-    }
+//    public Treino getProximoTreino(UUID id) throws HttpException{
+//        Aluno aluno = alunoRepository.find(id);
+//        return proximoTreino(aluno);
+//    }
+//
+//    private Treino proximoTreino(Aluno aluno){
+//        List<Treino> treinos = aluno.getAcompanhamento().getTreinos();
+//        Integer num = treinos.size();
+//        return treinos.get(aluno.getAcompanhamento().getTreinosRealizados() % num);
+//    }
 }
