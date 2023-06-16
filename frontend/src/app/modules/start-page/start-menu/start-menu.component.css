@@ -1,0 +1,16 @@
+.menu {
+    border: 2px solid black;
+    padding: 15px;
+    margin: 20px;
+    line-height: 35px;
+}
+.logo {
+    display: inline-block;
+}
+.sign {
+    display: inline;
+    float: right;
+}
+.dropdown {
+    display: inline-block;
+}
