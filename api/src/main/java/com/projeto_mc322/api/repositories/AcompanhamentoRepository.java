@@ -29,6 +29,6 @@ public class AcompanhamentoRepository implements IRepository<Acompanhamento> {
 
     @Override
     public boolean remove(UUID id) {
-        return false;
+        return JsonManager.excluirArquivo("dados/Acompanhamento/" + id + ".json");
     }
 }

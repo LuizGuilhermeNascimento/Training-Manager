@@ -38,9 +38,12 @@ public class AcompanhamentoService {
     }
 
     public Acompanhamento create(CreateAcompanhamentoDTO createAcompanhamentoDTO) throws HttpException {
-        // todo: remover o acompanhamento que o aluno tinha quando o novo acompanhamento for criado
         Professor professor = (Professor) userRepository.find(createAcompanhamentoDTO.getProfessorId());
         Aluno aluno = (Aluno) userRepository.find(createAcompanhamentoDTO.getAlunoId());
+        if (aluno.getAcompanhamento().isPresent()){
+            delete(aluno.getAcompanhamento().get());
+            professor.deleteAcompanhamento(aluno.getAcompanhamento().get());
+        }
         Acompanhamento acompanhamento = professor.createAcompanhamento(
                 aluno,
                 createAcompanhamentoDTO.getTreinos(),
@@ -51,5 +54,9 @@ public class AcompanhamentoService {
             userRepository.save(aluno);
         }
         return acompanhamento;
+    }
+
+    public boolean delete(Acompanhamento acompanhamento){
+        return acompanhamentoRepository.remove(acompanhamento.getId());
     }
 }

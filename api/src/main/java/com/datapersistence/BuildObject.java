@@ -83,8 +83,8 @@ public class BuildObject {
             );
         });
 
-        if (jsonObject.containsKey(jsonObject.getString("alunoId"))){
-            acompanhamento.setAluno((Aluno) jsonObject.get(jsonObject.getString("alunoId")));
+        if (visitados.containsKey(jsonObject.getString("alunoId"))){
+            acompanhamento.setAluno((Aluno) visitados.get(jsonObject.getString("alunoId")));
         }else{
             try{
                 JsonObject jsonObject1 = JsonManager.readFile("dados/Aluno/" + jsonObject.getString("alunoId") + ".json");
@@ -93,8 +93,8 @@ public class BuildObject {
             }catch (Exception ignored){
             }
         }
-        if (jsonObject.containsKey(jsonObject.getString("professorId"))){
-            acompanhamento.setProfessor((Professor) jsonObject.get(jsonObject.getString("professorId")));
+        if (visitados.containsKey(jsonObject.getString("professorId"))){
+            acompanhamento.setProfessor((Professor) visitados.get(jsonObject.getString("professorId")));
         }else{
             try{
                 JsonObject jsonObject1 = JsonManager.readFile("dados/Professor/" + jsonObject.getString("professorId") + ".json");
@@ -108,7 +108,7 @@ public class BuildObject {
 
     private static Aluno buildAluno(JsonObject jsonObject, HashMap<String, Object> visitados){
         if (visitados.containsKey(jsonObject.getString("id"))){
-            return (Aluno) visitados.get("id");
+            return (Aluno) visitados.get(jsonObject.getString("id"));
         }
         Aluno aluno = new Aluno(
                 UUID.fromString(jsonObject.getString("id")),

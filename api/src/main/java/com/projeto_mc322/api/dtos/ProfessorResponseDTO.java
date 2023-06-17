@@ -14,7 +14,7 @@ public class ProfessorResponseDTO extends UserResponseDTO {
         professor.getAcompanhamentos().forEach(
                 acompanhamento -> acompanhamentos.add(new AcompanhamentoResponseDTO(acompanhamento))
         );
-        this.cref = cref;
+        this.cref = professor.getCref();
     }
 
     public List<AcompanhamentoResponseDTO> getAcompanhamentos() {
