@@ -15,7 +15,7 @@ public class CreateProfessorDTO extends CreateUserDTO {
     }
 
     @Override
-    public User create() {
+    public Professor create() {
         return new Professor(
                 getNome(),
                 getCpf(),

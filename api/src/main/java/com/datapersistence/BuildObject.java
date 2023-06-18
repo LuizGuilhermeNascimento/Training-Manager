@@ -12,25 +12,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class BuildObject {
-
-//    public static void main(String[] args) {
-//        try{
-////            Professor professor = new Professor("Eliel", "asdfsad", "adfsadfsd", "adasfsadf", "dfasdf");
-////            Aluno aluno = new Aluno("sadfsdfsadfsdafdsa", "dsafdsfsadf", "dasgsafdsaf", "dahasfdsa");
-////            Acompanhamento acompanhamento = new Acompanhamento(professor, aluno, 10);
-////            professor.getAcompanhamentos().add(acompanhamento);
-////            aluno.setAcompanhamento(acompanhamento);
-////
-////            JsonManager.writeFile(professor);
-////            JsonManager.writeFile(aluno);
-////            JsonManager.writeFile(acompanhamento);
-//            Professor professor = buildProfessor(JsonManager.readFile("dados/Professor/945ca381-157b-44be-8a10-bbd3dea69fe7.json"));
-//            System.out.println(professor.getId());
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//    }
-
     private static Professor buildProfessor(JsonObject jsonObject, HashMap<String, Object> visitados){
         if (visitados.containsKey(jsonObject.getString("id"))){
             return (Professor) visitados.get(jsonObject.getString("id"));
@@ -141,5 +122,14 @@ public class BuildObject {
 
     public static Acompanhamento buildAcompanhamento(JsonObject jsonObject){
         return buildAcompanhamento(jsonObject, new HashMap<>());
+    }
+
+    public static <T> T build(Class<T> clazz, JsonObject jsonObject){
+        if (clazz.equals(Aluno.class)){
+            return (T) buildAluno(jsonObject);
+        }else if (clazz.equals(Professor.class)){
+            return (T) buildProfessor(jsonObject);
+        }
+        return (T) buildAcompanhamento(jsonObject);
     }
 }

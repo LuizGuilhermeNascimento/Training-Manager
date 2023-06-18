@@ -33,32 +33,4 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
         }
     }
-
-    @PostMapping("/aluno/sign-up")
-    public ResponseEntity<Object> signUp(@RequestBody CreateAlunoDTO createAlunoDTO){
-        try{
-            UserResponseDTO aluno = userService.create(createAlunoDTO);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(aluno);
-        }catch (HttpException e){
-            return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
-        }
-    }
-
-    @PostMapping("/professor/sign-up")
-    public ResponseEntity<Object> signUp(@RequestBody CreateProfessorDTO createProfessorDTO){
-        try{
-            UserResponseDTO professor = userService.create(createProfessorDTO);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(professor);
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(e.getMessage());
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> delete(@PathVariable(name = "id") UUID id){
-        if (userService.delete(id)){
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body("Deletado");
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nao deletado");
-    }
 }

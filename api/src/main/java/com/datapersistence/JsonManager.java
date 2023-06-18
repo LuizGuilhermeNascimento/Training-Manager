@@ -12,26 +12,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.Objects;
+import java.util.UUID;
 
 public class JsonManager {
-    public static void main(String[] args) {
-//        try{
-//            Professor professor = new Professor("Kratos", "23866461536", "51629996", "eafad", "adfasdf");
-//            Aluno aluno = new Aluno("eADFADFA", "Q2342Q4", "ADFADFAS", "adfadsfadf");
-//            Secao secao = professor.criarSecao("ADFDASFASDFASDF", "AAAAAAAAAAAAAAAAAAAA", 20, new Sala(), new Date(), 60);
-//            secao.getAlunos().add(aluno);
-//            writeFile(professor);
-//            writeFile(secao);
-//            writeFile(aluno);
-//            System.out.println(readFile("dados/Aluno/" + aluno.getId() + ".json"));
-//            System.out.println(readFile("dados/Professor/" + professor.getId() + ".json"));
-//            System.out.println(readFile("dados/Secao/" + secao.getId() + ".json"));
-////            readFile("data/exemplo.json");
-////            System.out.println(crefUnico("51629996"));
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
-    }
 
     public static boolean excluirArquivo(String path){
         return new File(path).delete();
@@ -64,6 +47,10 @@ public class JsonManager {
 
     private static String getPath(JsonSerializable jsonSerializable){
         return "dados/" + jsonSerializable.getClass().getSimpleName() + "/" + jsonSerializable.getId() + ".json";
+    }
+
+    public static <T> String buildPath(Class<T> clazz, UUID id){
+        return "dados/" + clazz.getSimpleName() + "/" + id + ".json";
     }
 
     private static void createFolderIfNotExists(String path){

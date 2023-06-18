@@ -5,7 +5,7 @@ import com.projeto_mc322.api.models.user.User;
 
 public class CreateAlunoDTO extends CreateUserDTO {
     @Override
-    public User create() {
+    public Aluno create() {
         return new Aluno(
                 getNome(),
                 getCpf(),

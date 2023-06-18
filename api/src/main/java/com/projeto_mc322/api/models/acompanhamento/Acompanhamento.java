@@ -54,6 +54,10 @@ public class Acompanhamento implements JsonSerializable {
         return id;
     }
 
+    public boolean acompanhamentoFinalizado(){
+        return treinosRealizados >= treinosMeta * treinos.size();
+    }
+
     public Treino exibirProximoTreino(){
         Integer num = treinos.size();
         return treinos.get(treinosRealizados % num);

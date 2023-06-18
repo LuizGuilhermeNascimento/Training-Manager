@@ -58,7 +58,11 @@ public class Professor extends User {
 
 
     public boolean deleteAcompanhamento(Acompanhamento acompanhamento) {
-        return acompanhamentos.remove(acompanhamento);
+        if (acompanhamentos.remove(acompanhamento)){
+            acompanhamento.getAluno().setAcompanhamento(Optional.empty());
+            return true;
+        }
+        return false;
     }
 
     public boolean deleteAcompanhamento(UUID acompanhamentoId){
