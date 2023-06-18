@@ -31,7 +31,8 @@ public class UserRepository implements IRepository<User> {
 
     @Override
     public boolean remove(UUID id) {
-        return false;
+        return JsonManager.excluirArquivo("dados/Professor/" + id + ".json")
+                || JsonManager.excluirArquivo("dados/Aluno/" + id + ".json");
     }
 
     @Override

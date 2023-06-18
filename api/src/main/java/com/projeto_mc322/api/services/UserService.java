@@ -45,6 +45,6 @@ public class UserService {
     }
 
     public boolean delete(UUID id) {
-        return true;
+        return userRepository.remove(id);
     }
 }
