@@ -7,6 +7,7 @@ import { LoginModule } from './modules/login/login.module';
 import { StartPageModule } from './modules/start-page/start-page.module';
 import { MainPageModule } from './modules/main-page/main-page.module';
 import { StartPageComponent } from './modules/start-page/start-page/start-page.component';
+import { LoginService } from './services/login/login.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { StartPageComponent } from './modules/start-page/start-page/start-page.c
     StartPageModule,
     MainPageModule
   ],
-  providers: [],
+  providers: [
+    LoginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
