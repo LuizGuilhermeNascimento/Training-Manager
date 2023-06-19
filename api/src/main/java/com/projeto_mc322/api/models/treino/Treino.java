@@ -1,5 +1,8 @@
 package com.projeto_mc322.api.models.treino;
 
+import javax.json.Json;
+import javax.json.JsonObject;
+
 public class Treino {
     private String tipo;
     private String nome;
@@ -9,6 +12,14 @@ public class Treino {
         setTipo(tipo);
         setNome(nome);
         setDescricao(descricao);
+    }
+
+    public JsonObject writeJson(){
+        return Json.createObjectBuilder()
+                .add("tipo", getTipo())
+                .add("nome", getNome())
+                .add("descricao", getDescricao())
+                .build();
     }
 
     public String getTipo() {

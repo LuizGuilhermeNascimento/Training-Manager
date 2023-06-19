@@ -1,18 +1,22 @@
 package com.projeto_mc322.api.models.acompanhamento;
 
+import com.datapersistence.JsonSerializable;
 import com.projeto_mc322.api.models.treino.Treino;
 import com.projeto_mc322.api.models.user.Aluno;
 import com.projeto_mc322.api.models.user.Professor;
 
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Acompanhamento {
-    private final UUID id = UUID.randomUUID();
+public class Acompanhamento implements JsonSerializable {
+    private final UUID id;
     private Professor professor;
     private Aluno aluno;
-    private List<Treino> treinos = new ArrayList<>();
+    private List<Treino> treinos;
     private Integer treinosRealizados = 0;
     private Integer treinosMeta; // quantas vezes o aluno deve realizar uma seção completa de treinos
 
@@ -20,6 +24,38 @@ public class Acompanhamento {
         setProfessor(professor);
         setAluno(aluno);
         setTreinosMeta(treinosMeta);
+        treinos = new ArrayList<>();
+        id = UUID.randomUUID();
+    }
+
+    public Acompanhamento(UUID id, Integer treinosRealizados, Integer treinosMeta) {
+        setTreinosRealizados(treinosRealizados);
+        setTreinosMeta(treinosMeta);
+        treinos = new ArrayList<>();
+        this.id = id;
+    }
+
+    @Override
+    public JsonObject writeJson() {
+        JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
+        treinos.forEach(treino -> jsonArrayBuilder.add(treino.writeJson()));
+        return Json.createObjectBuilder()
+                .add("id", getId().toString())
+                .add("alunoId", getAluno().getId().toString())
+                .add("professorId", getProfessor().getId().toString())
+                .add("treinos", jsonArrayBuilder.build())
+                .add("treinosMeta", getTreinosMeta())
+                .add("treinosRealizados", getTreinosRealizados())
+                .build();
+    }
+
+    @Override
+    public UUID getId() {
+        return id;
+    }
+
+    public boolean acompanhamentoFinalizado(){
+        return treinosRealizados >= treinosMeta * treinos.size();
     }
 
     public Treino exibirProximoTreino(){
@@ -29,10 +65,6 @@ public class Acompanhamento {
 
     public void realizarTreino(){
         treinosRealizados++;
-    }
-
-    public UUID getId() {
-        return id;
     }
 
     public Professor getProfessor() {

@@ -1,44 +1,56 @@
 package com.projeto_mc322.api.models.user;
 
 import com.projeto_mc322.api.models.acompanhamento.Acompanhamento;
-import com.projeto_mc322.api.models.secao.Secao;
+
 import com.projeto_mc322.api.models.treino.Treino;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+import java.util.Optional;
+import java.util.UUID;
 
 public class Aluno extends User{
-    private Acompanhamento acompanhamento;
-    private List<Secao> secoesAgendadas = new ArrayList<>();
-    public Aluno(String nome, String cpf, String email, String senha, Acompanhamento acompanhamento) {
+    private Optional<Acompanhamento> acompanhamento = Optional.empty();
+
+    public Aluno(String nome, String cpf, String email, String senha) {
         super(nome, cpf, email, senha);
     }
 
-    public Treino proximoTreino(){
-        return acompanhamento.exibirProximoTreino();
+    public Aluno(UUID uuid, String nome, String cpf, String email, String senha) {
+        super(uuid, nome, cpf, email, senha);
+    }
+
+    @Override
+    public JsonObject writeJson() {
+        JsonObject jsonObject = super.writeJson();
+        JsonObjectBuilder jsonObjectBuilder =  Json.createObjectBuilder();
+        String acompanhamentoString = "";
+        if (getAcompanhamento().isPresent()){
+            acompanhamentoString = getAcompanhamento().get().getId().toString();
+        }
+        jsonObject.keySet().forEach(key -> jsonObjectBuilder.add(key, jsonObject.get(key)));
+        return jsonObjectBuilder
+                .add("acompanhamento", acompanhamentoString)
+                .build();
+    }
+
+    public Treino proximoTreino() throws Exception{
+        if (acompanhamento.isPresent()){
+            return acompanhamento.get().exibirProximoTreino();
+        }
+        throw new Exception();
     }
 
     public void realizarTreino(){
-        if (acompanhamento != null){
-            acompanhamento.realizarTreino();
-        }
+        acompanhamento.ifPresent(Acompanhamento::realizarTreino);
     }
 
-    public Acompanhamento getAcompanhamento() {
+    public Optional<Acompanhamento> getAcompanhamento() {
         return acompanhamento;
     }
 
-    public void setAcompanhamento(Acompanhamento acompanhamento) {
+    public void setAcompanhamento(Optional<Acompanhamento> acompanhamento) {
         this.acompanhamento = acompanhamento;
     }
-
-    public List<Secao> getSecoesAgendadas() {
-        return secoesAgendadas;
-    }
-
-    public void setSecoesAgendadas(List<Secao> secoesAgendadas) {
-        this.secoesAgendadas = secoesAgendadas;
-    }
-
-
 }
