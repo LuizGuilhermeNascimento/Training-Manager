@@ -1,8 +1,5 @@
 package com.datapersistence;
 
-import com.projeto_mc322.api.models.user.Aluno;
-import com.projeto_mc322.api.models.user.Professor;
-
 import javax.json.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,7 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -41,12 +37,11 @@ public class JsonManager {
     }
 
     public static boolean writeFile(JsonSerializable jsonSerializable) {
-        String path = "dados/" + jsonSerializable.getClass().getSimpleName() + "/" + jsonSerializable.getId() + ".json";
-        return writeFile(path, jsonSerializable.writeJson());
+        return writeFile(getPath(jsonSerializable), jsonSerializable.writeJson());
     }
 
-    private static String getPath(JsonSerializable jsonSerializable){
-        return "dados/" + jsonSerializable.getClass().getSimpleName() + "/" + jsonSerializable.getId() + ".json";
+    public static String getPath(JsonSerializable jsonSerializable){
+        return buildPath(jsonSerializable.getClass(), jsonSerializable.getId());
     }
 
     public static <T> String buildPath(Class<T> clazz, UUID id){

@@ -1,7 +1,6 @@
 package com.projeto_mc322.api.dtos;
 
 import com.projeto_mc322.api.models.user.Professor;
-import com.projeto_mc322.api.models.user.User;
 
 public class CreateProfessorDTO extends CreateUserDTO {
     private String cref;

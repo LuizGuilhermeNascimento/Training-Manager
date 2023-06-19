@@ -3,7 +3,6 @@ package com.projeto_mc322.api.models.user;
 import com.datapersistence.JsonSerializable;
 
 import javax.json.Json;
-import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import java.util.Objects;
 import java.util.UUID;

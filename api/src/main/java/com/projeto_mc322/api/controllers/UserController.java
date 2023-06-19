@@ -1,18 +1,13 @@
 package com.projeto_mc322.api.controllers;
 
 
-import com.projeto_mc322.api.dtos.CreateAlunoDTO;
-import com.projeto_mc322.api.dtos.CreateProfessorDTO;
 import com.projeto_mc322.api.dtos.LoginDTO;
 import com.projeto_mc322.api.dtos.UserResponseDTO;
 import com.projeto_mc322.api.exceptions.*;
-import com.projeto_mc322.api.models.user.User;
 import com.projeto_mc322.api.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)

@@ -6,8 +6,6 @@ import com.datapersistence.BuildObject;
 import com.datapersistence.JsonManager;
 import com.datapersistence.JsonSerializable;
 import com.projeto_mc322.api.exceptions.HttpException;
-import com.projeto_mc322.api.models.user.Aluno;
-import com.projeto_mc322.api.models.user.Professor;
 import org.springframework.http.HttpStatus;
 
 import javax.json.JsonObject;

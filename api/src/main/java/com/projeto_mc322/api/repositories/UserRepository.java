@@ -3,14 +3,11 @@ package com.projeto_mc322.api.repositories;
 import com.datapersistence.BuildObject;
 import com.datapersistence.JsonManager;
 import com.projeto_mc322.api.exceptions.HttpException;
-import com.projeto_mc322.api.models.user.Professor;
 import com.projeto_mc322.api.models.user.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
-import javax.json.Json;
 import javax.json.JsonObject;
-import java.util.UUID;
 
 @Repository
 public class UserRepository {

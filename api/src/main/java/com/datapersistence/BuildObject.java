@@ -126,10 +126,10 @@ public class BuildObject {
 
     public static <T> T build(Class<T> clazz, JsonObject jsonObject){
         if (clazz.equals(Aluno.class)){
-            return (T) buildAluno(jsonObject);
+            return clazz.cast(buildAluno(jsonObject));
         }else if (clazz.equals(Professor.class)){
-            return (T) buildProfessor(jsonObject);
+            return clazz.cast(buildProfessor(jsonObject));
         }
-        return (T) buildAcompanhamento(jsonObject);
+        return clazz.cast(buildAcompanhamento(jsonObject));
     }
 }

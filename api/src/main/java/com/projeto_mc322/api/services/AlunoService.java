@@ -4,14 +4,11 @@ import com.projeto_mc322.api.dtos.*;
 import com.projeto_mc322.api.exceptions.HttpException;
 import com.projeto_mc322.api.models.acompanhamento.Acompanhamento;
 import com.projeto_mc322.api.models.user.Aluno;
-import com.projeto_mc322.api.models.user.Professor;
-import com.projeto_mc322.api.models.user.User;
 import com.projeto_mc322.api.repositories.AcompanhamentoRepository;
 import com.projeto_mc322.api.repositories.AlunoRepository;
 import com.projeto_mc322.api.repositories.ProfessorRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service

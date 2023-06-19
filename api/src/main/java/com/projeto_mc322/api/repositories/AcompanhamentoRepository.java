@@ -4,7 +4,6 @@ import com.datapersistence.BuildObject;
 import com.datapersistence.JsonManager;
 import com.projeto_mc322.api.exceptions.HttpException;
 import com.projeto_mc322.api.models.acompanhamento.Acompanhamento;
-import com.projeto_mc322.api.models.user.Aluno;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
