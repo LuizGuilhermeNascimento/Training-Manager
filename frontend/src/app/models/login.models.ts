@@ -8,4 +8,5 @@ export interface UserJson {
     nome: string;
     cpf: string;
     email: string;
+    roleId: number; // colocar no backend
 }

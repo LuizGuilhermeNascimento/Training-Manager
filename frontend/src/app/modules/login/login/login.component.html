@@ -1,10 +1,107 @@
 <div class="login">
     <div class="optionsBtn">
-        <button class="btn btn-outline-dark">
+        <button class="btn btn-outline-dark" (click)="changeToLogin()">
             Login
         </button>
-        <button class="btn btn-outline-dark">
+        <button class="btn btn-outline-dark" (click)="changeToRegister()">
             Register
         </button>
     </div>
+    <div class="register" *ngIf="!isLogin">
+        <form [formGroup]="formRegister">
+
+            <!-- Nome -->
+            <div class="form-item">
+              <label for="nome">Nome</label>
+              <br>
+              <input class="form-control" formControlName="nome"
+                placeholder="Insira seu nome"></input>
+            </div>
+    
+            <!-- CPF -->
+            <div class="form-item">
+                <label for="cpf">CPF</label>
+                <br>
+                <input class="form-control" formControlName="cpf"
+                  placeholder="(123.456.678-90)"></input>
+            </div>
+    
+            <!-- Email -->
+            <div class="form-item">
+                <label for="email">Email</label>
+                <br>
+                <input class="form-control" formControlName="email"
+                  placeholder="emailgenerico@dominio.com"></input>
+            </div>
+    
+            <!-- Senha -->
+            <div class="form-item">
+                <label for="senha">Senha</label>
+                <br>
+                <input class="form-control" formControlName="senha"
+                  placeholder="Insira sua senha"></input>
+            </div>
+    
+    
+            <!-- Registrar como professor checkbox -->
+            <div class="form-check">
+              <input class="taskCheck checkbox" type="checkbox" value="" id="signComoProfessor" [(ngModel)]="alunoSigning">
+              <label for="signComoProfessor">Deseja se registrar como professor? </label>
+            </div>
+            
+            <!-- CREF -->
+            <div class="form-item" *ngIf="!alunoSigning">
+                <label for="cref">CREF</label>
+                <br>
+                <input class="form-control" formControlName="cref"
+                  placeholder="CREF"></input>
+            </div>
+            
+            <!-- Submit -->
+            <div class="container-fluid" style="padding: 0; margin: 0;">
+              <div class="row justify-content-between">
+                <div class="col-auto mb-1">
+                  <div class="btn-group-vertical submit" role="group" aria-label="Button group with nested dropdown">
+                    <button class="btn btn-primary btn-lg" (click)="onSubmit()">
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
+    </div>
+    <div class="login" *ngIf="isLogin">
+        <form [formGroup]="formLogin">
+
+    
+            <!-- Email -->
+            <div class="form-item">
+                <label for="email">Email</label>
+                <br>
+                <input class="form-control" formControlName="email"
+                  placeholder="emailgenerico@dominio.com"></input>
+            </div>
+    
+            <!-- Senha -->
+            <div class="form-item">
+                <label for="senha">Senha</label>
+                <br>
+                <input class="form-control" formControlName="senha"
+                  placeholder="Insira sua senha"></input>
+            </div>
+            
+            <!-- Submit -->
+            <div class="container-fluid" style="padding: 0; margin: 0;">
+              <div class="row justify-content-between">
+                <div class="col-auto mb-1">
+                  <div class="btn-group-vertical submit" role="group" aria-label="Button group with nested dropdown">
+                    <button class="btn btn-primary btn-lg" (click)="onSubmit()">
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
+    </div>
+
 </div>
