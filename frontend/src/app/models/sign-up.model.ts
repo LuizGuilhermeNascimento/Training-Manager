@@ -1,5 +1,5 @@
 export interface ProfessorSign {
-    name: string;
+    nome: string;
     cpf: string;
     email: string;
     senha: string;
@@ -7,8 +7,16 @@ export interface ProfessorSign {
 }
 
 export interface AlunoSign {
-    name: string;
+    nome: string;
     cpf: string;
     email: string;
     senha: string;
+}
+
+export interface BasicSign {
+    nome: string;
+    cpf: string;
+    email: string;
+    senha: string;
+    cref: string
 }

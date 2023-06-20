@@ -5,7 +5,8 @@ import { StartPageComponent } from './modules/start-page/start-page/start-page.c
 
 const routes: Routes = [
   { path:'', component: StartPageComponent },
-  { path:'login', component: LoginComponent }
+  { path:'login', component: LoginComponent },
+  //{ path:'main', component: MainPageComponent }
 ];
 
 @NgModule({

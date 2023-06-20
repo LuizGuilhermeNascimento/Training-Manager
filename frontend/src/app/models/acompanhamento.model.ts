@@ -8,3 +8,10 @@ export interface Acompanhamento {
     treinosRealizados: number;
     treinosMeta: number;
 }
+
+export interface AcompanhamentoJson {
+    alunoId: string;
+    professorId: string;
+    treinos: Treino[];
+    treinosMeta: number;
+}
