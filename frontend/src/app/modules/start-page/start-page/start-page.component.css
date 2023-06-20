@@ -1,3 +1,58 @@
-.start {
-    margin: 0px 20px;
+body{
+    background-color: #141414;
+    height: 100vh;
+    font-family: 'Lato', 'Space Grotesk';
+    color: #f2f2f2;
+}
+
+.menu{
+    position: absolute;
+    width: 55%;
+}
+
+h1{
+    position: absolute;
+    right: 52%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 56pt;
+    font-weight: bold;
+}
+
+#retangulo{
+    position: absolute;
+    right: 52%;
+    bottom: 51%;
+    width: 360px;
+    height: 56pt;
+    background-color: #f2f2f2;
+}
+
+p{
+    position: absolute;
+    right: 48%;
+    bottom: 50px;
+    width: 280px;
+    text-align: end;
+    color: #bababa;
+    font-size: 12pt;
+    font-weight: 600;
+}
+
+svg{
+    position: absolute;
+    width: 30px;
+    fill:#f2f2f2;
+    bottom: 70px;
+    left: 130px;
+}
+
+#imageStart{
+    position: absolute;
+    right: 0;
+    width: 45%;
+    height: 100vh;
+    background-image: url(./imageStart.png);
+    background-size: cover;
+    background-position: center;
 }
