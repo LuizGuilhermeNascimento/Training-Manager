@@ -9,6 +9,7 @@ import com.projeto_mc322.api.repositories.AlunoRepository;
 import com.projeto_mc322.api.repositories.ProfessorRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -46,5 +47,9 @@ public class AlunoService {
 
     public Aluno find(UUID id) throws HttpException{
         return alunoRepository.find(id);
+    }
+
+    public List<Aluno> listar() {
+        return alunoRepository.list();
     }
 }
