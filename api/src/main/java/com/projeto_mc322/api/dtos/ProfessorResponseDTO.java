@@ -10,7 +10,7 @@ public class ProfessorResponseDTO extends UserResponseDTO {
     private String cref;
 
     public ProfessorResponseDTO(Professor professor) {
-        super(professor.getId(), professor.getNome(), professor.getCpf(), professor.getEmail());
+        super(professor.getId(), professor.getNome(), professor.getCpf(), professor.getEmail(), "professor");
         professor.getAcompanhamentos().forEach(
                 acompanhamento -> acompanhamentos.add(new AcompanhamentoResponseDTO(acompanhamento))
         );

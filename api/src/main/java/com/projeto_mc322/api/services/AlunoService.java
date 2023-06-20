@@ -43,4 +43,8 @@ public class AlunoService {
             return false;
         }
     }
+
+    public Aluno find(UUID id) throws HttpException{
+        return alunoRepository.find(id);
+    }
 }

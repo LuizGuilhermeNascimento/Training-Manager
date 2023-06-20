@@ -5,7 +5,7 @@ import com.projeto_mc322.api.models.user.Aluno;
 public class AlunoResponseDTO extends UserResponseDTO {
     private AcompanhamentoResponseDTO acompanhamento;
     public AlunoResponseDTO(Aluno aluno) {
-        super(aluno.getId(), aluno.getNome(), aluno.getCpf(), aluno.getEmail());
+        super(aluno.getId(), aluno.getNome(), aluno.getCpf(), aluno.getEmail(), "aluno");
         if (aluno.getAcompanhamento().isPresent()){
             acompanhamento = new AcompanhamentoResponseDTO(aluno.getAcompanhamento().get());
         }
