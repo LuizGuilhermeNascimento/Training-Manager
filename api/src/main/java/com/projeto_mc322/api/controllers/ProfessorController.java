@@ -3,7 +3,6 @@ package com.projeto_mc322.api.controllers;
 
 import com.projeto_mc322.api.dtos.*;
 import com.projeto_mc322.api.exceptions.HttpException;
-import com.projeto_mc322.api.models.user.Aluno;
 import com.projeto_mc322.api.models.user.Professor;
 import com.projeto_mc322.api.services.ProfessorService;
 import org.springframework.http.HttpStatus;

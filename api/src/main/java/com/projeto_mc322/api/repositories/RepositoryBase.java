@@ -1,6 +1,5 @@
 package com.projeto_mc322.api.repositories;
 
-import java.io.File;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
