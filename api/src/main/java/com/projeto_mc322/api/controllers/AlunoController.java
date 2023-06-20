@@ -23,6 +23,16 @@ public class AlunoController {
         this.alunoService = alunoService;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getAlunoById(@PathVariable(name = "id") UUID id){
+        try{
+            Aluno aluno = alunoService.find(id);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(new AlunoResponseDTO(aluno));
+        }catch (HttpException e){
+            return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
+        }
+    }
+
     @PostMapping("/sign-up")
     public ResponseEntity<Object> signUp(@RequestBody CreateAlunoDTO createAlunoDTO){
         try{
