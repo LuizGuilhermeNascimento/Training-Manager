@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -21,6 +23,24 @@ public class AlunoController {
 
     public AlunoController(AlunoService alunoService) {
         this.alunoService = alunoService;
+    }
+
+    @GetMapping(value = {"", "/"})
+    public ResponseEntity<Object> listarAlunos(){
+        List<Aluno> alunos = alunoService.listar();
+        List<AlunoResponseDTO> list = new ArrayList<>();
+        alunos.forEach(aluno -> list.add(new AlunoResponseDTO(aluno)));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(alunos);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getAlunoById(@PathVariable(name = "id") UUID id){
+        try{
+            Aluno aluno = alunoService.find(id);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(new AlunoResponseDTO(aluno));
+        }catch (HttpException e){
+            return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
+        }
     }
 
     @PostMapping("/sign-up")

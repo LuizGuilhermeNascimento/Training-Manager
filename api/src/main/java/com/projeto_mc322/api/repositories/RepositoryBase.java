@@ -1,5 +1,11 @@
 package com.projeto_mc322.api.repositories;
 
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import com.datapersistence.BuildObject;
@@ -32,5 +38,18 @@ public abstract class RepositoryBase<T extends JsonSerializable> {
     }
     public boolean save(T t) {
         return JsonManager.writeFile(t);
+    }
+
+    public List<T> list(){
+        List<T> list = new ArrayList<>();
+        String path = "dados/" + type.getSimpleName();
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(path))){
+            for (Path file: stream){
+                String id = file.getFileName().toString();
+                list.add(find(UUID.fromString(id.replace(".json",""))));
+            }
+        }catch (Exception ignored){
+        }
+        return list;
     }
 }

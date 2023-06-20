@@ -42,4 +42,8 @@ public class ProfessorService {
             return false;
         }
     }
+
+    public Professor find(UUID id) throws HttpException {
+        return professorRepository.find(id);
+    }
 }

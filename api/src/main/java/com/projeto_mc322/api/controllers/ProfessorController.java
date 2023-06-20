@@ -2,6 +2,7 @@ package com.projeto_mc322.api.controllers;
 
 
 import com.projeto_mc322.api.dtos.*;
+import com.projeto_mc322.api.exceptions.HttpException;
 import com.projeto_mc322.api.models.user.Professor;
 import com.projeto_mc322.api.services.ProfessorService;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,15 @@ public class ProfessorController {
         this.professorService = professorService;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getProfessorById(@PathVariable(name = "id") UUID id){
+        try{
+            Professor professor = professorService.find(id);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ProfessorResponseDTO(professor));
+        }catch (HttpException e){
+            return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
+        }
+    }
     @PostMapping("/sign-up")
     public ResponseEntity<Object> signUp(@RequestBody CreateProfessorDTO createProfessorDTO){
         try{

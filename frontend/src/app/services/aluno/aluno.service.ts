@@ -3,20 +3,21 @@ import { HttpClient } from '@angular/common/http'
 import { Observable, take } from 'rxjs';
 import { UserLogin } from '../../models/login.models';
 import { UserJson } from '../../models/login.models';
+import { Aluno } from 'src/app/models/aluno.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AlunoService {
 
   constructor(private http: HttpClient) {}
     
     baseUrl = 'http://localhost:8080';
 
-    login(login: UserLogin): Observable<UserJson> {
+    getAlunoPorId(id: string): Observable<Aluno> {
 
-      const url =  `${this.baseUrl}/users/login`
+      const url =  `${this.baseUrl}/aluno/${id}`
 
-      return this.http.post<UserJson>(url, login).pipe(take(1));
+      return this.http.get<Aluno>(url).pipe(take(1));
     }
 }
