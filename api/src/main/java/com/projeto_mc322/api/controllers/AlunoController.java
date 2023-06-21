@@ -47,7 +47,7 @@ public class AlunoController {
     public ResponseEntity<Object> signUp(@RequestBody CreateAlunoDTO createAlunoDTO){
         try{
             Aluno aluno = alunoService.create(createAlunoDTO);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(new AlunoResponseDTO(aluno));
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(new LoginSignupResponseDTO(aluno));
         }catch (HttpException e){
             return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
         }

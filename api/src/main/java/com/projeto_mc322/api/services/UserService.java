@@ -18,14 +18,11 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserResponseDTO login(String email, String senha) throws HttpException {
+    public User login(String email, String senha) throws HttpException {
         try{
             User user = userRepository.findByEmail(email);
             if (user.getSenha().equals(senha)){
-                if (user instanceof Professor){
-                    return new ProfessorResponseDTO((Professor) user);
-                }
-                return new AlunoResponseDTO((Aluno) user);
+                return user;
             }
         }catch (HttpException e){
             throw new HttpException("Credenciais inválidas", HttpStatus.UNAUTHORIZED);
