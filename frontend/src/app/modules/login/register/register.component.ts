@@ -2,15 +2,17 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-start-menu',
-  templateUrl: './start-menu.component.html',
-  styleUrls: ['./start-menu.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class StartMenuComponent {
-
+export class RegisterComponent {
   constructor(private router: Router) {}
 
   navigateToLogin() {
     this.router.navigate(['/', 'login'])
+  }
+  navigateToStartPage() {
+    this.router.navigate(['/'])
   }
 }
