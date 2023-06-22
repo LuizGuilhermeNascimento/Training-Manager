@@ -18,12 +18,10 @@ import { ProfessorService } from './services/professor/professor.service';
     AppComponent
   ],
   imports: [
-    NgModule,
     BrowserModule,
     AppRoutingModule,
     LoginModule,
-    StartPageModule,
-    MainPageModule
+    StartPageModule
   ],
   providers: [
     LoginService,
