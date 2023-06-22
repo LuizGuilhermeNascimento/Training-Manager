@@ -40,6 +40,7 @@ export class LoginComponent {
       console.log(user)
       this.localStorageService.setItem(keys.roleKey, user.role);
       this.localStorageService.setItem(keys.idKey, user.id);
+      this.router.navigate(['/', 'main']);
     });
 
     
