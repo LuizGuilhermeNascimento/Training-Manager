@@ -34,7 +34,7 @@ public class ProfessorController {
     public ResponseEntity<Object> signUp(@RequestBody CreateProfessorDTO createProfessorDTO){
         try{
             Professor professor = professorService.create(createProfessorDTO);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ProfessorResponseDTO(professor));
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(new LoginSignupResponseDTO(professor));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(e.getMessage());
         }

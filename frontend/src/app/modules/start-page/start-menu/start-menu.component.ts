@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./start-menu.component.css']
 })
 export class StartMenuComponent {
-  
+
   constructor(private router: Router) {}
   
   navigateToLogin() {
