@@ -12,6 +12,7 @@ import { SignUpService } from './services/sign-up/sign-up.service';
 import { AcompanhamentoService } from './services/acompanhamento/acompanhamento.service';
 import { AlunoService } from './services/aluno/aluno.service';
 import { ProfessorService } from './services/professor/professor.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ProfessorService } from './services/professor/professor.service';
     BrowserModule,
     AppRoutingModule,
     LoginModule,
-    StartPageModule
+    StartPageModule,
+    HttpClientModule
   ],
   providers: [
     LoginService,
