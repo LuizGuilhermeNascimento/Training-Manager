@@ -9,18 +9,14 @@ import { AlunoSign, BasicSign } from 'src/app/models/sign-up.model';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  constructor(private router: Router) {
-    
-  }
-  ngOnInit(): void {
-      
+  constructor(private router: Router) {}
+
+  navigateToStartPage() {
+    this.router.navigate([``])
   }
   navigateToRegister() {
-    this.router.navigate(['/', 'register'])
-  }
-  navigateToStartPage() {
-    this.router.navigate(['/'])
+    this.router.navigate([`/`, `register`])
   }
 }
