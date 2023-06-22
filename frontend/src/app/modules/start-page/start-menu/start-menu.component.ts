@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 export class StartMenuComponent {
 
   constructor(private router: Router) {}
-
+  
   navigateToLogin() {
-    this.router.navigate(['/', 'login'])
+    this.router.navigate(['/', `login`]);
   }
 }
