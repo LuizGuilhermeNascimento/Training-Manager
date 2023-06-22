@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserLogin } from 'src/app/models/login.models';
 import { AlunoSign, BasicSign } from 'src/app/models/sign-up.model';
