@@ -1,22 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
 import { Observable, take } from 'rxjs';
 import { UserLogin } from '../../models/login.models';
 import { UserJson } from '../../models/login.models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
-
   constructor(private http: HttpClient) {}
-    
-    baseUrl = 'http://localhost:8080';
 
-    login(login: UserLogin): Observable<UserJson> {
+  baseUrl = 'http://localhost:8080';
 
-      const url =  `${this.baseUrl}/users/login`
+  login(login: UserLogin): Observable<UserJson> {
+    const url = `${this.baseUrl}/users/login`;
 
-      return this.http.post<UserJson>(url, login).pipe(take(1));
-    }
+    return this.http.post<UserJson>(url, login).pipe(take(1));
+  }
 }
