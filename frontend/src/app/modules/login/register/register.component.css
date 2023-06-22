@@ -1,15 +1,17 @@
-:root {
-    --off-white: #d91616;
+:host {
+    --off-white: #e7e7e7;
+    --light-gray: #cfcfcf;
     --dark-gray: #1C1C1C;
-    --off-glack: #141414;
+    --gray:#333333;
+    --off-black: #141414;
 }
 
-.login {
-    width: 100%;
+body {
+    width: 100vw;
     height: 100vh;
-    background-color: #f5f5f5;
+    background-color: var(--off-black);
     font-family: 'Lato', 'Space Grotesk';
-    color: #141414;
+    color: var(--off-white);
 }
 
 svg{
@@ -17,11 +19,11 @@ svg{
     width: 30px;
     left: 130px;
     top: 70px;
-    fill: #1c1c1c;
+    fill: var(--off-white);
 }
 
 #home:hover svg{
-    fill: #4c4c4c;
+    fill: var(--off-white);
 }
 
 button{
@@ -31,48 +33,65 @@ button{
     font-weight: 900;
     letter-spacing: 3px;
     right: 0;
-    background-color: #141414;
-    color: #f2f2f2;
+    background-color: var(--off-white);
+    color: var(--dark-gray);
     width: 150px;
     padding: 5px 70px 5px 20px;
+}
+
+#userType{
+    padding: 0 0 30px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px;
+}
+
+input[type="radio"]{
+    display: none;
+}
+
+label{
+    height: 100%;
+    font-size: 16pt;
+    font-weight: 700;
+    border: var(--gray) 2px solid;
+    padding: 10px 30px 10px 30px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+input[type="radio"]:checked + label {
+    border: var(--off-white) 2px solid;
 }
 
 .sign{
     position: absolute;
     right: 130px;
-    top: 70px;
+    top: 70px;  
 }
 
 #call {
     top: 20%;
-    right: 20%;
+    left: 20%;
     font-family: 'Space Grotesk';
     position: absolute;
     font-size: 52pt;
     font-weight: bold;
     line-height: 60pt;
-    text-align: end;
 }
 
-.signIn {
+.signUp {
     position: absolute;
     width: 30%;
-    right: 55%;
+    left: 55%;
     top: 50%;
     transform: translateY(-50%);
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     row-gap: 40px;
     font-size: 16pt;
     font-variant-caps: all-petite-caps;
     font-weight: 900;
-}
-
-.signIn p{
-    color: #141414;
-    width: 65%;
-    letter-spacing: 1px;
-    line-height: 15pt;
 }
 
 .form{
@@ -90,16 +109,27 @@ input {
     border: none;
     border-bottom: #C2C2C2 solid 1px;
     outline: none;
+    color: var(--off-white);
 }
 
 input::placeholder{
-    color: #797979;
+    color: var(--light-gray);
 }
 
 .first {
     border-top: #C2C2C2 solid 1px;
 }
 
-.signIn button{
-    margin-left: 70%;
+.signUp button{
+    position: relative;
+    left: 100%;
+    transform: translateX(-100%);
+}
+
+#cref {
+    display: auto;
+}
+
+#professorUser:checked #cref{
+    display: none;
 }
