@@ -14,17 +14,24 @@
         <div class="form">
             <div id="userType">
                 <input type="radio" name="user" id="aluno" checked="true">
-                <label for="aluno">Aluno</label>
+                <label for="aluno" (click)="changeToAlunoLogin()">Aluno</label>
                 <input type="radio" name="user" id="professor">
-                <label id="professorUser" for="professor">Professor</label>
+                <label id="professorUser" for="professor" (click)="changeToProfessorLogin()">Professor</label>
             </div>
-            <input class="first" type="text" placeholder="NAME">
-            <input type="text" placeholder="CPF" maxlength="11">
-            <input type="email" placeholder="E-MAIL" autocomplete="off">
-            <input type="password" placeholder="PASSWORD">
-            <input  id="cref" type="text" placeholder="CREF">
+            <input class="first" type="text" placeholder="NAME" #name (change)="updateInputForm(name)" maxlength="50">
+            <input type="text" placeholder="CPF" maxlength="11" #cpf (change)="updateInputForm(cpf); validacaoCPF(cpf)">
+            <p *ngIf="!cpfValido"> {{ mensagemError }} </p>
+            <input type="email" placeholder="E-MAIL" autocomplete="off" #email (change)="updateInputForm(email); validacaoEmail(email)" maxlength="30">
+            <p *ngIf="!emailValido"> {{ mensagemError }} </p>
+            <input type="password" placeholder="PASSWORD" #senha (change)="updateInputForm(senha); validacaoSenha(senha)" minlength="8">
+            <p *ngIf="!senhaValida"> {{ mensagemError }} </p>
+            <input *ngIf="!alunoIsLogin" id="cref" type="text" placeholder="CREF" #cref (change)="updateInputForm(cref); validacaoCREF(cref)">
+            <p *ngIf="!crefValido"> {{ mensagemError }} </p>
         </div>
-        <button> ENTER </button>
+        <p *ngIf="this.campoVazio">
+            Preencha todos os campos!
+        </p>
+        <button (click)="verificarCamposVazios(); onSubmit()"> ENTER </button>
     </div>
 
     <div id="call">
