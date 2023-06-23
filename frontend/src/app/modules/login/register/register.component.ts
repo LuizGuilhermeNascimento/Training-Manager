@@ -1,17 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ValidationService } from 'src/app/services/validation/validation.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
+  constructor(private router: Router, private validationService: ValidationService) {}
 
-  constructor(private router: Router) {}
+  ngOnInit(): void {
+    if (this.validationService.isLoggedIn()){
+      this.router.navigate(["/main"])
+    }
+  }
 
   navigateToStartPage() {
-    this.router.navigate([``])
+    this.router.navigate([``]);
   }
 
   navigateToLogin() {

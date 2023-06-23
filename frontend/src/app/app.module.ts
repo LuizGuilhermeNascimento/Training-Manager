@@ -13,6 +13,7 @@ import { AlunoService } from './services/aluno/aluno.service';
 import { ProfessorService } from './services/professor/professor.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MainPageModule } from './modules/main-page/main-page.module';
+import { ValidationService } from './services/validation/validation.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MainPageModule } from './modules/main-page/main-page.module';
     SignUpService,
     AcompanhamentoService,
     AlunoService,
-    ProfessorService
+    ProfessorService,
+    ValidationService
   ],
   bootstrap: [AppComponent]
 })
