@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { AlunoSign, ProfessorSign } from 'src/app/models/sign-up.model';
 import { ValidacaoFormulario } from 'src/app/services/validacao-form/validacao-form.service';
 import { SignUpService } from '../../../services/sign-up/sign-up.service';
@@ -7,12 +8,15 @@ import { LocalStorageService } from 'src/app/services/local-storage/localstorage
 import { keys } from 'src/app/services/local-storage/keys.json';
 import { Observable } from 'rxjs';
 import { UserJson } from 'src/app/models/login.models';
+import { ValidationService } from 'src/app/services/validation/validation.service';
+
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
+
 export class RegisterComponent{
 
   alunoIsLogin: boolean;
@@ -89,7 +93,7 @@ export class RegisterComponent{
   }
 
   navigateToStartPage() {
-    this.router.navigate([``])
+    this.router.navigate([``]);
   }
 
   navigateToLogin() {
