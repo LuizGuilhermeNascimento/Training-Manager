@@ -9,7 +9,6 @@ import com.projeto_mc322.api.models.user.Professor;
 import com.projeto_mc322.api.repositories.AcompanhamentoRepository;
 import com.projeto_mc322.api.repositories.AlunoRepository;
 import com.projeto_mc322.api.repositories.ProfessorRepository;
-import com.projeto_mc322.api.repositories.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,7 @@ public class AcompanhamentoService {
     private final ProfessorRepository professorRepository;
     private final AlunoRepository alunoRepository;
 
-    public AcompanhamentoService(UserRepository userRepository, AcompanhamentoRepository acompanhamentoRepository, ProfessorRepository professorRepository, AlunoRepository alunoRepository) {
+    public AcompanhamentoService(AcompanhamentoRepository acompanhamentoRepository, ProfessorRepository professorRepository, AlunoRepository alunoRepository) {
         this.acompanhamentoRepository = acompanhamentoRepository;
         this.professorRepository = professorRepository;
         this.alunoRepository = alunoRepository;
@@ -39,17 +38,17 @@ public class AcompanhamentoService {
         return professor.getAcompanhamentos();
     }
 
-    public Acompanhamento getAcompanhamento(UUID acompanhamentoId) throws HttpException{
+    public Acompanhamento getAcompanhamento(UUID acompanhamentoId) throws HttpException {
         return acompanhamentoRepository.find(acompanhamentoId);
     }
 
     public Acompanhamento create(CreateAcompanhamentoDTO createAcompanhamentoDTO) throws HttpException {
         Professor professor = professorRepository.find(createAcompanhamentoDTO.getProfessorId());
         Aluno aluno = alunoRepository.find(createAcompanhamentoDTO.getAlunoId());
-        if (aluno.getAcompanhamento().isPresent()){
-            if (aluno.getAcompanhamento().get().acompanhamentoFinalizado()){
+        if (aluno.getAcompanhamento().isPresent()) {
+            if (aluno.getAcompanhamento().get().acompanhamentoFinalizado()) {
                 delete(aluno.getAcompanhamento().get());
-            }else{
+            } else {
                 throw new HttpException("O aluno ainda não atingiu a meta", HttpStatus.NOT_ACCEPTABLE);
             }
         }
@@ -58,24 +57,24 @@ public class AcompanhamentoService {
                 createAcompanhamentoDTO.getTreinos(),
                 createAcompanhamentoDTO.getTreinosMeta()
         );
-        if (acompanhamentoRepository.save(acompanhamento)){
+        if (acompanhamentoRepository.save(acompanhamento)) {
             professorRepository.save(professor);
             alunoRepository.save(aluno);
         }
         return acompanhamento;
     }
 
-    public boolean delete(UUID acompanhamentoId){
-        try{
+    public boolean delete(UUID acompanhamentoId) {
+        try {
             Acompanhamento acompanhamento = acompanhamentoRepository.find(acompanhamentoId);
             return delete(acompanhamento);
-        }catch (Exception ignored){
+        } catch (Exception ignored) {
             return false;
         }
     }
 
-    public boolean delete(Acompanhamento acompanhamento){
-        if (acompanhamentoRepository.remove(acompanhamento.getId())){
+    public boolean delete(Acompanhamento acompanhamento) {
+        if (acompanhamentoRepository.remove(acompanhamento.getId())) {
             Professor professor = acompanhamento.getProfessor();
             Aluno aluno = acompanhamento.getAluno();
             acompanhamento.getProfessor().deleteAcompanhamento(acompanhamento);
@@ -86,9 +85,9 @@ public class AcompanhamentoService {
         return false;
     }
 
-    public Treino getProximoTreinp(UUID alunoId) throws HttpException{
+    public Treino getProximoTreino(UUID alunoId) throws HttpException {
         Aluno aluno = alunoRepository.find(alunoId);
-        if (aluno.getAcompanhamento().isPresent()){
+        if (aluno.getAcompanhamento().isPresent()) {
             return aluno.getAcompanhamento().get().exibirProximoTreino();
         }
         throw new HttpException("O aluno não possui acompanhamento", HttpStatus.NOT_FOUND);
@@ -96,7 +95,7 @@ public class AcompanhamentoService {
 
     public boolean realizarTreino(UUID alunoId) throws HttpException {
         Aluno aluno = alunoRepository.find(alunoId);
-        if (aluno.getAcompanhamento().isPresent()){
+        if (aluno.getAcompanhamento().isPresent()) {
             aluno.getAcompanhamento().get().realizarTreino();
             acompanhamentoRepository.save(aluno.getAcompanhamento().get());
             return true;

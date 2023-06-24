@@ -26,23 +26,23 @@ public class AcompanhamentoController {
     }
 
     @GetMapping("/proximo-treino/{alunoId}")
-    public ResponseEntity<Object> getProximoTreino(@PathVariable(name = "alunoId") UUID alunoId){
-        try{
-            Treino treino = acompanhamentoService.getProximoTreinp(alunoId);
+    public ResponseEntity<Object> getProximoTreino(@PathVariable(name = "alunoId") UUID alunoId) {
+        try {
+            Treino treino = acompanhamentoService.getProximoTreino(alunoId);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(treino);
-        } catch (HttpException e){
+        } catch (HttpException e) {
             return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
         }
     }
 
     @PutMapping("/realizar-treino/{alunoId}")
-    public ResponseEntity<Object> realizarTreino(@PathVariable(name = "alunoId") UUID alunoId){
+    public ResponseEntity<Object> realizarTreino(@PathVariable(name = "alunoId") UUID alunoId) {
         try {
-            if (acompanhamentoService.realizarTreino(alunoId)){
+            if (acompanhamentoService.realizarTreino(alunoId)) {
                 return ResponseEntity.status(HttpStatus.ACCEPTED).body("Treino realizado.");
             }
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("O aluno não possui acompanhamento");
-        } catch (HttpException e){
+        } catch (HttpException e) {
             return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
         }
     }
@@ -52,7 +52,7 @@ public class AcompanhamentoController {
     public ResponseEntity<Object> getAcompanhamentoAluno(@PathVariable(name = "alunoId") UUID alunoId) {
         try {
             Optional<Acompanhamento> optionalAcompanhamento = acompanhamentoService.getAlunoAcompanhamento(alunoId);
-            if (optionalAcompanhamento.isPresent()){
+            if (optionalAcompanhamento.isPresent()) {
                 return ResponseEntity.status(HttpStatus.ACCEPTED).body(new AcompanhamentoResponseDTO(optionalAcompanhamento.get()));
             }
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
@@ -74,8 +74,8 @@ public class AcompanhamentoController {
     }
 
     @PostMapping()
-    public ResponseEntity<Object> create(@RequestBody CreateAcompanhamentoDTO createAcompanhamentoDTO){
-        try{
+    public ResponseEntity<Object> create(@RequestBody CreateAcompanhamentoDTO createAcompanhamentoDTO) {
+        try {
             Acompanhamento acompanhamento = acompanhamentoService.create(createAcompanhamentoDTO);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(new AcompanhamentoResponseDTO(acompanhamento));
         } catch (HttpException e) {
@@ -84,8 +84,8 @@ public class AcompanhamentoController {
     }
 
     @DeleteMapping("/{acompanhamentoId}")
-    public ResponseEntity<Object> delete(@PathVariable(name = "acompanhamentoId") UUID acompanhamentoId){
-        if (acompanhamentoService.delete(acompanhamentoId)){
+    public ResponseEntity<Object> delete(@PathVariable(name = "acompanhamentoId") UUID acompanhamentoId) {
+        if (acompanhamentoService.delete(acompanhamentoId)) {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Deletado");
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não deletado");

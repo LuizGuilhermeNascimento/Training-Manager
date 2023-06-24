@@ -9,16 +9,14 @@ import { keys } from 'src/app/services/local-storage/keys.json';
 import { Observable } from 'rxjs';
 import { UserJson } from 'src/app/models/login.models';
 import { ValidationService } from 'src/app/services/validation/validation.service';
-
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-
-export class RegisterComponent{
-
+export class RegisterComponent {
   alunoIsLogin: boolean;
 
   professorSign: ProfessorSign;
@@ -34,7 +32,11 @@ export class RegisterComponent{
   mensagemErrorCREF: string;
   campoVazio: boolean;
 
-  constructor(private router: Router, private SignUpService: SignUpService, private localStorageService: LocalStorageService) {
+  constructor(
+    private router: Router,
+    private SignUpService: SignUpService,
+    private localStorageService: LocalStorageService
+  ) {
     this.alunoIsLogin = true;
     this.professorSign = this.generateNewProfessorSign();
     this.alunoSign = this.generateNewAlunoSign();
@@ -55,8 +57,8 @@ export class RegisterComponent{
       nome: '',
       cpf: '',
       email: '',
-      senha: ''
-    }
+      senha: '',
+    };
   }
 
   generateNewProfessorSign(): ProfessorSign {
@@ -65,8 +67,8 @@ export class RegisterComponent{
       cpf: '',
       email: '',
       senha: '',
-      cref: ''
-    }
+      cref: '',
+    };
   }
 
   fillProfessorWithAluno(): ProfessorSign {
@@ -75,8 +77,8 @@ export class RegisterComponent{
       cpf: this.alunoSign.cpf,
       email: this.alunoSign.email,
       senha: this.alunoSign.senha,
-      cref: ''
-    }
+      cref: '',
+    };
   }
 
   fillAlunoWithProfessor(): AlunoSign {
@@ -85,7 +87,7 @@ export class RegisterComponent{
       cpf: this.professorSign.cpf,
       email: this.professorSign.email,
       senha: this.professorSign.senha,
-    }
+    };
   }
 
   changeToProfessorLogin() {
@@ -99,70 +101,69 @@ export class RegisterComponent{
   }
 
   navigateToStartPage() {
-    this.router.navigate([``]);
+    this.router.navigate(['']);
   }
 
   navigateToLogin() {
-    this.router.navigate(['/', `login`]);
+    this.router.navigate(['/login']);
   }
 
   updateInputForm(element: HTMLInputElement): void {
     let placeholderTag: string = element.placeholder;
     let value: string = element.value;
     if (this.alunoIsLogin) {
-      switch(placeholderTag) {
-        case "NAME":
+      switch (placeholderTag) {
+        case 'NAME':
           this.alunoSign.nome = value;
-          break
-        case "CPF":
+          break;
+        case 'CPF':
           this.alunoSign.cpf = value;
-          break
-        case "E-MAIL":
+          break;
+        case 'E-MAIL':
           this.alunoSign.email = value;
-          break
-        case "PASSWORD":
+          break;
+        case 'PASSWORD':
           this.alunoSign.senha = value;
-          break
+          break;
       }
-
     } else {
-      switch(placeholderTag) {
-        case "NAME":
+      switch (placeholderTag) {
+        case 'NAME':
           this.professorSign.nome = value;
-          break
-        case "CPF":
+          break;
+        case 'CPF':
           this.professorSign.cpf = value;
-          break
-        case "E-MAIL":
+          break;
+        case 'E-MAIL':
           this.professorSign.email = value;
-          break
-        case "PASSWORD":
+          break;
+        case 'PASSWORD':
           this.professorSign.senha = value;
-          break
-        case "CREF":
+          break;
+        case 'CREF':
           this.professorSign.cref = value;
-          break
+          break;
       }
     }
   }
+
   validacaoCPF(cpf: HTMLInputElement): void {
     if (ValidacaoFormulario.validarCPF(cpf.value) || cpf.value == '') {
       this.cpfValido = true;
-
     } else {
       // TODO estilização - victor
       this.cpfValido = false;
-      this.mensagemErrorCPF = 'CPF inválido!'
+      this.mensagemErrorCPF = 'CPF inválido!';
     }
   }
+
   validacaoEmail(email: HTMLInputElement): void {
     if (ValidacaoFormulario.validarEmail(email.value) || email.value == '') {
       this.emailValido = true;
-
     } else {
       // TODO estilização - victor
       this.emailValido = false;
-      this.mensagemErrorEmail = 'Email inválido!'
+      this.mensagemErrorEmail = 'Email inválido!';
     }
   }
 
@@ -170,7 +171,6 @@ export class RegisterComponent{
     let mensagemResposta = ValidacaoFormulario.validarSenha(senha.value);
     if (mensagemResposta == 'A senha é válida') {
       this.senhaValida = true;
-
     } else {
       // TODO estilização - victor
       this.senhaValida = false;
@@ -179,9 +179,8 @@ export class RegisterComponent{
   }
 
   validacaoCREF(cref: HTMLInputElement): void {
-    if (ValidacaoFormulario.validarCREF(cref.value)  || cref.value == '') {
+    if (ValidacaoFormulario.validarCREF(cref.value) || cref.value == '') {
       this.crefValido = true;
-
     } else {
       // TODO estilização - victor
       this.crefValido = false;
@@ -194,33 +193,34 @@ export class RegisterComponent{
       return (
         ValidacaoFormulario.validarEmail(this.alunoSign.email) &&
         ValidacaoFormulario.validarCPF(this.alunoSign.cpf) &&
-        (ValidacaoFormulario.validarSenha(this.alunoSign.senha) == 'A senha é válida')
-      )
+        ValidacaoFormulario.validarSenha(this.alunoSign.senha) ==
+          'A senha é válida'
+      );
     }
     return (
       ValidacaoFormulario.validarEmail(this.professorSign.email) &&
       ValidacaoFormulario.validarCPF(this.professorSign.cpf) &&
-      (ValidacaoFormulario.validarSenha(this.professorSign.senha) == 'A senha é válida') &&
+      ValidacaoFormulario.validarSenha(this.professorSign.senha) ==
+        'A senha é válida' &&
       ValidacaoFormulario.validarCREF(this.professorSign.cref)
-    )
+    );
   }
 
   verificarCamposVazios(): void {
     if (this.alunoIsLogin) {
-      this.campoVazio = (
+      this.campoVazio =
         this.alunoSign.nome == '' ||
         this.alunoSign.email == '' ||
         this.alunoSign.cpf == '' ||
-        this.alunoSign.senha == ''
-      )
+        this.alunoSign.senha == '';
+    } else {
+      this.campoVazio =
+        this.professorSign.nome == '' ||
+        this.professorSign.email == '' ||
+        this.professorSign.cpf == '' ||
+        this.professorSign.senha == '' ||
+        this.professorSign.cref == '';
     }
-    this.campoVazio = (
-      this.professorSign.nome == '' ||
-      this.professorSign.email == '' ||
-      this.professorSign.cpf == '' ||
-      this.professorSign.senha == '' ||
-      this.professorSign.cref == ''
-    )
   }
 
   onSubmit() {
@@ -237,11 +237,31 @@ export class RegisterComponent{
     } else {
       response = this.SignUpService.signUpProfessor(this.professorSign);
     }
-    response.subscribe(user => {
-      console.log(user)
-      this.localStorageService.setItem(keys.roleKey, user.role);
-      this.localStorageService.setItem(keys.idKey, user.id);
-      this.router.navigate(['/', 'main']);
+    response.subscribe({
+      next: (user) => {
+        console.log(user);
+        this.localStorageService.setItem(keys.roleKey, user.role);
+        this.localStorageService.setItem(keys.idKey, user.id);
+        this.router.navigate(['/main']);
+      },
+      error: (error: HttpErrorResponse) => {
+        switch (error.error) {
+          case 'Cpf já utilizado':
+            this.mensagemErrorCPF = 'CPF já cadastrado';
+            this.cpfValido = false;
+            break;
+          case 'Email já utilizado':
+            this.mensagemErrorEmail = 'Email já cadastrado';
+            this.emailValido = false;
+            break;
+          case 'Cref já utilizado':
+            this.mensagemErrorCREF = 'CREF já cadastrado';
+            this.crefValido = false;
+            break;
+          default:
+            break;
+        }
+      },
     });
   }
 }

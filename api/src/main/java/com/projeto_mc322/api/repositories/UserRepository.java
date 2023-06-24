@@ -15,7 +15,7 @@ public class UserRepository {
         return buscarPorCampo("email", email);
     }
 
-    public User findByCpf(String cpf) throws HttpException{
+    public User findByCpf(String cpf) throws HttpException {
         return buscarPorCampo("cpf", cpf);
     }
 
@@ -23,11 +23,11 @@ public class UserRepository {
         try {
             JsonObject jsonObject = JsonManager.buscarPorCampo("dados/Professor", campo, valor);
             return BuildObject.buildProfessor(jsonObject);
-        } catch (Exception e){
-            try{
+        } catch (Exception e) {
+            try {
                 JsonObject jsonObject = JsonManager.buscarPorCampo("dados/Aluno", campo, valor);
                 return BuildObject.buildAluno(jsonObject);
-            }catch (Exception ignore){
+            } catch (Exception ignore) {
                 throw new HttpException("Usuario não encontrado", HttpStatus.NOT_FOUND);
             }
         }

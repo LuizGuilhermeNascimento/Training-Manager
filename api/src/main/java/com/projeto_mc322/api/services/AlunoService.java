@@ -24,28 +24,28 @@ public class AlunoService {
         this.acompanhamentoRepository = acompanhamentoRepository;
     }
 
-    public Aluno create(CreateAlunoDTO createAlunoDTO) throws HttpException{
-            Aluno aluno = createAlunoDTO.create();
-            alunoRepository.create(aluno);
-            return aluno;
+    public Aluno create(CreateAlunoDTO createAlunoDTO) throws HttpException {
+        Aluno aluno = createAlunoDTO.create();
+        alunoRepository.create(aluno);
+        return aluno;
     }
 
     public boolean delete(UUID id) {
-        try{
+        try {
             Aluno aluno = alunoRepository.find(id);
-            if (aluno.getAcompanhamento().isPresent()){
+            if (aluno.getAcompanhamento().isPresent()) {
                 Acompanhamento acompanhamento = aluno.getAcompanhamento().get();
                 acompanhamento.getProfessor().deleteAcompanhamento(acompanhamento);
                 professorRepository.save(acompanhamento.getProfessor());
                 acompanhamentoRepository.remove(acompanhamento.getId());
             }
             return alunoRepository.remove(id);
-        }catch (Exception ignored){
+        } catch (Exception ignored) {
             return false;
         }
     }
 
-    public Aluno find(UUID id) throws HttpException{
+    public Aluno find(UUID id) throws HttpException {
         return alunoRepository.find(id);
     }
 

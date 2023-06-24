@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.UUID;
 
 
-
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/aluno")
@@ -26,7 +25,7 @@ public class AlunoController {
     }
 
     @GetMapping(value = {"", "/"})
-    public ResponseEntity<Object> listarAlunos(){
+    public ResponseEntity<Object> listarAlunos() {
         List<Aluno> alunos = alunoService.listar();
         List<AlunoResponseDTO> list = new ArrayList<>();
         alunos.forEach(aluno -> list.add(new AlunoResponseDTO(aluno)));
@@ -34,28 +33,28 @@ public class AlunoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getAlunoById(@PathVariable(name = "id") UUID id){
-        try{
+    public ResponseEntity<Object> getAlunoById(@PathVariable(name = "id") UUID id) {
+        try {
             Aluno aluno = alunoService.find(id);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(new AlunoResponseDTO(aluno));
-        }catch (HttpException e){
+        } catch (HttpException e) {
             return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
         }
     }
 
     @PostMapping("/sign-up")
-    public ResponseEntity<Object> signUp(@RequestBody CreateAlunoDTO createAlunoDTO){
-        try{
+    public ResponseEntity<Object> signUp(@RequestBody CreateAlunoDTO createAlunoDTO) {
+        try {
             Aluno aluno = alunoService.create(createAlunoDTO);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(new LoginSignupResponseDTO(aluno));
-        }catch (HttpException e){
+        } catch (HttpException e) {
             return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> delete(@PathVariable(name = "id") UUID id){
-        if (alunoService.delete(id)){
+    public ResponseEntity<Object> delete(@PathVariable(name = "id") UUID id) {
+        if (alunoService.delete(id)) {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Deletado");
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nao deletado");

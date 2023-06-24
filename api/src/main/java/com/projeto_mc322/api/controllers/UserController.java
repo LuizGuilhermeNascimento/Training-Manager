@@ -21,11 +21,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestBody LoginDTO loginDTO){
-        try{
+    public ResponseEntity<Object> login(@RequestBody LoginDTO loginDTO) {
+        try {
             User user = userService.login(loginDTO.getEmail(), loginDTO.getSenha());
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(new LoginSignupResponseDTO(user));
-        } catch (HttpException e){
+        } catch (HttpException e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
         }
     }

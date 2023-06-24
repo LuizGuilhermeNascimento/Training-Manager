@@ -30,7 +30,7 @@ public class ProfessorService {
     }
 
     public boolean delete(UUID id) {
-        try{
+        try {
             Professor professor = professorRepository.find(id);
             professor.getAcompanhamentos().forEach(acompanhamento -> {
                 acompanhamento.getAluno().setAcompanhamento(Optional.empty());
@@ -38,7 +38,7 @@ public class ProfessorService {
                 acompanhamentoRepository.remove(acompanhamento.getId());
             });
             return professorRepository.remove(id);
-        }catch (Exception ignored){
+        } catch (Exception ignored) {
             return false;
         }
     }
