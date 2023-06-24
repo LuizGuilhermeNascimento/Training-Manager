@@ -1,6 +1,5 @@
 # projeto_mc322
-Projeto Final MC322
-
+Participantes
   <table>
       <thead>
           <tr>
@@ -23,6 +22,17 @@ Projeto Final MC322
           </tr>
       </tbody>
   </table>
+
+  
+# Frameworks e funcionamento geral do sistema
+O sistema foi dividido em duas partes: o backend (na pasta api), contendo as regras de negócio da aplicação, bem como o gerenciamento dos dados em
+arquivo, feito com o framework <b>Spring Boot</b> em java, e o frontend (pasta frontend :D), contendo a contrução da parte gráfica utilizando o framework web <b>Angular</b>, em <b>Typescript</b>.
+
+Basicamente, o backend consiste em uma <b>API Rest</b>, que permite a criação de rotas especificias para obter e enviar dados, enquanto que essas
+rotas são acessadas pelo frontend através de requisições <b>HTTP</b> (get, post, delete, put,...)
+
+![diagrama-funcionamento-api](https://github.com/LuizGuilhermeNascimento/projeto_mc322/assets/52840354/c06a8972-f3df-457f-b593-5a86d56b367a)
+
  
  
 ># O Projeto
