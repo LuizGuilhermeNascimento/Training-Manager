@@ -33,48 +33,8 @@
         <div id="trackingTitle">
             <h1>Tracking</h1>
         </div>
-        <div class="trackItem">
-            <h1 class="name">Joao da Silva Santos</h1>
-            <p class="current">23 <span class="progress">/ 30</span></p>
-            <p class="training">traning · ABC</p>
-            <p class="description">dsjfoasd faidsjfoa sdofj iaojsd formArrayName <br>
-                ioafjsdf <br>
-                adsiofjasdofi <br>
-                asdfijoasd <br>
-                faisdojfa <br>
-                dfiaodf <br>
-                asdijfas
-            </p>
-        </div>
-        <div class="trackItem">
-            <h1 class="name">Gustovo doijafs diafo disoj</h1>
-            <p class="training">traing · ABCD</p>
-            <p class="current">17 <span class="progress">/ 30</span></p>
-        </div>
-        <div class="trackItem">
-            <h1 class="name">Gustovo doijafs diafo disoj</h1>
-            <p class="training">traing · ABCD</p>
-            <p class="current">17 <span class="progress">/ 30</span></p>
-        </div>
-        <div class="trackItem">
-            <h1 class="name">Gustovo doijafs diafo disoj</h1>
-            <p class="training">traing · ABCD</p>
-            <p class="current">17 <span class="progress">/ 30</span></p>
-        </div>
-        <div class="trackItem">
-            <h1 class="name">Gustovo doijafs diafo disoj</h1>
-            <p class="training">traing · ABCD</p>
-            <p class="current">17 <span class="progress">/ 30</span></p>
-        </div>
-        <div class="trackItem">
-            <h1 class="name">Gustovo doijafs diafo disoj</h1>
-            <p class="training">traing · ABCD</p>
-            <p class="current">17 <span class="progress">/ 30</span></p>
-        </div>
-        <div class="trackItem">
-            <h1 class="name">Gustovo doijafs diafo disoj</h1>
-            <p class="training">traing · ABCD</p>
-            <p class="current">17 <span class="progress">/ 30</span></p>
+        <div *ngFor="let acompanhamento of acompanhamentos">
+            <app-acompanhamento-item [acompanhamento]="acompanhamento"></app-acompanhamento-item>
         </div>
     </div>
 
