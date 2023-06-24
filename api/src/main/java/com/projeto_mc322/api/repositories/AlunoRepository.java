@@ -17,10 +17,10 @@ public class AlunoRepository extends RepositoryBase<Aluno> {
         if (!JsonManager.cpfUnico(aluno.getCpf())) {
             throw new HttpException("Cpf já utilizado", HttpStatus.CONFLICT);
         }
-        if (!JsonManager.emailUnico(aluno.getEmail())){
+        if (!JsonManager.emailUnico(aluno.getEmail())) {
             throw new HttpException("Email já utilizado", HttpStatus.CONFLICT);
         }
-        if (!JsonManager.writeFile(aluno)){
+        if (!JsonManager.writeFile(aluno)) {
             throw new HttpException("Usuário não criado", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

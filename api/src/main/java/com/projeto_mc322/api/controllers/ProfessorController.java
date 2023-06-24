@@ -22,27 +22,28 @@ public class ProfessorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getProfessorById(@PathVariable(name = "id") UUID id){
-        try{
+    public ResponseEntity<Object> getProfessorById(@PathVariable(name = "id") UUID id) {
+        try {
             Professor professor = professorService.find(id);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ProfessorResponseDTO(professor));
-        }catch (HttpException e){
+        } catch (HttpException e) {
             return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
         }
     }
+
     @PostMapping("/sign-up")
-    public ResponseEntity<Object> signUp(@RequestBody CreateProfessorDTO createProfessorDTO){
-        try{
+    public ResponseEntity<Object> signUp(@RequestBody CreateProfessorDTO createProfessorDTO) {
+        try {
             Professor professor = professorService.create(createProfessorDTO);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(new LoginSignupResponseDTO(professor));
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(e.getMessage());
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> delete(@PathVariable(name = "id") UUID id){
-        if (professorService.delete(id)){
+    public ResponseEntity<Object> delete(@PathVariable(name = "id") UUID id) {
+        if (professorService.delete(id)) {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Deletado");
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nao deletado");

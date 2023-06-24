@@ -10,9 +10,9 @@ public class LoginSignupResponseDTO {
     private UUID id;
 
     public LoginSignupResponseDTO(User user) {
-        if (user instanceof Professor){
+        if (user instanceof Professor) {
             this.role = 0;
-        }else{
+        } else {
             this.role = 1;
         }
         this.id = user.getId();

@@ -20,10 +20,10 @@ public class ProfessorRepository extends RepositoryBase<Professor> {
         if (!JsonManager.cpfUnico(professor.getCpf())) {
             throw new HttpException("Cpf já utilizado", HttpStatus.CONFLICT);
         }
-        if (!JsonManager.emailUnico(professor.getEmail())){
+        if (!JsonManager.emailUnico(professor.getEmail())) {
             throw new HttpException("Email já utilizado", HttpStatus.CONFLICT);
         }
-        if (!JsonManager.writeFile(professor)){
+        if (!JsonManager.writeFile(professor)) {
             throw new HttpException("Usuário não criado", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

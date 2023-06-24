@@ -28,7 +28,7 @@ public abstract class RepositoryBase<T extends JsonSerializable> {
             String path = JsonManager.buildPath(type, id);
             JsonObject jsonObject = JsonManager.readFile(path);
             return BuildObject.build(type, jsonObject);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new HttpException(type.getSimpleName() + " não encontrado", HttpStatus.NOT_FOUND);
         }
     }
@@ -36,19 +36,20 @@ public abstract class RepositoryBase<T extends JsonSerializable> {
     public boolean remove(UUID id) {
         return JsonManager.excluirArquivo(JsonManager.buildPath(type, id));
     }
+
     public boolean save(T t) {
         return JsonManager.writeFile(t);
     }
 
-    public List<T> list(){
+    public List<T> list() {
         List<T> list = new ArrayList<>();
         String path = "dados/" + type.getSimpleName();
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(path))){
-            for (Path file: stream){
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(path))) {
+            for (Path file : stream) {
                 String id = file.getFileName().toString();
-                list.add(find(UUID.fromString(id.replace(".json",""))));
+                list.add(find(UUID.fromString(id.replace(".json", ""))));
             }
-        }catch (Exception ignored){
+        } catch (Exception ignored) {
         }
         return list;
     }

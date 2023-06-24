@@ -15,26 +15,4 @@ public class AcompanhamentoRepository extends RepositoryBase<Acompanhamento> {
     public AcompanhamentoRepository() {
         super(Acompanhamento.class);
     }
-
-    @Override
-    public Acompanhamento find(UUID id) throws HttpException {
-        try {
-            String path = JsonManager.buildPath(Acompanhamento.class, id);
-            JsonObject jsonObject = JsonManager.readFile(path);
-            return BuildObject.buildAcompanhamento(jsonObject);
-        }catch (Exception e){
-            throw new HttpException("Aluno não encontrado", HttpStatus.NOT_FOUND);
-        }
-    }
-
-
-    @Override
-    public boolean save(Acompanhamento acompanhamento) {
-        return JsonManager.writeFile(acompanhamento);
-    }
-
-    @Override
-    public boolean remove(UUID id) {
-        return JsonManager.excluirArquivo("dados/Acompanhamento/" + id + ".json");
-    }
 }
