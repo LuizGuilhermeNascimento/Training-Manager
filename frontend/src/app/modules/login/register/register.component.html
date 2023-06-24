@@ -23,19 +23,19 @@
             </div>
             <div class="inputs">
                 <input type="text" placeholder="CPF" maxlength="11" #cpf (change)="updateInputForm(cpf); validacaoCPF(cpf)">
-                <p *ngIf="!cpfValido"> {{ mensagemError }} </p>
+                <p *ngIf="!cpfValido"> {{ mensagemErrorCPF }} </p>
             </div>
             <div class="inputs">
                 <input type="email" placeholder="E-MAIL" autocomplete="off" #email (change)="updateInputForm(email); validacaoEmail(email)" maxlength="30">
-                <p *ngIf="!emailValido"> {{ mensagemError }} </p>
+                <p *ngIf="!emailValido"> {{ mensagemErrorEmail }} </p>
             </div>
             <div class="inputs">
                 <input type="password" placeholder="PASSWORD" #senha (change)="updateInputForm(senha); validacaoSenha(senha)" minlength="8">
-                <p *ngIf="!senhaValida"> {{ mensagemError }} </p>
+                <p *ngIf="!senhaValida"> {{ mensagemErrorSenha }} </p>
             </div>
             <div class="inputs">
                 <input *ngIf="!alunoIsLogin" id="cref" type="text" placeholder="CREF" #cref (change)="updateInputForm(cref); validacaoCREF(cref)">
-                <p *ngIf="!crefValido"> {{ mensagemError }} </p>
+                <p *ngIf="!crefValido"> {{ mensagemErrorCREF }} </p>
             </div>
         </div>
         <p *ngIf="this.campoVazio">

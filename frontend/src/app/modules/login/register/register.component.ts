@@ -28,7 +28,10 @@ export class RegisterComponent{
   emailValido: boolean;
   senhaValida: boolean;
   crefValido: boolean;
-  mensagemError: string;
+  mensagemErrorCPF: string;
+  mensagemErrorEmail: string;
+  mensagemErrorSenha: string;
+  mensagemErrorCREF: string;
   campoVazio: boolean;
 
   constructor(private router: Router, private SignUpService: SignUpService, private localStorageService: LocalStorageService) {
@@ -40,7 +43,10 @@ export class RegisterComponent{
     this.emailValido = true;
     this.senhaValida = true;
     this.crefValido = true;
-    this.mensagemError = '';
+    this.mensagemErrorCPF = '';
+    this.mensagemErrorEmail = '';
+    this.mensagemErrorSenha = '';
+    this.mensagemErrorCREF = '';
     this.campoVazio = false;
   }
 
@@ -146,7 +152,7 @@ export class RegisterComponent{
     } else {
       // TODO estilização - victor
       this.cpfValido = false;
-      this.mensagemError = 'CPF inválido!'
+      this.mensagemErrorCPF = 'CPF inválido!'
     }
   }
   validacaoEmail(email: HTMLInputElement): void {
@@ -156,7 +162,7 @@ export class RegisterComponent{
     } else {
       // TODO estilização - victor
       this.emailValido = false;
-      this.mensagemError = 'Email inválido!'
+      this.mensagemErrorEmail = 'Email inválido!'
     }
   }
 
@@ -168,7 +174,7 @@ export class RegisterComponent{
     } else {
       // TODO estilização - victor
       this.senhaValida = false;
-      this.mensagemError = mensagemResposta;
+      this.mensagemErrorSenha = mensagemResposta;
     }
   }
 
@@ -179,7 +185,7 @@ export class RegisterComponent{
     } else {
       // TODO estilização - victor
       this.crefValido = false;
-      this.mensagemError = 'CREF inválido! Insira no formato: UF000000';
+      this.mensagemErrorCREF = 'CREF inválido! Insira no formato: UF000000';
     }
   }
 
@@ -202,17 +208,17 @@ export class RegisterComponent{
   verificarCamposVazios(): void {
     if (this.alunoIsLogin) {
       this.campoVazio = (
-        this.alunoSign.nome == '' &&
-        this.alunoSign.email == '' &&
-        this.alunoSign.cpf == '' &&
+        this.alunoSign.nome == '' ||
+        this.alunoSign.email == '' ||
+        this.alunoSign.cpf == '' ||
         this.alunoSign.senha == ''
       )
     }
     this.campoVazio = (
-      this.professorSign.nome == '' &&
-      this.professorSign.email == '' &&
-      this.professorSign.cpf == '' &&
-      this.professorSign.senha == '' &&
+      this.professorSign.nome == '' ||
+      this.professorSign.email == '' ||
+      this.professorSign.cpf == '' ||
+      this.professorSign.senha == '' ||
       this.professorSign.cref == ''
     )
   }
