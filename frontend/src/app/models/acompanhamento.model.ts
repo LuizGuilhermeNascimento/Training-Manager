@@ -3,6 +3,7 @@ import { Treino } from "./treino.model";
 export interface Acompanhamento {
     id: string;
     alunoId: string;
+    nomeAluno: string;
     professorId: string;
     treinos: Treino[];
     treinosRealizados: number;

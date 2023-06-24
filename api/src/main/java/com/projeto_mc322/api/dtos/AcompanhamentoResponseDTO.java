@@ -9,6 +9,7 @@ import java.util.UUID;
 public class AcompanhamentoResponseDTO {
     private UUID id;
     private UUID alunoId;
+    private String nomeAluno;
     private UUID professorId;
     private List<Treino> treinos;
     private Integer treinosRealizados;
@@ -21,7 +22,9 @@ public class AcompanhamentoResponseDTO {
         this.treinos = acompanhamento.getTreinos();
         this.treinosRealizados = acompanhamento.getTreinosRealizados();
         this.treinosMeta = acompanhamento.getTreinosMeta();
+        this.nomeAluno = acompanhamento.getAluno().getNome();
     }
+    
 
     public UUID getId() {
         return id;
@@ -69,5 +72,15 @@ public class AcompanhamentoResponseDTO {
 
     public void setTreinosMeta(Integer treinosMeta) {
         this.treinosMeta = treinosMeta;
+    }
+
+
+    public String getNomeAluno() {
+        return nomeAluno;
+    }
+
+
+    public void setNomeAluno(String nomeAluno) {
+        this.nomeAluno = nomeAluno;
     }
 }

@@ -1,0 +1,10 @@
+<div class="trackItem">
+    <h1 class="name">{{ acompanhamento.nomeAluno }}</h1>
+    <p class="current">{{ acompanhamento.treinosRealizados }} <span class="progress">/ {{ acompanhamento.treinosMeta }}</span></p>
+    <p class="training">traning · {{ treinosTipo }}</p>
+    <div class="description">
+        <div *ngFor="let treino of acompanhamento.treinos">
+            <app-treino-item [treino]="treino"></app-treino-item>
+        </div>
+    </div>
+</div>
