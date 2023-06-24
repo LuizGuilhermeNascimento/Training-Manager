@@ -8,6 +8,7 @@
 
 *{
     margin: 0;
+    border: 0;
 }
 
 body{
@@ -38,38 +39,32 @@ body{
 }
 
 #profile{
-    position: absolute;  
-    right: 7%;
-    top: 50%;
+    position: absolute;
+    top: 4.5vh;
     transform: translateY(-50%);
-    font-size: 12pt;
+    right: 6vw;
     display: grid;
-    height: 60px;
-    grid-template-columns: 50px 1fr;
+    grid-template-columns: 60px 1fr;
     grid-template-rows: 1fr 1fr;
-    color: var(--off-white);
-    cursor: pointer;
 }
 
 #photo{
     grid-row: span 2;
     background-color: var(--dark-gray);
-    width: 100%;
     aspect-ratio: 1;
     border-radius: 50%;
 }
 
 #username{
-    padding: 0 0 0 10%;
+    padding: 0 0 0 10px;
     position: relative;
-    width: 100%;
     top: 30%;
     font-weight: bold;
     text-transform: uppercase;
 }
 
 #email{
-    padding: 0 0 0 10%;
+    padding: 0 0 0 10px;
     position: relative; 
     font-size: 0.8em;
     font-weight: 600;
@@ -94,11 +89,11 @@ body{
     position: relative;
     width: 80%;
     left: 50%;
-    top: 5%;
+    top: 3%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
-    row-gap: 20px;
+    row-gap: 15px;
 }
 
 input::-webkit-outer-spin-button,
@@ -127,13 +122,43 @@ input::-webkit-inner-spin-button {
     font-size: 14pt;
 }
 
-.inputTracking:is(:focus) {
+.inputTracking:is(:focus),
+.inputTracking:not(:placeholder-shown) {
     padding: 10px 15px 12px 15px;
     background-color: var(--dark-gray);
     border: none;
 }
 
-#description{
+.newTraining{
+    width: 100%;
+}
+
+input[type="radio"]{
+    display: none;
+}
+
+label{
+    border: var(--gray) 2px dotted;
+    width: 100%;
+    padding: 5px 0 5px 15px;
+    user-select: none;
+    text-align: center;
+}
+
+label:has(+ .trainDescription:not(:placeholder-shown)) {
+    border: none;
+    background-color: var(--dark-gray);
+}
+
+input[type="radio"]:checked + label + .trainDescription{
+    height: 200px;
+    padding: 10px;
+    margin: 5px 0 10px 0;
+}
+
+.trainDescription{
+    transition: all 0.3s ease-out;
+    position: relative;
     font-size: 12pt;
     font-family: 'Lato';
     font-weight: 600;
@@ -141,32 +166,33 @@ input::-webkit-inner-spin-button {
     line-height: 18pt;
     background-color: var(--dark-gray);
     color: var(--off-white);
-    padding: 10px;
-    height: 350px;
+    padding: 0px;
+    height: 0;
+    width: 100%;
     resize: none;
     outline: none;
     border: none;
     scroll-behavior: smooth;
 }
 
-#description::placeholder{
+.trainDescription::placeholder{
     color: var(--gray);
     font-weight: 600;
     font-size: 12pt;
 }
 
-#description::-webkit-scrollbar {
+.trainDescription::-webkit-scrollbar {
     width: 4px;
 }
 
-#description::-webkit-scrollbar-thumb{
+.trainDescription::-webkit-scrollbar-thumb{
     background-color: var(--gray);
     border-radius: 3.5px;
 }
 
 .button{
     position: absolute;
-    bottom: 5%;
+    bottom: 3%;
     left: 50%;
     transform: translateX(-50%);
     width: 75%;
@@ -285,15 +311,16 @@ input::-webkit-inner-spin-button {
     position: absolute;
     top: 75px;
     transform: translateY(-50%);
-    right: 25px;
-    font-size:3em;
+    right: 90px;
+    font-size:56pt;
     font-weight: bold;
 }
 
-.progress{
-    font-size: 0.3em;
-    position: relative;
-    top: -30px;
+.goal{
+    position: absolute;
+    font-size: 16pt;
+    top: 40px;
+    right: 40px;
     color: var(--light-gray);
 }
 
@@ -304,4 +331,8 @@ input::-webkit-inner-spin-button {
     top: 160px;
     left: 5%;
     width: 90%;
+}
+
+#excluir{
+    display: none;
 }
