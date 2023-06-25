@@ -39,9 +39,10 @@ public class AcompanhamentoController {
     public ResponseEntity<Object> realizarTreino(@PathVariable(name = "alunoId") UUID alunoId) {
         try {
             if (acompanhamentoService.realizarTreino(alunoId)) {
-                return ResponseEntity.status(HttpStatus.ACCEPTED).body("Treino realizado.");
+                Treino treino = acompanhamentoService.getProximoTreino(alunoId);
+                return ResponseEntity.status(HttpStatus.ACCEPTED).body(treino);
             }
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body("O aluno não possui acompanhamento");
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("O aluno não possui acompanhamento");
         } catch (HttpException e) {
             return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
         }

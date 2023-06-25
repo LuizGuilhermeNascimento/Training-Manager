@@ -45,14 +45,15 @@ export class AlunoPageComponent implements OnInit {
     if (id) {
       const response = this.acompanhamentoService.finalizarTreino(id);
       response.subscribe({
-        next: () => {
+        next: (proximoTreino: Treino) => {
+          this.proximoTreino = proximoTreino;
+
           this.acompanhamentoService.getAcompanhamentoDoAluno(id).subscribe({
             next: (acompanhamento: Acompanhamento) => {
               this.acompanhamento = acompanhamento;
             },
           });
         },
-        error: (error) => {},
       });
     }
   }

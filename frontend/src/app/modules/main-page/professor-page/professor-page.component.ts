@@ -40,4 +40,9 @@ export class ProfessorPageComponent implements OnInit {
       this.router.navigate(['/main']);
     }
   }
+
+  logOut(): void {
+    this.localStorageService.clear();
+    this.router.navigate(['']);
+  }
 }
