@@ -1,29 +1,90 @@
-#logo{
+#sign{
     position: absolute;
-    left:130px;
-    top: 70px;
-    aspect-ratio: 1;
-    width: 60px;
-    background-image: url(./haltere.png);
-    background-size: cover;
-    background-position: center;
-}
-
-button{
+    left: 32%;
+    bottom: 25%;
     outline: none;
     border:none;
-    font-size: 10pt;
+    font-size: 12pt;
     font-weight: 900;
     letter-spacing: 3px;
     right: 0;
-    background-color: #f2f2f2;
+    background-color: #ececec;
     color: #1c1c1c;
-    width: 210px;
-    padding: 7px 40px 7px 15px;
+    width: 250px;
+    padding: 15px 25px 15px 25px;
+    font-family: 'Space Grotesk';
+    cursor: pointer;
+    border-radius: 3px;
 }
 
-#sign{
+#sign span {
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+   
+#sign span:after {
+    content: '»';
     position: absolute;
-    right: 5%;
-    top: 90px;
+    opacity: 0;
+    top: -8%;
+    right: -20px;
+    transition: 0.5s;
+}
+   
+#sign:hover span {
+    padding-right: 20px;
+}
+   
+#sign:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+#nav{
+    position: absolute;
+    right: 13%;
+    top: 8%;
+    display: flex;
+    column-gap: 20px;
+}
+
+.sign {
+    font-size: 18px;
+    color: #e1e1e1;
+    font-family: 'Space Grotesk';
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    background: none;
+    text-transform: uppercase;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 400ms;
+    transition-property: color;
+    outline: none;
+}
+
+  
+.sign:focus:after,
+.sign:hover:after {
+    width: 100%;
+    left: 0%;
+}
+  
+.sign:after {
+    content: "";
+    pointer-events: none;
+    bottom: -2px;
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: #bfbfbf;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 400ms;
+    transition-property: width, left;
 }

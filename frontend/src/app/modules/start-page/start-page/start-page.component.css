@@ -1,58 +1,41 @@
 body{
-    background-color: #141414;
+    background-image: url(./background.jpg);
+    background-size: cover;
+    background-position: center;
     height: 100vh;
-    font-family: 'Lato', 'Space Grotesk';
-    color: #f2f2f2;
+    width: 100vw;
+    font-family: 'Lato', 'Space Grotesk', 'Lora';
+    user-select: none;
 }
 
 .menu{
     position: absolute;
-    width: 55%;
+    height: 100vh;
+    width: 100vw;
 }
 
 h1{
     position: absolute;
-    right: 52%;
-    top: 50%;
+    left: 14%;
+    top: 37%;
     transform: translateY(-50%);
-    font-size: 56pt;
-    font-weight: bold;
+    font-size: 52pt;
+    font-weight: 400;
+    font-family: 'Space Grotesk';
+    color: #ececec;
 }
 
-#retangulo{
-    position: absolute;
-    right: 52%;
-    bottom: 51%;
-    width: 360px;
-    height: 56pt;
-    background-color: #f2f2f2;
+#meio{
+    color: #8e7e71;
 }
 
 p{
     position: absolute;
-    right: 48%;
-    bottom: 50px;
-    width: 280px;
-    text-align: end;
-    color: #bababa;
-    font-size: 12pt;
+    left: 14%;
+    top: 52%;
+    width: 370px;
+    color: #808080;
+    font-size: 13pt;
     font-weight: 600;
-}
-
-svg{
-    position: absolute;
-    width: 30px;
-    fill:#f2f2f2;
-    bottom: 70px;
-    left: 130px;
-}
-
-#imageStart{
-    position: absolute;
-    right: 0;
-    width: 45%;
-    height: 100vh;
-    background-image: url(./imageStart.png);
-    background-size: cover;
-    background-position: center;
+    font-family: 'Space Grotesk';
 }
