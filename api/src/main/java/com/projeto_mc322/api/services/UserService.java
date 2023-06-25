@@ -1,10 +1,6 @@
 package com.projeto_mc322.api.services;
 
-
-import com.projeto_mc322.api.dtos.*;
 import com.projeto_mc322.api.exceptions.*;
-import com.projeto_mc322.api.models.user.Aluno;
-import com.projeto_mc322.api.models.user.Professor;
 import com.projeto_mc322.api.models.user.User;
 import com.projeto_mc322.api.repositories.UserRepository;
 import org.springframework.http.HttpStatus;

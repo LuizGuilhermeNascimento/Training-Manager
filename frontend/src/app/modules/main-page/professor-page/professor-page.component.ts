@@ -6,11 +6,12 @@ import { AcompanhamentoService } from 'src/app/services/acompanhamento/acompanha
 import { AlunoService } from 'src/app/services/aluno/aluno.service';
 import { keys } from 'src/app/services/local-storage/keys.json';
 import { LocalStorageService } from 'src/app/services/local-storage/localstorage.service';
+import { ValidationService } from 'src/app/services/validation/validation.service';
 
 @Component({
   selector: 'app-professor-page',
   templateUrl: './professor-page.component.html',
-  styleUrls: ['./professor-page.component.css']
+  styleUrls: ['./professor-page.component.css'],
 })
 export class ProfessorPageComponent implements OnInit {
   acompanhamentos: Acompanhamento[];
