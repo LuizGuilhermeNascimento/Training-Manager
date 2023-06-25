@@ -37,7 +37,7 @@ public class Aluno extends User{
 
     public Treino proximoTreino() throws Exception{
         if (acompanhamento.isPresent()){
-            return acompanhamento.get().exibirProximoTreino();
+            return acompanhamento.get().proximoTreino();
         }
         throw new Exception();
     }
