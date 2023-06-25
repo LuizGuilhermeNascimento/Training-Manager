@@ -14,9 +14,14 @@
         <div class="form">
             <div id="userType">
                 <input type="radio" name="user" id="aluno" checked="true">
-                <label for="aluno" (click)="changeToAlunoLogin()">Aluno</label>
+                <label for="aluno" (click)="changeToAlunoLogin()">
+                    <span>Aluno</span>
+                </label>
+                <p>·</p>
                 <input type="radio" name="user" id="professor">
-                <label id="professorUser" for="professor" (click)="changeToProfessorLogin()">Professor</label>
+                <label id="professorUser" for="professor" (click)="changeToProfessorLogin()">
+                    <span>Professor</span>
+                </label>
             </div>
             <div class="inputs">
                 <input class="first" type="text" placeholder="NAME" #name (change)="updateInputForm(name)" maxlength="50">
@@ -38,19 +43,20 @@
                 <p *ngIf="!crefValido"> {{ mensagemErrorCREF }} </p>
             </div>
         </div>
-        <p *ngIf="this.campoVazio">
+        <p *ngIf="this.campoVazio" id="blank">
             Preencha todos os campos!
         </p>
-        <button (click)="verificarCamposVazios(); onSubmit()"> ENTER </button>
+        <button id="enter" (click)="verificarCamposVazios(); onSubmit()"> 
+            <span>ENTER</span>
+        </button>
     </div>
 
     <div id="call">
-        <p>SEND US A<br>
-            REQUEST TO<br>
-            CREATE<br>
-            UNIQUE<br>
-            PROJECT<br>
-            FOR YOU</p>
+        <p>JUNTE-SE A NÓS<br>
+            E CRIE UM<br>
+            ACOMPANHAMENTO<br>
+            ÚNICO PARA<br>
+             VOCÊ</p>
     </div>
 </body>
 
