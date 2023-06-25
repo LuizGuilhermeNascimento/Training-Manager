@@ -1,6 +1,5 @@
 package com.projeto_mc322.api.controllers;
 
-
 import com.projeto_mc322.api.dtos.*;
 import com.projeto_mc322.api.exceptions.*;
 import com.projeto_mc322.api.models.user.Aluno;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/aluno")
@@ -24,12 +22,13 @@ public class AlunoController {
         this.alunoService = alunoService;
     }
 
-    @GetMapping(value = {"", "/"})
+    @GetMapping(value = { "", "/" })
     public ResponseEntity<Object> listarAlunos() {
         List<Aluno> alunos = alunoService.listar();
         List<AlunoResponseDTO> list = new ArrayList<>();
         alunos.forEach(aluno -> list.add(new AlunoResponseDTO(aluno)));
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(alunos);
+        ListAlunosDTO listAlunosDTO = new ListAlunosDTO(list);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(listAlunosDTO);
     }
 
     @GetMapping("/{id}")

@@ -88,7 +88,7 @@ public class AcompanhamentoService {
     public Treino getProximoTreino(UUID alunoId) throws HttpException {
         Aluno aluno = alunoRepository.find(alunoId);
         if (aluno.getAcompanhamento().isPresent()) {
-            return aluno.getAcompanhamento().get().exibirProximoTreino();
+            return aluno.getAcompanhamento().get().proximoTreino();
         }
         throw new HttpException("O aluno não possui acompanhamento", HttpStatus.NOT_FOUND);
     }
