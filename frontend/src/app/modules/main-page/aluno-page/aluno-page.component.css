@@ -1,0 +1,283 @@
+:host{
+    --off-white: #ececec;
+    --lightter-gray: #b3b3b3;
+    --light-gray: #808080;
+    --gray: #626262;
+    --dark-gray: #1c1c1c;
+    --intermidiate-gray: #3b3b3b;
+    --off-black: #141414;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: var(--intermidiate-gray);
+    border-radius: 3.5px;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Space Grotesk', 'Lato';
+    background-color: var(--off-black);
+    color: var(--off-white);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 80px 1fr;
+    align-items: center;
+    justify-items: center;
+}
+
+#nav{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    grid-column: span 3;
+    border-bottom: var(--intermidiate-gray) 1px solid;
+}
+
+#logOut{
+    width: 30px;
+    position: absolute;
+    right: 1.5%;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+#profile{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 6%;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    grid-template-rows: 1fr 1fr;
+    cursor: pointer;
+}
+
+#photo{
+    grid-row: span 2;
+    background-color: var(--dark-gray);
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+
+#username{
+    padding: 0 0 0 10px;
+    position: relative;
+    top: 30%;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0;
+    height: fit-content;
+}
+
+#email{
+    padding: 0 0 0 10px;
+    position: relative; 
+    font-size: 0.8em;
+    font-weight: 600;
+    color: var(--gray);
+    margin: 0;
+    height: fit-content;
+}
+
+#welcome{
+    border: var(--gray) 1px solid;
+    border-radius: 30px;
+    grid-column: span 1;
+    width: 90%;
+    height: 90%;
+    font-size: 36pt;
+    position: relative;
+}
+
+#welcomeMessage{
+    position: relative;
+    left: 14%;
+    top: 20%;
+}
+
+#welcomeName{
+    position: relative;
+    left: 14%;
+    top: 18%;
+    display: inline-block;
+}
+
+#welcomeName::after{
+    content: '';
+    width: 100%;
+    height: 7px;
+    background-color: var(--intermidiate-gray);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#welcome #progress{
+    position: relative;
+    bottom: -78%;
+    transform: translateY(-100%);
+    border: green 2px solid;
+    height: 40%;
+    width: 100%;
+    border-radius: 30px;
+}
+
+#welcome #progress h1{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+}
+
+#welcome #progress #current{
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    font-size: 120pt;
+}
+
+#welcome #progress #goal{
+    position: absolute;
+    top: 26%;
+    right: 19%;
+}
+
+#workouts{
+    grid-column: span 1;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.training{
+    position: relative;
+    border: red 2px solid;
+    height: 260px;
+    width: 90%;
+    border-radius: 30px;
+}
+
+.training h1{
+    padding: 20px 0 10px 40px;
+}
+
+.training p{
+    padding: 5px 5px 0 10px;
+    width: 80%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 140px;
+    overflow-y: scroll;
+}
+
+#today{
+    position: relative;
+    top: 5%;
+    height: 40%;
+    width: 100%;
+}
+
+#today button{
+    position: absolute;
+    bottom: 7%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 13%;
+    outline: none;
+}
+
+#next{
+    position: absolute;
+    bottom: 0;
+    height: 52%;
+    width: 100%;
+    overflow-y: scroll;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 30px 0 0 0;
+    row-gap: 40px;
+}
+
+#next::-webkit-scrollbar {
+    width: 3px;
+}
+
+#next::-webkit-scrollbar-thumb{
+    background-color: var(--intermidiate-gray);
+    border-radius: 3.5px;
+}
+
+#track{
+    grid-column: span 1;
+    border: blue 2px solid;
+    border-radius: 30px;
+    background-color: var(--off-white);
+    width: 90%;
+    height: 90%;
+    padding: 50px;
+    color: var(--dark-gray);
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+track::-webkit-scrollbar {
+    width: 4px;
+}
+
+#track h1{
+    font-size: 36pt;
+    border-bottom: var(--gray) 1px solid;
+    padding-bottom: 5px;
+}
+
+.trackWorkouts{
+    position: relative;
+    height: 50px;
+    overflow-y: hidden;
+    transition: 0.7s;
+}
+
+.trackWorkouts h2{
+    position: absolute;
+    right: 50%;
+    transform: translateX(+50%);
+}
+
+.trackWorkouts p{
+    position: absolute;
+    top: 60px;
+    left: 5%;
+}
+
+.trackWorkouts::after{
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: var(--light-gray);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#track:hover .trackWorkouts{
+    color: var(--light-gray);
+}
+
+#track:hover .trackWorkouts::after{
+    background-color: var(--lightter-gray);
+}
+
+#track:hover .trackWorkouts:hover{  /* não tem como ajustar a altura ao conteudo, height: auto não funciona*/
+    height: 500px;
+    color: var(--dark-graygray);
+}

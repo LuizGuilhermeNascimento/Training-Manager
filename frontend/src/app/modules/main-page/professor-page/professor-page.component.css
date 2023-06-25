@@ -157,7 +157,7 @@ input[type="radio"]:checked + label + .trainDescription{
 }
 
 .trainDescription{
-    transition: all 0.3s ease-out;
+    transition: all 0.35s ease-out;
     position: relative;
     font-size: 12pt;
     font-family: 'Lato';
