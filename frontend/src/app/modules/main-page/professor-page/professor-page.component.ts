@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   Acompanhamento,
@@ -31,6 +31,7 @@ export class ProfessorPageComponent implements OnInit {
   nomeAlunoNovoAcomp: string;
   alunoEncontrado: boolean = true;
   numTreinosCorreto: boolean = true;
+  @ViewChild('meta') meta: ElementRef<HTMLInputElement>;
 
   nome = '';
   email = '';
@@ -163,11 +164,12 @@ export class ProfessorPageComponent implements OnInit {
     this.campoVazio =
       this.nomeAlunoNovoAcomp == '' || this.novoAcompanhamento.treinosMeta == 0;
   }
-  changeMetaTreinos(meta: HTMLInputElement) {
-    this.novoAcompanhamento.treinosMeta = parseInt(meta.value);
-    if (!(parseInt(meta.value) >= 10 && parseInt(meta.value) <= 30)) {
+  changeMetaTreinos() {
+    let metaAtual: number = parseInt(this.meta.nativeElement.value);
+    if (!(metaAtual >= 10 && metaAtual <= 30)) {
       this.numTreinosCorreto = false;
     } else {
+      this.novoAcompanhamento.treinosMeta = metaAtual;
       this.numTreinosCorreto = true;
     }
   }
@@ -197,6 +199,29 @@ export class ProfessorPageComponent implements OnInit {
     });
   }
 
+  restoreAcompanhamentosProfessor() {
+    if (
+      this.validationService.isLoggedIn() &&
+      this.localStorageService.getItem<number>(keys.roleKey) == 0
+    ) {
+      let responseAcomp =
+        this.acompanhamentoService.getAcompanhamentosDoProfessor(
+          this.idProfessor
+        );
+      responseAcomp.subscribe(
+        (acompanhamentos) => (this.acompanhamentos = acompanhamentos)
+      )
+      console.log(this.acompanhamentos);
+    }
+  }
+
+  resetForm() {
+    this.gerarAcompanhamentoVazio();
+    this.nomeAlunoNovoAcomp = '';
+    this.tiposTreino = [];
+    this.meta.nativeElement.value = '';
+  }
+
   onSubmit() {
     this.verificarCamposVazios();
     this.setAlunoId();
@@ -204,8 +229,8 @@ export class ProfessorPageComponent implements OnInit {
     let responseNovoAcomp = this.acompanhamentoService.createAcompanhamento(
       this.novoAcompanhamento
     );
-    responseNovoAcomp.subscribe((object) => console.log(object));
-    this.gerarAcompanhamentoVazio();
+    this.restoreAcompanhamentosProfessor();
+    this.resetForm();
   }
 
   logOut(): void {
