@@ -4,13 +4,15 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-start-menu',
   templateUrl: './start-menu.component.html',
-  styleUrls: ['./start-menu.component.css']
+  styleUrls: ['./start-menu.component.css'],
 })
 export class StartMenuComponent {
-
   constructor(private router: Router) {}
-  
+
   navigateToLogin() {
-    this.router.navigate(['/', `login`]);
+    this.router.navigate(['/login']);
+  }
+  navigateToRegister() {
+    this.router.navigate(['/register']);
   }
 }
