@@ -91,3 +91,7 @@ O projeto consiste em uma aplicação de uma academia, que permite um que um pro
 Segue o diagrama UML do projeto:
 
 ![UML_final_322 drawio](https://github.com/LuizGuilhermeNascimento/projeto_mc322/assets/52840354/48f9c183-94df-4bf9-bc81-c3146c271229)
+
+
+
+![UML_final_322-Página-2 drawio](https://github.com/LuizGuilhermeNascimento/projeto_mc322/assets/52840354/8b44ca04-336f-4fab-9f84-190b8a50eb83)
