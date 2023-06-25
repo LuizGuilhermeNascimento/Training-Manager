@@ -1,12 +1,16 @@
-import { Acompanhamento } from "./acompanhamento.model";
+import { Acompanhamento } from './acompanhamento.model';
 
 export interface AlunoJson {
-    acompanhamento: Acompanhamento
+  acompanhamento: Acompanhamento;
 }
 
 export interface Aluno {
-    nome: string;
-    cpf: string;
-    email: string;
-    acompanhamento: Acompanhamento;
+  nome: string;
+  cpf: string;
+  email: string;
+  acompanhamento: Acompanhamento;
+}
+
+export interface ListAlunos {
+  list: Aluno[];
 }
