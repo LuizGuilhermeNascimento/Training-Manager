@@ -22,7 +22,7 @@ export class AlunoService {
 
   getTodosAlunos(): Observable<Aluno[]> {
     
-    const url = '/aluno/'
+    const url = `${this.baseUrl}/aluno/`
     
     return this.http.get<Aluno[]>(url).pipe(take(1));
   }

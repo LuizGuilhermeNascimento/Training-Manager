@@ -10,7 +10,7 @@
             <p id="username">joao da silva santos pereira</p>
             <p id="email">faiojsd@gmail.com</p>
         </div>
-        <svg fill="none" viewBox="0 0 24 24" id="logOut">
+        <svg fill="none" viewBox="0 0 24 24" id="logOut" (click)="logOut()">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 8.75L19.25 12L15.75 15.25"></path>
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 12H10.75"></path>
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V17.25C4.75 18.3546 5.64543 19.25 6.75 19.25H15.25"></path>
@@ -23,6 +23,7 @@
             <input type="text" class="inputTracking" placeholder="NOME DO ALUNO" [(ngModel)]="nomeAlunoNovoAcomp" #nomeAluno (change)="changeNomeAluno(nomeAluno)">
             <p *ngIf="!alunoEncontrado">Aluno não encontrado!</p>
             <input type="number" min="10" max="60" class="inputTracking" placeholder="META DE TREINOS  (10-30)" #meta (change)="changeMetaTreinos(meta)">
+            <p *ngIf="!numTreinosCorreto">Insira um número entre 10 e 30</p>
             <div class="newTraining">
                 <div class="a" *ngIf="this.tiposTreino.length >= 1">
                     <input type="radio" name="letter" id="a">
@@ -65,59 +66,7 @@
         <div id="trackingTitle">
             <h1>Tracking</h1>
         </div>
-        <div class="itens">
-            <div class="trackItem">
-                <h1 class="name">Joao da Silva Santos</h1>
-                <p class="current">23</p>
-                <p class="goal">/ 30</p>
-                <p class="training">traning · ABC</p>
-                <p class="description">dsjfoasd faidsjfoa sdofj iaojsd formArrayName <br>
-                    ioafjsdf <br>
-                    adsiofjasdofi <br>
-                    asdfijoasd <br>
-                    faisdojfa <br>
-                    dfiaodf <br>
-                    asdijfas
-                </p>
-            </div>
-            <div class="trackItem">
-                <h1 class="name">Gustovo doijafs diafo disoj</h1>
-                <p class="training">traing · ABCD</p>
-                <p class="current">23</p>
-                <p class="goal">/ 30</p>
-            </div>
-            <div class="trackItem">
-                <h1 class="name">Gustovo doijafs diafo disoj</h1>
-                <p class="training">traing · ABCD</p>
-                <p class="current">23</p>
-                <p class="goal">/ 30</p>
-            </div>
-            <div class="trackItem">
-                <h1 class="name">Gustovo doijafs diafo disoj</h1>
-                <p class="training">traing · ABCD</p>
-                <p class="current">23</p>
-                <p class="goal">/ 30</p>
-            </div>
-            <div class="trackItem">
-                <h1 class="name">Gustovo doijafs diafo disoj</h1>
-                <p class="training">traing · ABCD</p>
-                <p class="current">23</p>
-                <p class="goal">/ 30</p>
-            </div>
-            <div class="trackItem">
-                <h1 class="name">Gustovo doijafs diafo disoj</h1>
-                <p class="training">traing · ABCD</p>
-                <p class="current">23</p>
-                <p class="goal">/ 30</p>
-            </div>
-            <div class="trackItem">
-                <h1 class="name">Gustovo doijafs diafo disoj</h1>
-                <p class="training">traing · ABCD</p>
-                <p class="current">23</p>
-                <p class="goal">/ 30</p>
-            </div>
-        </div>
-        <div *ngFor="let acompanhamento of acompanhamentos" id="excluir">
+        <div class="itens" *ngFor="let acompanhamento of acompanhamentos">
             <app-acompanhamento-item [acompanhamento]="acompanhamento"></app-acompanhamento-item>
         </div>
     </div>

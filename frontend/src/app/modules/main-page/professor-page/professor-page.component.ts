@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Acompanhamento, AcompanhamentoJson } from 'src/app/models/acompanhamento.model';
 import { Aluno } from 'src/app/models/aluno.model';
 import { Treino } from 'src/app/models/treino.model';
@@ -24,11 +25,13 @@ export class ProfessorPageComponent implements OnInit {
   treinos: Treino[];
   nomeAlunoNovoAcomp: string;
   alunoEncontrado: boolean = true;
+  numTreinosCorreto: boolean = true;
 
   constructor(
     private acompanhamentoService: AcompanhamentoService,
     private localStorageService: LocalStorageService,
-    private alunoService: AlunoService
+    private alunoService: AlunoService,
+    private router: Router
     ) {
     this.acompanhamentos = [];
     this.idProfessor = localStorageService.getItem<string>(keys.idKey) ?? '';
@@ -122,28 +125,49 @@ export class ProfessorPageComponent implements OnInit {
   }
   changeMetaTreinos(meta: HTMLInputElement) {
     this.novoAcompanhamento.treinosMeta = parseInt(meta.value);
+    if (!(parseInt(meta.value) >= 10 && parseInt(meta.value) <= 30)) {
+      this.numTreinosCorreto = false;
+    } else {
+      this.numTreinosCorreto = true;
+    }
   }
   changeNomeAluno(nomeAluno: HTMLInputElement) {
-    this.alunoEncontrado = nomeAluno.value == '';
+    if (!this.alunoExiste() || nomeAluno.value == '') {
+      this.alunoEncontrado = false;
+      return;
+    }
+    this.alunoEncontrado = true;
   }
 
   alunoExiste(): boolean {
     let existe: boolean = false;
     this.alunosAssociados.forEach(aluno => {
-      if (aluno.name == this.nomeAlunoNovoAcomp) {
+      if (aluno.nome == this.nomeAlunoNovoAcomp) {
         existe = true;
       }
     })
     return existe;
   }
 
+  setAlunoId() {
+    this.alunosAssociados.forEach(aluno => {
+      if (aluno.nome == this.nomeAlunoNovoAcomp) {
+        this.novoAcompanhamento.alunoId = aluno.id
+      }
+    })
+  }
+
   onSubmit() {
     this.verificarCamposVazios();
-    if (!this.alunoExiste()) {
-      this.alunoEncontrado = false;
-      return;
-    }
-    this.alunoEncontrado = true;
+    this.setAlunoId();
     console.log(this.novoAcompanhamento);
+    let responseNovoAcomp = this.acompanhamentoService.createAcompanhamento(this.novoAcompanhamento);
+    responseNovoAcomp.subscribe(object => console.log(object))
+    this.gerarAcompanhamentoVazio();
+  }
+
+  logOut(): void {
+    this.localStorageService.clear();
+    this.router.navigate(['']);
   }
 }
