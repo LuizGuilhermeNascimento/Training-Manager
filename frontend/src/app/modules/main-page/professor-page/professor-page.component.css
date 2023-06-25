@@ -156,6 +156,20 @@ input[type="radio"]:checked + label + .trainDescription{
     margin: 5px 0 10px 0;
 }
 
+.temporaryDescription {
+    outline: none;
+    color: var(--off-white);
+    padding: 10px 0px 10px 0px;
+    font-weight: 600;
+    font-size: 15pt;
+    letter-spacing: 1px;
+    background-color: var(--off-black);
+    border: none;
+    border-bottom: 2px var(--gray) solid;
+    transition: all 200ms ease-out;
+    text-transform: capitalize;
+}
+
 .trainDescription{
     transition: all 0.35s ease-out;
     position: relative;

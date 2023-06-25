@@ -20,4 +20,11 @@ export class AlunoService {
 
       return this.http.get<Aluno>(url).pipe(take(1));
     }
+
+    getTodosAlunos(): Observable<Aluno[]> {
+      
+      const url = '/aluno/'
+      
+      return this.http.get<Aluno[]>(url).pipe(take(1));
+    }
 }

@@ -5,6 +5,7 @@ export interface AlunoJson {
 }
 
 export interface Aluno {
+    id: string;
     name: string;
     cpf: string;
     email: string;
