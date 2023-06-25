@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import {
@@ -210,7 +211,7 @@ export class ProfessorPageComponent implements OnInit {
         );
       responseAcomp.subscribe(
         (acompanhamentos) => (this.acompanhamentos = acompanhamentos)
-      )
+      );
       console.log(this.acompanhamentos);
     }
   }
@@ -226,9 +227,18 @@ export class ProfessorPageComponent implements OnInit {
     this.verificarCamposVazios();
     this.setAlunoId();
     console.log(this.novoAcompanhamento);
-    let responseNovoAcomp = this.acompanhamentoService.createAcompanhamento(
-      this.novoAcompanhamento
-    );
+    this.acompanhamentoService
+      .createAcompanhamento(this.novoAcompanhamento)
+      .subscribe({
+        next: (value) => {
+          this.acompanhamentos.push(value);
+        },
+        error: (error: HttpErrorResponse) => {
+          // todo error message
+          alert(error.error);
+          // console.log(error);
+        },
+      });
     this.restoreAcompanhamentosProfessor();
     this.resetForm();
   }
