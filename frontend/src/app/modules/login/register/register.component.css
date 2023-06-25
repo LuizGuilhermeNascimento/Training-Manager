@@ -23,10 +23,11 @@ svg{
     left: 130px;
     top: 70px;
     fill: var(--off-white);
+    cursor: pointer;
 }
 
 #home:hover svg{
-    fill: var(--off-white);
+    fill: #989898;
 }
 
 #enter{
@@ -40,6 +41,7 @@ svg{
     color: #141414;
     width: 150px;
     padding: 10px 35px 10px 35px;
+    cursor: pointer;
 }
 
 #enter span {

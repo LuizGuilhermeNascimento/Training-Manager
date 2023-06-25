@@ -20,10 +20,11 @@ svg{
     left: 130px;
     top: 70px;
     fill: #1c1c1c;
+    cursor: pointer;
 }
 
 #home:hover svg{
-    fill: #4c4c4c;
+    fill: #484848;
 }
 
 .sign {
@@ -117,6 +118,7 @@ svg{
     color: #f2f2f2;
     width: 150px;
     padding: 10px 35px 10px 35px;
+    cursor: pointer;
 }
 
 #enter span {

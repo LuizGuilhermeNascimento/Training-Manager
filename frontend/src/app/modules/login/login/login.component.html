@@ -12,6 +12,7 @@
 
     <div class="signIn">
         <p>HIRE US NOW - WE'RE HERE TO ASSIST YOU. DROP US A LINE, AND WE'LL GET BACK TO YOU IN A BLINK OF AN EYE.</p>
+        <p id="error">{{errorMessage}}</p>
         <div class="form" (keyup.enter)="onSubmit()">
             <input class="first" type="email" placeholder="E-MAIL" [(ngModel)]="user.email">
             <input type="password" placeholder="PASSWORD" [(ngModel)]="user.senha">

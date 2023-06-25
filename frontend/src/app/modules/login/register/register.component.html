@@ -40,7 +40,7 @@
             </div>
             <div class="inputs">
                 <input *ngIf="!alunoIsLogin" id="cref" type="text" placeholder="CREF" #cref (change)="updateInputForm(cref); validacaoCREF(cref)">
-                <p *ngIf="!crefValido"> {{ mensagemErrorCREF }} </p>
+                <p *ngIf="!crefValido && !alunoIsLogin"> {{ mensagemErrorCREF }} </p>
             </div>
         </div>
         <p *ngIf="this.campoVazio" id="blank">
