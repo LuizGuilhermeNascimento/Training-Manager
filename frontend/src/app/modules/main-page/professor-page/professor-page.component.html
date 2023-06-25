@@ -18,53 +18,55 @@
     </div>
 
     <div id="info">
-        <h1>NEW TRACK</h1>
+        <h1>NOVO ACOMPANHAMENTO</h1>
         <div id="inputs">
             <input type="text" class="inputTracking" placeholder="NOME DO ALUNO" [(ngModel)]="nomeAlunoNovoAcomp" #nomeAluno (change)="changeNomeAluno(nomeAluno)">
             <p *ngIf="!alunoEncontrado">Aluno não encontrado!</p>
             <input type="number" min="10" max="60" class="inputTracking" placeholder="META DE TREINOS  (10-30)" #meta (change)="changeMetaTreinos()">
             <p *ngIf="!numTreinosCorreto">Insira um número entre 10 e 30</p>
+            <p *ngIf="campoVazio">Preencha todos os campos.</p>
             <div class="newTraining">
-                <div class="a" *ngIf="this.tiposTreino.length >= 1">
-                    <input type="radio" name="letter" id="a">
+                <div class="newWorkoutBox" *ngIf="this.tiposTreino.length >= 1">
+                    <input type="radio" name="letter" id="a" checked>
                     <label for="a">A</label>
-                    <input type="text" class="inputTracking" placeholder="NOME" [(ngModel)]="this.novoAcompanhamento.treinos[0].nome"> <!--fazer css para sumir junto com a descrição-->
-                    <textarea class="temporaryDescription" placeholder="DESCRIÇÃO" [(ngModel)]="this.novoAcompanhamento.treinos[0].descricao"></textarea>
+                    <input type="text" class="trainName" placeholder="NOME" [(ngModel)]="this.novoAcompanhamento.treinos[0].nome"> 
+                    <textarea class="trainDescription" placeholder="DESCRIÇÃO" [(ngModel)]="this.novoAcompanhamento.treinos[0].descricao"></textarea>
                 </div>
-                <div class="b" *ngIf="this.tiposTreino.length >= 2">
-                    <input type="radio" name="letter" id="b">
+                <div class="newWorkoutBox" *ngIf="this.tiposTreino.length >= 2">
+                    <input type="radio" name="letter" id="b" checked>
                     <label for="b">B</label>
-                    <input type="text" class="inputTracking" placeholder="NOME" [(ngModel)]="this.novoAcompanhamento.treinos[1].nome"> <!--fazer css para sumir junto com a descrição-->
-                    <textarea class="temporaryDescription" placeholder="DESCRIÇÃO" [(ngModel)]="this.novoAcompanhamento.treinos[1].descricao"></textarea>
+                    <input type="text" class="trainName" placeholder="NOME" [(ngModel)]="this.novoAcompanhamento.treinos[1].nome"> 
+                    <textarea class="trainDescription" placeholder="DESCRIÇÃO" [(ngModel)]="this.novoAcompanhamento.treinos[1].descricao"></textarea>
                 </div>
-                <div class="b" *ngIf="this.tiposTreino.length >= 3">
-                    <input type="radio" name="letter" id="c">
+                <div class="newWorkoutBox" *ngIf="this.tiposTreino.length >= 3">
+                    <input type="radio" name="letter" id="c" checked>
                     <label for="c">C</label>
-                    <input type="text" class="inputTracking" placeholder="NOME" [(ngModel)]="this.novoAcompanhamento.treinos[2].nome"> <!--fazer css para sumir junto com a descrição-->
-                    <textarea class="temporaryDescription" placeholder="DESCRIÇÃO" [(ngModel)]="this.novoAcompanhamento.treinos[2].descricao"></textarea>
+                    <input type="text" class="trainName" placeholder="NOME" [(ngModel)]="this.novoAcompanhamento.treinos[2].nome"> 
+                    <textarea class="trainDescription" placeholder="DESCRIÇÃO" [(ngModel)]="this.novoAcompanhamento.treinos[2].descricao"></textarea>
                 </div>
-                <div class="b" *ngIf="this.tiposTreino.length >= 4">
-                    <input type="radio" name="letter" id="d">
+                <div class="newWorkoutBox" *ngIf="this.tiposTreino.length >= 4">
+                    <input type="radio" name="letter" id="d" checked>
                     <label for="d">D</label>
-                    <input type="text" class="inputTracking" placeholder="NOME" [(ngModel)]="this.novoAcompanhamento.treinos[3].nome"> <!--fazer css para sumir junto com a descrição-->
-                    <textarea class="temporaryDescription" placeholder="DESCRIÇÃO" [(ngModel)]="this.novoAcompanhamento.treinos[3].descricao"></textarea>
+                    <input type="text" class="trainName" placeholder="NOME" [(ngModel)]="this.novoAcompanhamento.treinos[3].nome"> 
+                    <textarea class="trainDescription" placeholder="DESCRIÇÃO" [(ngModel)]="this.novoAcompanhamento.treinos[3].descricao"></textarea>
                 </div>
-                <div class="b" *ngIf="this.tiposTreino.length >= 5">
-                    <input type="radio" name="letter" id="e">
+                <div class="newWorkoutBox" *ngIf="this.tiposTreino.length >= 5">
+                    <input type="radio" name="letter" id="e" checked>
                     <label for="e">E</label>
-                    <input type="text" class="inputTracking" placeholder="NOME" [(ngModel)]="this.novoAcompanhamento.treinos[4].nome"> <!--fazer css para sumir junto com a descrição-->
-                    <textarea class="temporaryDescription" placeholder="DESCRIÇÃO" [(ngModel)]="this.novoAcompanhamento.treinos[4].descricao"></textarea>
+                    <input type="text" class="trainName" placeholder="NOME" [(ngModel)]="this.novoAcompanhamento.treinos[4].nome"> 
+                    <textarea class="trainDescription" placeholder="DESCRIÇÃO" [(ngModel)]="this.novoAcompanhamento.treinos[4].descricao"></textarea>
                 </div>
-                <p *ngIf="campoVazio">Preencha todos os campos.</p>
-                <button class="addWorkOut" (click)="adicionarTreino()">Add workout</button>
+                <button id="addWorkOut" (click)="adicionarTreino()">
+                    <span>NOVO TREINO</span>
+                </button>
             </div>
         </div>
-        <button class="button" (click)="onSubmit()"> CREATE </button>
+        <button class="button" (click)="onSubmit()"> CRIAR </button>
     </div>
     
     <div id="tracking">
         <div id="trackingTitle">
-            <h1>Tracking</h1>
+            <h1>Acompanhamentos</h1>
         </div>
         <div class="itens" *ngFor="let acompanhamento of acompanhamentos">
             <app-acompanhamento-item [acompanhamento]="acompanhamento"></app-acompanhamento-item>

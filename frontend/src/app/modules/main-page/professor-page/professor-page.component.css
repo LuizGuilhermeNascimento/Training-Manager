@@ -80,7 +80,7 @@ body{
 #info h1{
     position: relative;
     left: 8%;
-    top: 3%;
+    top: 2%;
     font-size: 28pt;
     user-select: none;
 }
@@ -131,6 +131,22 @@ input::-webkit-inner-spin-button {
 
 .newTraining{
     width: 100%;
+    height: 480px;
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    transition: 1s ease-out;
+    padding: 10px;
+}
+
+.newTraining::-webkit-scrollbar {
+    width: 4px;
+}
+
+.newTraining::-webkit-scrollbar-thumb{
+    background-color: var(--gray);
+    border-radius: 3.5px;
 }
 
 input[type="radio"]{
@@ -140,48 +156,79 @@ input[type="radio"]{
 label{
     border: var(--gray) 2px dotted;
     width: 100%;
+    height: 40px;
     padding: 5px 0 5px 15px;
     user-select: none;
     text-align: center;
 }
 
-label:has(+ .trainDescription:not(:placeholder-shown)) {
+label:has(+ .trainName:not(:placeholder-shown)) {
     border: none;
     background-color: var(--dark-gray);
 }
 
-input[type="radio"]:checked + label + .trainDescription{
+input[type=radio]:checked + label + input{
+    display: block;
+}
+
+input[type=radio]:checked + label + input + textarea{
     height: 200px;
     padding: 10px;
     margin: 5px 0 10px 0;
 }
 
-.temporaryDescription {
+.newWorkoutBox{
+    height: 50%;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+}
+
+.trainName{
+    font-size: 11pt;
+    font-weight: 600;
+    letter-spacing: 1px;
+    height: 40px;
+    width: 80%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
     outline: none;
     color: var(--off-white);
     padding: 10px 0px 10px 0px;
-    font-weight: 600;
-    font-size: 15pt;
-    letter-spacing: 1px;
     background-color: var(--off-black);
     border: none;
-    border-bottom: 2px var(--gray) solid;
+    border-bottom: 1px var(--gray) solid;
     transition: all 200ms ease-out;
     text-transform: capitalize;
+    display: none;
+}
+
+.trainName::placeholder{
+    color: var(--light-gray);
+    font-weight: 800;
+    font-size: 12pt;
+}
+
+.trainName:is(:focus),
+.trainName:not(:placeholder-shown) {
+    padding: 10px 15px 11px 15px;
+    background-color: var(--dark-gray);
+    border: none;
 }
 
 .trainDescription{
     transition: all 0.35s ease-out;
     position: relative;
-    font-size: 12pt;
+    font-size: 11pt;
     font-family: 'Lato';
     font-weight: 600;
     letter-spacing: 1px;
     line-height: 18pt;
     background-color: var(--dark-gray);
     color: var(--off-white);
-    padding: 0px;
     height: 0;
+    padding: 0;
     width: 100%;
     resize: none;
     outline: none;
@@ -192,7 +239,8 @@ input[type="radio"]:checked + label + .trainDescription{
 .trainDescription::placeholder{
     color: var(--gray);
     font-weight: 600;
-    font-size: 12pt;
+    font-size: 11pt;
+    user-select: none;
 }
 
 .trainDescription::-webkit-scrollbar {
@@ -202,6 +250,49 @@ input[type="radio"]:checked + label + .trainDescription{
 .trainDescription::-webkit-scrollbar-thumb{
     background-color: var(--gray);
     border-radius: 3.5px;
+}
+
+#addWorkOut{
+    margin-top: 10px;
+    border: none;
+    outline: none;
+    font-size: 10pt;
+    font-weight: 800;
+    letter-spacing: 1px;
+    position: sticky;
+    bottom: 0;
+    left: 100%;
+    background-color: #f2f2f2;
+    color: #141414;
+    width: 150px;
+    height: 40px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#addWorkOut span {
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+#addWorkOut span:after {
+    content: '+';
+    font-size: 10pt;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+   
+#addWorkOut:hover span {
+    padding-right: 15px;
+}
+   
+#addWorkOut:hover span:after {
+    opacity: 1;
+    right: 0;
 }
 
 .button{
@@ -218,15 +309,16 @@ input[type="radio"]:checked + label + .trainDescription{
     letter-spacing: 1px;
     color: var(--dark-gray);
     cursor: pointer;
+    user-select: none;
+    outline: none;
 }
 
 #tracking{
     grid-area: 2 / 2 / 3 / 3;
-    display: grid;
-    grid-template-columns: 1fr;
     overflow-y: scroll;
     padding-right: 10px;
     scroll-behavior: smooth;
+    height: 90vh;
 }
 
 #tracking::-webkit-scrollbar {
@@ -239,15 +331,16 @@ input[type="radio"]:checked + label + .trainDescription{
 }
 
 #trackingTitle{
-    font-size: 36pt;
     padding: 20px 10px 0 10px;
     position: sticky;
     top: 0;
     background-color: var(--off-black);
-    z-index: 1;
+    z-index: 4;
+    height: fit-content;
 }
 
 #trackingTitle h1{
+    font-size: 42pt;
     user-select: none;
     padding: 0 0 20px 50px;
     border-bottom: 2px solid var(--light-gray);
@@ -257,8 +350,8 @@ input[type="radio"]:checked + label + .trainDescription{
     position: relative;
     height: 150px;
     font-size: 16pt;
-    overflow-y: hidden;
-    transition: 0.7s;
+    overflow: hidden;
+    transition: 0.6s ease-out;
     padding: 0 30px 0 20px;
 }
 
@@ -266,8 +359,8 @@ input[type="radio"]:checked + label + .trainDescription{
     color: var(--gray);
 }
 
-#tracking:hover .trackItem:hover{  /* não tem como ajustar a altura ao conteudo, height: auto não funciona*/
-    height: 500px;
+#tracking:hover .trackItem:hover{
+    height: 600px;
     color: var(--off-white);
 }
 
@@ -278,10 +371,10 @@ input[type="radio"]:checked + label + .trainDescription{
     right: 0;
     width: 0;
     height: 100%;
-    z-index: -1;
+    z-index: 0;
     background-color: var(--dark-gray);
 
-    transition: all 400ms ease-in;
+    transition: all 300ms ease-in;
 }
 
 .trackItem:hover::before{
@@ -300,7 +393,7 @@ input[type="radio"]:checked + label + .trainDescription{
 }
 
 .name{
-    position: absolute;
+    position: relative;
     top: 75px;
     transform: translateY(-50%);
     left: 10%;
@@ -342,9 +435,22 @@ input[type="radio"]:checked + label + .trainDescription{
     font-family: 'Lato';
     font-size: 0.8em;
     position: relative;
-    top: 160px;
+    top: 150px;
     left: 5%;
     width: 90%;
+    background-color: #282828;
+    padding: 20px;
+    overflow-y: scroll;
+    max-height: 350px;
+}
+
+.description::-webkit-scrollbar {
+    width: 4px;
+}
+
+.description::-webkit-scrollbar-thumb{
+    background-color: var(--gray);
+    border-radius: 3.5px;
 }
 
 #excluir{
