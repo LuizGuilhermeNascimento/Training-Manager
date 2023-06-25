@@ -30,7 +30,7 @@ export class AcompanhamentoService {
   finalizarTreino(id: string): Observable<any> {
     const url = `${this.baseUrl}/acompanhamento/realizar-treino/${id}`;
 
-    return this.http.put<any>(url, null).pipe(take(1));
+    return this.http.put<any>(url, {}).pipe(take(1));
   }
 
   getAcompanhamentosDoProfessor(
