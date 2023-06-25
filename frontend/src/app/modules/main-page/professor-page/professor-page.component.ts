@@ -5,11 +5,13 @@ import {
   AcompanhamentoJson,
 } from 'src/app/models/acompanhamento.model';
 import { Aluno, ListAlunos } from 'src/app/models/aluno.model';
+import { Professor } from 'src/app/models/professor.model';
 import { Treino } from 'src/app/models/treino.model';
 import { AcompanhamentoService } from 'src/app/services/acompanhamento/acompanhamento.service';
 import { AlunoService } from 'src/app/services/aluno/aluno.service';
 import { keys } from 'src/app/services/local-storage/keys.json';
 import { LocalStorageService } from 'src/app/services/local-storage/localstorage.service';
+import { ProfessorService } from 'src/app/services/professor/professor.service';
 import { ValidationService } from 'src/app/services/validation/validation.service';
 
 @Component({
@@ -30,10 +32,15 @@ export class ProfessorPageComponent implements OnInit {
   alunoEncontrado: boolean = true;
   numTreinosCorreto: boolean = true;
 
+  nome = '';
+  email = '';
+
   constructor(
     private acompanhamentoService: AcompanhamentoService,
     private localStorageService: LocalStorageService,
     private alunoService: AlunoService,
+    private professorService: ProfessorService,
+    private validationService: ValidationService,
     private router: Router
   ) {
     this.acompanhamentos = [];
@@ -41,16 +48,25 @@ export class ProfessorPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.idProfessor);
-    let responseAcomp =
-      this.acompanhamentoService.getAcompanhamentosDoProfessor(
-        this.idProfessor
+    if (
+      this.validationService.isLoggedIn() &&
+      this.localStorageService.getItem<number>(keys.roleKey) == 0
+    ) {
+      let responseAcomp =
+        this.acompanhamentoService.getAcompanhamentosDoProfessor(
+          this.idProfessor
+        );
+      responseAcomp.subscribe(
+        (acompanhamentos) => (this.acompanhamentos = acompanhamentos)
       );
-    responseAcomp.subscribe(
-      (acompanhamentos) => (this.acompanhamentos = acompanhamentos)
-    );
-    this.buscarAlunos();
-    this.gerarAcompanhamentoVazio();
+      this.buscarDadosProfessor(
+        this.localStorageService.getItem<string>(keys.idKey)
+      );
+      this.buscarAlunos();
+      this.gerarAcompanhamentoVazio();
+    } else {
+      this.router.navigate(['/main']);
+    }
   }
 
   private buscarAlunos(): void {
@@ -60,6 +76,18 @@ export class ProfessorPageComponent implements OnInit {
         this.alunosAssociados = alunos.list;
       },
     });
+  }
+
+  private buscarDadosProfessor(id: string | null): void {
+    if (id) {
+      const response = this.professorService.getProfessorPorId(id);
+      response.subscribe({
+        next: (professor: Professor) => {
+          this.nome = professor.nome;
+          this.email = professor.email;
+        },
+      });
+    }
   }
 
   gerarAcompanhamentoVazio() {

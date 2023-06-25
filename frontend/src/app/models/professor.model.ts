@@ -6,7 +6,7 @@ export interface ProfessorJson {
 }
 
 export interface Professor {
-    name: string;
+    nome: string;
     cpf: string;
     email: string;
     cref: string

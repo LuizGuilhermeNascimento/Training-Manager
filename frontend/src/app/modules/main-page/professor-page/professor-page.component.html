@@ -7,8 +7,8 @@
     <div id="nav">
         <div id="profile">
             <div id="photo"></div>
-            <p id="username">joao da silva santos pereira</p>
-            <p id="email">faiojsd@gmail.com</p>
+            <p id="username">{{nome}}</p>
+            <p id="email">{{email}}</p>
         </div>
         <svg fill="none" viewBox="0 0 24 24" id="logOut" (click)="logOut()">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 8.75L19.25 12L15.75 15.25"></path>
@@ -70,7 +70,4 @@
             <app-acompanhamento-item [acompanhamento]="acompanhamento"></app-acompanhamento-item>
         </div>
     </div>
-
-
-
 </body>
