@@ -20,86 +20,53 @@
     <div id="info">
         <h1>NEW TRACK</h1>
         <div id="inputs">
-            <input type="text" class="inputTracking" placeholder="NOME">
-            <input type="number" min="10" max="60" class="inputTracking" placeholder="META DE TREINOS  (10-30)">
+            <input type="text" class="inputTracking" placeholder="NOME DO ALUNO" [(ngModel)]="nomeAlunoNovoAcomp" #nomeAluno (change)="changeNomeAluno(nomeAluno)">
+            <p *ngIf="!alunoEncontrado">Aluno não encontrado!</p>
+            <input type="number" min="10" max="60" class="inputTracking" placeholder="META DE TREINOS  (10-30)" #meta (change)="changeMetaTreinos(meta)">
+            <p *ngIf="!numTreinosCorreto">Insira um número entre 10 e 30</p>
             <div class="newTraining">
-                <input type="radio" name="letter" id="a">
-                <label for="a">A</label>
-                <textarea class="trainDescription" placeholder="descrição"></textarea>
-                <input type="radio" name="letter" id="b">
-                <label for="b">B</label>
-                <textarea class="trainDescription" placeholder="descrição"></textarea>
-                <input type="radio" name="letter" id="c">
-                <label for="c">C</label>
-                <textarea class="trainDescription" placeholder="descrição"></textarea>
-                <input type="radio" name="letter" id="d">
-                <label for="d">D</label>
-                <textarea class="trainDescription" placeholder="descrição"></textarea>
-                <input type="radio" name="letter" id="e">
-                <label for="e">E</label>
-                <textarea class="trainDescription" placeholder="descrição"></textarea>
+                <div class="a" *ngIf="this.tiposTreino.length >= 1">
+                    <input type="radio" name="letter" id="a">
+                    <label for="a">A</label>
+                    <input type="text" class="inputTracking" placeholder="NOME" [(ngModel)]="this.novoAcompanhamento.treinos[0].nome"> <!--fazer css para sumir junto com a descrição-->
+                    <textarea class="temporaryDescription" placeholder="DESCRIÇÃO" [(ngModel)]="this.novoAcompanhamento.treinos[0].descricao"></textarea>
+                </div>
+                <div class="b" *ngIf="this.tiposTreino.length >= 2">
+                    <input type="radio" name="letter" id="b">
+                    <label for="b">B</label>
+                    <input type="text" class="inputTracking" placeholder="NOME" [(ngModel)]="this.novoAcompanhamento.treinos[1].nome"> <!--fazer css para sumir junto com a descrição-->
+                    <textarea class="temporaryDescription" placeholder="DESCRIÇÃO" [(ngModel)]="this.novoAcompanhamento.treinos[1].descricao"></textarea>
+                </div>
+                <div class="b" *ngIf="this.tiposTreino.length >= 3">
+                    <input type="radio" name="letter" id="c">
+                    <label for="c">C</label>
+                    <input type="text" class="inputTracking" placeholder="NOME" [(ngModel)]="this.novoAcompanhamento.treinos[2].nome"> <!--fazer css para sumir junto com a descrição-->
+                    <textarea class="temporaryDescription" placeholder="DESCRIÇÃO" [(ngModel)]="this.novoAcompanhamento.treinos[2].descricao"></textarea>
+                </div>
+                <div class="b" *ngIf="this.tiposTreino.length >= 4">
+                    <input type="radio" name="letter" id="d">
+                    <label for="d">D</label>
+                    <input type="text" class="inputTracking" placeholder="NOME" [(ngModel)]="this.novoAcompanhamento.treinos[3].nome"> <!--fazer css para sumir junto com a descrição-->
+                    <textarea class="temporaryDescription" placeholder="DESCRIÇÃO" [(ngModel)]="this.novoAcompanhamento.treinos[3].descricao"></textarea>
+                </div>
+                <div class="b" *ngIf="this.tiposTreino.length >= 5">
+                    <input type="radio" name="letter" id="e">
+                    <label for="e">E</label>
+                    <input type="text" class="inputTracking" placeholder="NOME" [(ngModel)]="this.novoAcompanhamento.treinos[4].nome"> <!--fazer css para sumir junto com a descrição-->
+                    <textarea class="temporaryDescription" placeholder="DESCRIÇÃO" [(ngModel)]="this.novoAcompanhamento.treinos[4].descricao"></textarea>
+                </div>
+                <p *ngIf="campoVazio">Preencha todos os campos.</p>
+                <button class="addWorkOut" (click)="adicionarTreino()">Add workout</button>
             </div>
         </div>
-        <button class="button"> CREATE </button>
+        <button class="button" (click)="onSubmit()"> CREATE </button>
     </div>
     
     <div id="tracking">
         <div id="trackingTitle">
             <h1>Tracking</h1>
         </div>
-        <div class="itens">
-            <div class="trackItem">
-                <h1 class="name">Joao da Silva Santos</h1>
-                <p class="current">23</p>
-                <p class="goal">/ 30</p>
-                <p class="training">traning · ABC</p>
-                <p class="description">dsjfoasd faidsjfoa sdofj iaojsd formArrayName <br>
-                    ioafjsdf <br>
-                    adsiofjasdofi <br>
-                    asdfijoasd <br>
-                    faisdojfa <br>
-                    dfiaodf <br>
-                    asdijfas
-                </p>
-            </div>
-            <div class="trackItem">
-                <h1 class="name">Gustovo doijafs diafo disoj</h1>
-                <p class="training">traing · ABCD</p>
-                <p class="current">23</p>
-                <p class="goal">/ 30</p>
-            </div>
-            <div class="trackItem">
-                <h1 class="name">Gustovo doijafs diafo disoj</h1>
-                <p class="training">traing · ABCD</p>
-                <p class="current">23</p>
-                <p class="goal">/ 30</p>
-            </div>
-            <div class="trackItem">
-                <h1 class="name">Gustovo doijafs diafo disoj</h1>
-                <p class="training">traing · ABCD</p>
-                <p class="current">23</p>
-                <p class="goal">/ 30</p>
-            </div>
-            <div class="trackItem">
-                <h1 class="name">Gustovo doijafs diafo disoj</h1>
-                <p class="training">traing · ABCD</p>
-                <p class="current">23</p>
-                <p class="goal">/ 30</p>
-            </div>
-            <div class="trackItem">
-                <h1 class="name">Gustovo doijafs diafo disoj</h1>
-                <p class="training">traing · ABCD</p>
-                <p class="current">23</p>
-                <p class="goal">/ 30</p>
-            </div>
-            <div class="trackItem">
-                <h1 class="name">Gustovo doijafs diafo disoj</h1>
-                <p class="training">traing · ABCD</p>
-                <p class="current">23</p>
-                <p class="goal">/ 30</p>
-            </div>
-        </div>
-        <div *ngFor="let acompanhamento of acompanhamentos" id="excluir">
+        <div class="itens" *ngFor="let acompanhamento of acompanhamentos">
             <app-acompanhamento-item [acompanhamento]="acompanhamento"></app-acompanhamento-item>
         </div>
     </div>

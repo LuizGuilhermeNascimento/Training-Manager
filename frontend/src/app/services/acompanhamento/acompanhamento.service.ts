@@ -47,9 +47,9 @@ export class AcompanhamentoService {
     return this.http.delete(url).pipe(take(1));
   }
 
-  createAcompanhamento(acompanhamento: AcompanhamentoJson): Observable<any> {
+  createAcompanhamento(acompanhamento: AcompanhamentoJson): Observable<Acompanhamento> {
     const url = `${this.baseUrl}/acompanhamento`;
 
-    return this.http.post(url, acompanhamento).pipe(take(1));
+    return this.http.post<Acompanhamento>(url, acompanhamento).pipe(take(1));
   }
 }

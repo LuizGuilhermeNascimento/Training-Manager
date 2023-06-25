@@ -14,15 +14,16 @@ export class AlunoService {
 
   baseUrl = 'http://localhost:8080';
 
-  getAlunoPorId(id: string): Observable<UserJson> {
+  getAlunoPorId(id: string): Observable<Aluno> {
     const url = `${this.baseUrl}/aluno/${id}`;
 
-    return this.http.get<UserJson>(url).pipe(take(1));
-  }
+      return this.http.get<Aluno>(url).pipe(take(1));
+    }
 
-  getInfosAlunoPorId(id: string): Observable<Aluno> {
-    const url = `${this.baseUrl}/aluno/${id}`;
-
-    return this.http.get<Aluno>(url).pipe(take(1));
+  getTodosAlunos(): Observable<Aluno[]> {
+    
+    const url = `${this.baseUrl}/aluno/`
+    
+    return this.http.get<Aluno[]>(url).pipe(take(1));
   }
 }

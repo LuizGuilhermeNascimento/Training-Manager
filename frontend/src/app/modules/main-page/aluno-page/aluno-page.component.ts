@@ -65,7 +65,7 @@ export class AlunoPageComponent implements OnInit {
 
   private buildAluno(id: string | null): void {
     if (id) {
-      const response = this.alunoService.getInfosAlunoPorId(id);
+      const response = this.alunoService.getAlunoPorId(id);
 
       response.subscribe({
         next: (aluno: Aluno) => {

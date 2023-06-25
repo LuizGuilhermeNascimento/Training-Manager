@@ -5,6 +5,7 @@ import { AlunoPageComponent } from './aluno-page/aluno-page.component';
 import { ProfessorPageComponent } from './professor-page/professor-page.component';
 import { AcompanhamentoItemComponent } from './acompanhamento-item/acompanhamento-item.component';
 import { TreinoItemComponent } from './treino-item/treino-item.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +18,8 @@ import { TreinoItemComponent } from './treino-item/treino-item.component';
     TreinoItemComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ]
 })
 export class MainPageModule { }
