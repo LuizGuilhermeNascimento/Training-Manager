@@ -109,6 +109,7 @@ export class RegisterComponent {
   }
 
   updateInputForm(element: HTMLInputElement): void {
+    this.campoVazio = false;
     let placeholderTag: string = element.placeholder;
     let value: string = element.value;
     if (this.alunoIsLogin) {
@@ -224,6 +225,8 @@ export class RegisterComponent {
   }
 
   onSubmit() {
+    this.verificarCamposVazios();
+    if (this.campoVazio) return;
     this.canSubmit = this.validacaoGeral();
     if (!this.canSubmit) {
       // exibir erro na tela  - TODO estilização victor
