@@ -5,7 +5,7 @@ export interface AlunoJson {
 }
 
 export interface Aluno {
-    name: string;
+    nome: string;
     cpf: string;
     email: string;
     acompanhamento: Acompanhamento;

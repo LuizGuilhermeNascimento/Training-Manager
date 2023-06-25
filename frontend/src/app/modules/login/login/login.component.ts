@@ -52,6 +52,8 @@ export class LoginComponent implements OnInit {
 
     response.subscribe({
       next: (user) => {
+        console.log(user);
+        
         this.localStorageService.setItem(keys.roleKey, user.role);
         this.localStorageService.setItem(keys.idKey, user.id);
         this.router.navigate(['/', 'main']);
