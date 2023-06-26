@@ -14,11 +14,11 @@ Participantes
           </tr>
           <tr>
               <td>Luiz Guilherme Nascimento</td>
-              <td>789012</td>
+              <td>230667</td>
           </tr>
           <tr>
               <td>Victor Wu</td>
-              <td>345678</td>
+              <td>231437</td>
           </tr>
       </tbody>
   </table>
