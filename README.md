@@ -85,7 +85,7 @@ O sistema foi dividido em duas partes: o backend (na pasta api), contendo as reg
 
 Basicamente, o backend consiste em uma <b>API Rest</b>, que permite a criação de rotas especificias para obter e enviar dados, enquanto que essas rotas são acessadas pelo frontend através de requisições <b>HTTP</b> (get, post, delete, put,...)
 
-![diagrama-funcionamento-api](https://github.com/LuizGuilhermeNascimento/projeto_mc322/assets/52840354/c06a8972-f3df-457f-b593-5a86d56b367a)
+![diagrama-funcionamento-api](https://github.com/LuizGuilhermeNascimento/projeto_mc322/assets/52840354/5b44c84e-6f7b-498a-91cc-943636ac9155)
 
  
  
@@ -93,14 +93,11 @@ Basicamente, o backend consiste em uma <b>API Rest</b>, que permite a criação 
 O projeto consiste em uma aplicação de uma academia, que permite um que um professor acompanhe o desenvolvimento do aluno. O professor receita um treino ao aluno, e quando a meta for atingida, o professor troca o treino do aluno.
 
 Segue o diagrama UML do projeto:
-
-![UML_final_322 drawio](https://github.com/LuizGuilhermeNascimento/projeto_mc322/assets/52840354/48f9c183-94df-4bf9-bc81-c3146c271229)
-
+![UML_final_322 drawio](https://github.com/LuizGuilhermeNascimento/projeto_mc322/assets/52840354/0f2cad45-95db-4d02-b177-d678ac64e46d)
 
 # Arquivos
 
 Os dados são salvos em arquivos .json. Basicamente, os dados ficam salvos na pasta <b>dados/<Nome da Classe do Objeto\>/<id do Objeto\>.json</b>, sendo cada arquivo para um único objeto.
-
 Pelo diagrama uml, algumas classes implementam a interface JsonSerializable
 ```java
 public interface JsonSerializable {
@@ -116,8 +113,7 @@ Assim, o método responsável por gravar o arquivo recebe um JsonSerializable, c
 
 
 # Manipulação dos Dados
-
-![UML_final_322-Página-2 drawio](https://github.com/LuizGuilhermeNascimento/projeto_mc322/assets/52840354/8b44ca04-336f-4fab-9f84-190b8a50eb83)
+![UML_final_322-Página-2 drawio](https://github.com/LuizGuilhermeNascimento/projeto_mc322/assets/52840354/e9dfd50b-b39d-49bc-b590-af69537aa5d4)
 
 Os dados são salvos e acessados a partir de classes 'Repository'
 
