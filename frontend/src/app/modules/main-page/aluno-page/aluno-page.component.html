@@ -52,12 +52,7 @@
         <div id="next">
             <h2>Próximos Treinos</h2>
             <div class="training" *ngFor="let treino of acompanhamento.treinos">
-                <h1>Treino {{treino.tipo}}</h1>
-                <p class="description">
-                    <a *ngFor="let line of treino.descricao.split('\n')">
-                        {{line}}<br>
-                    </a>
-                </p>
+                <h3>Treino {{treino.tipo}}</h3>
             </div>
         </div>
     </div>

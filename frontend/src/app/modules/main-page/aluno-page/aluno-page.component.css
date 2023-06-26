@@ -21,11 +21,13 @@ body{
     height: 100vh;
     width: 100vw;
     font-family: 'Space Grotesk', 'Lato';
-    background-color: var(--off-black);
+    background-image: url(alunoBackground.jpg);
+    background-position: center;
+    background-size: cover;
     color: var(--off-white);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 80px 1fr 2fr;
+    grid-template-rows: 80px 9fr 10fr;
     align-items: center;
     justify-items: center;
     user-select: none;
@@ -186,7 +188,7 @@ body{
 }
 
 #welcome{
-    border: #e5e7e9 1px dashed;
+    border: #e5e7e9 2px solid;
     border-radius: 30px;
     grid-column: span 1;
     grid-row: span 2;
@@ -214,7 +216,7 @@ body{
     content: '';
     width: 100%;
     height: 7px;
-    background-color: #444c53;
+    background-color: #565656;
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -225,7 +227,7 @@ body{
     position: absolute;
     top: 100%;
     transform: translateY(-100%);
-    background-color: #444c53;
+    background-color: #1c1c1c91;
     height: 40%;
     width: 100%;
     border-radius: 30px;
@@ -260,18 +262,13 @@ body{
 #workouts{
     grid-column: span 2;
     width: 98%;
+    height: 100%;
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
     align-items: center;
     top: 3%;
-}
-
-.training{
-    position: relative;
-    height: 300px;
-    border-radius: 30px;
 }
 
 .training h1{
@@ -301,6 +298,8 @@ body{
 
 #today{
     grid-column: span 1;
+    position: relative;
+    border-radius: 30px;
     height: 90%;
     width: 90%;
     background-image: url(vazio.jpg);
@@ -336,6 +335,7 @@ body{
     overflow-y: scroll;
     scroll-behavior: smooth;
     top: 26%;
+    text-align: left;
 }
 
 
@@ -364,19 +364,14 @@ body{
     right: 0;
 }
 
-#next .training{
-    bottom: -6%;
-}
-
 #next{
     grid-column: span 1;
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: 70%;
-    column-gap: 20px;
+    grid-auto-columns: 50%;
+    column-gap: 10%;
     overflow-x: scroll;
     padding: 30px 0 0 0;
-    row-gap: 40px;
     height: 90%;
     width: 100%;
     scroll-behavior: smooth;
@@ -398,10 +393,25 @@ body{
     padding: 5px 0 0 20px;
 }
 
+#next .training{
+    position: relative;
+    height: 80%;
+    border-radius: 30px;
+    border: var(--lightter-gray) 2px dotted;
+    bottom: -12%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+#next .training h3{
+    font-size: 28pt;
+}
+
 #track{
     grid-column: span 2;
     border-radius: 30px;
-    background-color: var(--dark-gray);
+    background-color: #1c1c1c72;
     width: 98%;
     height: 90%;
     padding: 20px 30px 5px 35px;
@@ -417,6 +427,7 @@ body{
     position: absolute;
     bottom: 0;
     display: flex;
+    column-gap: 5px;
     width: 1028px;
     height: 285px;
 }
@@ -425,11 +436,10 @@ body{
     position: relative;
     height: 85%;
     flex: 1;
-    background-color: #222222;
+    background-color: var(--dark-gray);
     overflow-y: hidden;
     transition: 0.7s;
-    border-left: var(--off-white) 1px solid;
-    border-right: var(--off-white) 1px solid;
+    border-radius: 10px;
 }
 
 .trackWorkouts h2{
@@ -443,11 +453,9 @@ body{
     position: absolute;
     top: 23%;
     left: 5%;
-    background-color: #252525;
-    border: var(--intermidiate-gray) 1px solid;
-    padding: 2px 4px 2px 4px;
+    padding: 2px 4px 2px 10px;
     width: 90%;
-    height: 75%;
+    height: 70%;
     overflow-y: scroll;
     scroll-behavior: smooth;
 }
@@ -466,7 +474,7 @@ body{
 }
 
 #track:hover .trackWorkouts:hover{  /* não tem como ajustar a altura ao conteudo, height: auto não funciona*/
-    flex: 3;
+    flex: 2.5;
     color: var(--dark-graygray);
 }
 
