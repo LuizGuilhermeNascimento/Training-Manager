@@ -32,7 +32,6 @@ body{
     justify-items: center;
     user-select: none;
     overflow: hidden;
-    overflow: hidden;
 }
 
 #nav{
@@ -65,7 +64,9 @@ body{
 
 #photo{
     grid-row: span 2;
-    background-color: var(--dark-gray);
+    background-image: url(squidchad.jpg);
+    background-size: cover;
+    background-position: center;
     aspect-ratio: 1;
     border-radius: 50%;
 }
@@ -283,8 +284,6 @@ body{
     transform: translateX(-50%);
     height: 140px;
     overflow-y: scroll;
-    background-color: #252525;
-    border: var(--intermidiate-gray) 1px solid;
 }
 
 #training .description::-webkit-scrollbar {
@@ -328,14 +327,13 @@ body{
 }
 
 #today .description{
-    background-color: #252525;
-    border: var(--gray) 2px dashed;
-    border-radius: 20px;
+    background-color: #25252578;
     height: 50%;
     overflow-y: scroll;
     scroll-behavior: smooth;
     top: 26%;
     text-align: left;
+    padding: 10px 10px 10px 20px;
 }
 
 
@@ -419,17 +417,19 @@ body{
 }
 
 #track h1{
-    font-size: 36pt;
+    font-size: 362t;
     padding-bottom: 5px;
+    margin: 0;
 }
 
 #treinoGrid{
-    position: absolute;
+    position: relative;
     bottom: 0;
     display: flex;
     column-gap: 5px;
     width: 1028px;
-    height: 285px;
+    height: 85%;
+    top: 0;
 }
 
 .trackWorkouts{

@@ -8,11 +8,11 @@
 
 .tipo{
     width: 100%;
-    background-color: var(--dark-gray);
+    background-color: #202020c6;
     font-size: 14pt;
     padding: 10px;
 }
 
 .descricao{
-    padding: 10px 0 10px 15px;
+    padding: 10px 0 10px 20px;
 }
