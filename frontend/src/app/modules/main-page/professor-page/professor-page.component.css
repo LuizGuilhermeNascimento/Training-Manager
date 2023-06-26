@@ -271,6 +271,7 @@ input[type=radio]:checked + label + input + textarea{
     height: 200px;
     padding: 10px;
     margin: 5px 0 10px 0;
+    border: #424242 1px solid;
 }
 
 .newWorkoutBox{
@@ -326,9 +327,9 @@ input[type=radio]:checked + label + input + textarea{
     height: 0;
     padding: 0;
     margin: 0;
+    border: 0;
     width: 100%;
     resize: none;
-    border: #424242 1px solid;
     outline: none;
     scroll-behavior: smooth;
 }
@@ -357,7 +358,7 @@ input[type=radio]:checked + label + input + textarea{
     font-weight: 800;
     letter-spacing: 1px;
     position: sticky;
-    bottom: 0;
+    bottom: 1.5vh;
     left: 100%;
     background-color: #f2f2f2;
     color: #141414;
