@@ -12,6 +12,7 @@ import com.projeto_mc322.api.repositories.ProfessorRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -101,5 +102,13 @@ public class AcompanhamentoService {
             return true;
         }
         return false;
+    }
+
+    public List<Treino> getProximosTreinos(UUID alunoId) throws HttpException {
+        Aluno aluno = alunoRepository.find(alunoId);
+        if (aluno.getAcompanhamento().isPresent()) {
+            return aluno.getAcompanhamento().get().proximosTreinos();
+        }
+        return new ArrayList<>();
     }
 }

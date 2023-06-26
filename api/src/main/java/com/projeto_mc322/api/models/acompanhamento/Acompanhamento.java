@@ -54,16 +54,25 @@ public class Acompanhamento implements JsonSerializable {
         return id;
     }
 
-    public boolean acompanhamentoFinalizado(){
+    public boolean acompanhamentoFinalizado() {
         return treinosRealizados >= treinosMeta * treinos.size();
     }
 
-    public Treino proximoTreino(){
+    public Treino proximoTreino() {
         Integer num = treinos.size();
         return treinos.get(treinosRealizados % num);
     }
 
-    public void realizarTreino(){
+    public List<Treino> proximosTreinos() {
+        List<Treino> proxs = new ArrayList<>();
+        Integer num = treinos.size();
+        for (int i = 0; i < num; i++) {
+            proxs.add(treinos.get((treinosRealizados + i) % num));
+        }
+        return proxs;
+    }
+
+    public void realizarTreino() {
         treinosRealizados++;
     }
 

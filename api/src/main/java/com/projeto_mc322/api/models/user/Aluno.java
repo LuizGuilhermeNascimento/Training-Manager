@@ -35,17 +35,6 @@ public class Aluno extends User{
                 .build();
     }
 
-    public Treino proximoTreino() throws Exception{
-        if (acompanhamento.isPresent()){
-            return acompanhamento.get().proximoTreino();
-        }
-        throw new Exception();
-    }
-
-    public void realizarTreino(){
-        acompanhamento.ifPresent(Acompanhamento::realizarTreino);
-    }
-
     public Optional<Acompanhamento> getAcompanhamento() {
         return acompanhamento;
     }

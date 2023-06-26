@@ -33,10 +33,10 @@ export class ProfessorPageComponent implements OnInit {
   alunoEncontrado: boolean = true;
   numTreinosCorreto: boolean = true;
   @ViewChild('meta') meta: ElementRef<HTMLInputElement>;
-
   nome: string = '';
   email: string = '';
   cpf: string = '';
+  cref: string = '';
 
   constructor(
     private acompanhamentoService: AcompanhamentoService,
@@ -89,6 +89,7 @@ export class ProfessorPageComponent implements OnInit {
           this.nome = professor.nome;
           this.email = professor.email.toLowerCase();
           this.cpf = this.formatarCPF(professor.cpf);
+          this.cref = professor.cref;
         },
       });
     }
@@ -97,9 +98,9 @@ export class ProfessorPageComponent implements OnInit {
   private formatarCPF(cpf: string): string {
     let cpfFormatado: string = '';
     for (let i = 0; i < 9; i += 4) {
-      cpfFormatado = cpfFormatado.concat(cpf.substring(i,i+3)+'.');
+      cpfFormatado = cpfFormatado.concat(cpf.substring(i, i + 3) + '.');
     }
-    return cpfFormatado.concat('-'+cpf.substring(9))
+    return cpfFormatado.concat('-' + cpf.substring(9));
   }
 
   gerarAcompanhamentoVazio() {
@@ -195,7 +196,7 @@ export class ProfessorPageComponent implements OnInit {
   alunoExiste(): boolean {
     let existe: boolean = false;
     this.alunosAssociados.forEach((aluno) => {
-      if (aluno.nome == this.nomeAlunoNovoAcomp) {
+      if (aluno.nome == this.nomeAlunoNovoAcomp.trim()) {
         existe = true;
       }
     });
@@ -253,8 +254,19 @@ export class ProfessorPageComponent implements OnInit {
     this.resetForm();
   }
 
+  public deletarConta(): void {
+    if (!confirm('Tem certeza que deseja excluir sua conta?')) return;
+    const id = this.localStorageService.getItem<string>(keys.idKey);
+    if (id) {
+      this.professorService
+        .deletarContaPorId(id)
+        .subscribe({ error: () => {} });
+      this.logOut();
+    }
+  }
+
   logOut(): void {
     this.localStorageService.clear();
-    this.router.navigate(['']);
+    this.router.navigate(['/']);
   }
 }

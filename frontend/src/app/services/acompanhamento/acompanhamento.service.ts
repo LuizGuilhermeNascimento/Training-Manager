@@ -5,7 +5,7 @@ import {
   Acompanhamento,
   AcompanhamentoJson,
 } from 'src/app/models/acompanhamento.model';
-import { Treino } from 'src/app/models/treino.model';
+import { ListTreino, Treino } from 'src/app/models/treino.model';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +25,12 @@ export class AcompanhamentoService {
     const url = `${this.baseUrl}/acompanhamento/proximo-treino/${id}`;
 
     return this.http.get<Treino>(url).pipe(take(1));
+  }
+
+  getProximosTreinos(id: string): Observable<ListTreino> {
+    const url = `${this.baseUrl}/acompanhamento/proximos-treinos/${id}`;
+
+    return this.http.get<ListTreino>(url).pipe(take(1));
   }
 
   finalizarTreino(id: string): Observable<any> {
@@ -47,7 +53,9 @@ export class AcompanhamentoService {
     return this.http.delete(url).pipe(take(1));
   }
 
-  createAcompanhamento(acompanhamento: AcompanhamentoJson): Observable<Acompanhamento> {
+  createAcompanhamento(
+    acompanhamento: AcompanhamentoJson
+  ): Observable<Acompanhamento> {
     const url = `${this.baseUrl}/acompanhamento`;
 
     return this.http.post<Acompanhamento>(url, acompanhamento).pipe(take(1));
