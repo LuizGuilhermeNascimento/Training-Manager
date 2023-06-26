@@ -69,6 +69,10 @@ Se tudo der certo, a api deve rodar no localhost:8080. <i>(caso esse comando nã
 npm i
 ```
 ```
+npm start
+```
+ou
+```
 npx ng serve
 ```
 
@@ -93,5 +97,30 @@ Segue o diagrama UML do projeto:
 ![UML_final_322 drawio](https://github.com/LuizGuilhermeNascimento/projeto_mc322/assets/52840354/48f9c183-94df-4bf9-bc81-c3146c271229)
 
 
+# Arquivos
+
+Os dados são salvos em arquivos .json. Basicamente, os dados ficam salvos na pasta <b>dados/<Nome da Classe do Objeto\>/<id do Objeto\>.json</b>, sendo cada arquivo para um único objeto.
+
+Pelo diagrama uml, algumas classes implementam a interface JsonSerializable
+```java
+public interface JsonSerializable {
+  UUID getId();
+  JsonObject writeJson();
+}
+```
+Como o nome do arquivo recebe o id do objeto, os objetos serializaveis precisam ter um getId. 
+
+Similarmente, cada classe escreve os dados em arquivos de uma forma diferente, por isso o método writeJson existe.
+
+Assim, o método responsável por gravar o arquivo recebe um JsonSerializable, chamando os dois métodos
+
+
+# Manipulação dos Dados
 
 ![UML_final_322-Página-2 drawio](https://github.com/LuizGuilhermeNascimento/projeto_mc322/assets/52840354/8b44ca04-336f-4fab-9f84-190b8a50eb83)
+
+Os dados são salvos e acessados a partir de classes 'Repository'
+
+Os Repositories das classes Aluno, Professor e Acompanhamento herdam uma classe abstrata RepositoryBase, contendo implementações genéricas
+
+Esses repositories são chamados em classes de serviço, que realizam operações que, por sua vez, são chamadas em classes controllers, que definem as rotas que serão chamadas no site.
