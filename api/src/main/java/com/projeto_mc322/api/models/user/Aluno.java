@@ -2,7 +2,6 @@ package com.projeto_mc322.api.models.user;
 
 import com.projeto_mc322.api.models.acompanhamento.Acompanhamento;
 
-import com.projeto_mc322.api.models.treino.Treino;
 
 import javax.json.Json;
 import javax.json.JsonObject;
