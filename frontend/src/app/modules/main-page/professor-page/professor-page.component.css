@@ -15,7 +15,9 @@ body{
     height: 100vh;
     width: 100vw;
     font-family: 'Space Grotesk', 'Lato';
-    background-color: var(--off-black);
+    background-image: url(profBackground.jpg);
+    background-position: center;
+    background-size: cover;
     color: var(--off-white);
     overflow-x: hidden;
     display: grid;
@@ -146,7 +148,9 @@ body{
 
 #photo{
     grid-row: span 2;
-    background-color: var(--dark-gray);
+    background-image: url(gigachad.jpg);
+    background-size: cover;
+    background-position: center;
     aspect-ratio: 1;
     border-radius: 50%;
 }
@@ -432,7 +436,7 @@ input[type=radio]:checked + label + input + textarea{
     padding: 20px 10px 0 10px;
     position: sticky;
     top: 0;
-    background-color: var(--off-black);
+    background-color: #1414148d;
     z-index: 4;
     height: fit-content;
 }
@@ -470,13 +474,13 @@ input[type=radio]:checked + label + input + textarea{
     width: 0;
     height: 100%;
     z-index: 0;
-    background-color: var(--dark-gray);
-
+    background-color: var(--off-white);
     transition: all 300ms ease-in;
 }
 
 .trackItem:hover::before{
     width: 100%;
+    background-color: var(--off-white);
 }
 
 .trackItem::after{ /*border*/
