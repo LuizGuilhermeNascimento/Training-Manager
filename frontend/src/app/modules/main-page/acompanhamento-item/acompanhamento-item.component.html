@@ -5,7 +5,7 @@
     <h1 class="name">{{ acompanhamento.nomeAluno }}</h1>
     <p class="current">{{ acompanhamento.treinosRealizados }}</p>
     <p class="goal">/ {{ acompanhamento.treinosMeta }}</p>
-    <p class="training">traning · {{ treinosTipo }}</p>
+    <p class="training">training · {{ treinosTipo }}</p>
     <div class="description">
         <div *ngFor="let treino of acompanhamento.treinos">
             <app-treino-item [treino]="treino"></app-treino-item>

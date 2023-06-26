@@ -34,8 +34,9 @@ export class ProfessorPageComponent implements OnInit {
   numTreinosCorreto: boolean = true;
   @ViewChild('meta') meta: ElementRef<HTMLInputElement>;
 
-  nome = '';
-  email = '';
+  nome: string = '';
+  email: string = '';
+  cpf: string = '';
 
   constructor(
     private acompanhamentoService: AcompanhamentoService,
@@ -86,10 +87,19 @@ export class ProfessorPageComponent implements OnInit {
       response.subscribe({
         next: (professor: Professor) => {
           this.nome = professor.nome;
-          this.email = professor.email;
+          this.email = professor.email.toLowerCase();
+          this.cpf = this.formatarCPF(professor.cpf);
         },
       });
     }
+  }
+
+  private formatarCPF(cpf: string): string {
+    let cpfFormatado: string = '';
+    for (let i = 0; i < 9; i += 4) {
+      cpfFormatado = cpfFormatado.concat(cpf.substring(i,i+3)+'.');
+    }
+    return cpfFormatado.concat('-'+cpf.substring(9))
   }
 
   gerarAcompanhamentoVazio() {

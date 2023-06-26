@@ -54,8 +54,8 @@ public class AlunoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable(name = "id") UUID id) {
         if (alunoService.delete(id)) {
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body("Deletado");
+            return ResponseEntity.ok("{ \"message\": \"Aluno deletado com sucesso\" }");
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nao deletado");
+        return ResponseEntity.ok("{ \"message\": \"Não foi possível deletar o aluno\" }");
     }
 }

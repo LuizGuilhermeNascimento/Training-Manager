@@ -20,6 +20,7 @@ export class AlunoPageComponent implements OnInit {
   cpf = '';
   acompanhamento: Acompanhamento | null;
   proximoTreino: Treino | null;
+  desejarExcluirConta: boolean = false;
 
   constructor(
     private router: Router,
@@ -70,8 +71,8 @@ export class AlunoPageComponent implements OnInit {
       response.subscribe({
         next: (aluno: Aluno) => {
           this.nome = aluno.nome;
-          this.email = aluno.email;
-          this.cpf = aluno.cpf;
+          this.email = aluno.email.toLowerCase();
+          this.cpf = this.formatarCPF(aluno.cpf);
           this.acompanhamento = aluno.acompanhamento;
           if (aluno.acompanhamento) {
             this.getProximoTreino(id);
@@ -80,6 +81,15 @@ export class AlunoPageComponent implements OnInit {
       });
     }
   }
+
+  private formatarCPF(cpf: string): string {
+    let cpfFormatado: string = '';
+    for (let i = 0; i < 9; i += 4) {
+      cpfFormatado = cpfFormatado.concat(cpf.substring(i,i+3)+'.');
+    }
+    return cpfFormatado.concat('-'+cpf.substring(9))
+  }
+
 
   private getProximoTreino(id: string | null): void {
     if (id) {
@@ -90,6 +100,20 @@ export class AlunoPageComponent implements OnInit {
           this.proximoTreino = treino;
         },
       });
+    }
+  }
+
+
+  public deletarConta(): void {
+    const id = this.localStorageService.getItem<string>(keys.idKey);
+    if (id) {
+      const response = this.alunoService.deletarContaPorId(id);
+
+      response.subscribe((message) => {
+        console.log(message);
+        this.localStorageService.clear()
+        this.router.navigate(['/','']);
+      })
     }
   }
 }

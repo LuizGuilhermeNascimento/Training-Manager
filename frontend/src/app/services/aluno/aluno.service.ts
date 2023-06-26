@@ -26,4 +26,10 @@ export class AlunoService {
     
     return this.http.get<ListAlunos>(url).pipe(take(1));
   }
+
+  deletarContaPorId(id: string): Observable<any> {
+    const url = `${this.baseUrl}/aluno/${id}`
+
+    return this.http.delete(url).pipe(take(1));
+  }
 }
