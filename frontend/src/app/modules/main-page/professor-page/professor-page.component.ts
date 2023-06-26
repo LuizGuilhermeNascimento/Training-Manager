@@ -96,11 +96,8 @@ export class ProfessorPageComponent implements OnInit {
   }
 
   private formatarCPF(cpf: string): string {
-    let cpfFormatado: string = '';
-    for (let i = 0; i < 9; i += 4) {
-      cpfFormatado = cpfFormatado.concat(cpf.substring(i, i + 3) + '.');
-    }
-    return cpfFormatado.concat('-' + cpf.substring(9));
+    return cpf.substring(0,3) + "." + cpf.substring(3,6) +
+          "." + cpf.substring(6,9) + "-" + cpf.substring(10);
   }
 
   gerarAcompanhamentoVazio() {
