@@ -213,7 +213,7 @@ input[type=radio]:checked + label + input + textarea{
 .trainName:is(:focus),
 .trainName:not(:placeholder-shown) {
     padding: 10px 15px 11px 15px;
-    background-color: var(--dark-gray);
+    background-color: #212121;
     border: none;
 }
 
@@ -231,8 +231,8 @@ input[type=radio]:checked + label + input + textarea{
     padding: 0;
     width: 100%;
     resize: none;
+    border: #424242 1px solid;
     outline: none;
-    border: none;
     scroll-behavior: smooth;
 }
 

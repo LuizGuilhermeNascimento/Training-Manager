@@ -21,8 +21,10 @@
         <p id="welcomeName"> {{nome}}</p>
         <div id="progress" *ngIf="acompanhamento">
             <h1>Progresso</h1>
-            <p id="current">{{acompanhamento.treinosRealizados}}</p>
-            <p id="goal">/ {{acompanhamento.treinosMeta * acompanhamento.treinos.length}}</p>
+            <div id="wrap">
+                <p id="current">{{acompanhamento.treinosRealizados}}</p>
+                <p id="goal">/ {{acompanhamento.treinosMeta * acompanhamento.treinos.length}}</p>
+            </div>
         </div>
     </div>
     <div *ngIf="!acompanhamento">

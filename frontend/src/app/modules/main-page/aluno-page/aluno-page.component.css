@@ -6,6 +6,9 @@
     --dark-gray: #1c1c1c;
     --intermidiate-gray: #3b3b3b;
     --off-black: #141414;
+    --cian: #1adec8;
+    --purple: #ba86fc;
+    --dark-purple: #261f2d;
 }
 
 ::-webkit-scrollbar {
@@ -28,6 +31,8 @@ body{
     grid-template-rows: 80px 1fr;
     align-items: center;
     justify-items: center;
+    user-select: none;
+    overflow: hidden;
 }
 
 #nav{
@@ -86,7 +91,7 @@ body{
 }
 
 #welcome{
-    border: var(--gray) 1px solid;
+    border: var(--purple) 1px solid;
     border-radius: 30px;
     grid-column: span 1;
     width: 90%;
@@ -106,13 +111,14 @@ body{
     left: 14%;
     top: 18%;
     display: inline-block;
+    color: var(--purple);
 }
 
 #welcomeName::after{
     content: '';
     width: 100%;
     height: 7px;
-    background-color: var(--intermidiate-gray);
+    background-color: var(--dark-purple);
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -121,9 +127,10 @@ body{
 
 #welcome #progress{
     position: relative;
-    bottom: -78%;
+    bottom: -75%;
     transform: translateY(-100%);
-    border: green 2px solid;
+    background-color: var(--dark-purple);
+    border-top: var(--purple) 1px solid ;
     height: 40%;
     width: 100%;
     border-radius: 30px;
@@ -131,21 +138,28 @@ body{
 
 #welcome #progress h1{
     position: absolute;
-    top: 5%;
-    left: 5%;
+    top: 10%;
+    left: 10%;
+}
+
+#wrap{
+    position: absolute;
+    display: flex;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%,-50%);
+    column-gap: 10px;
 }
 
 #welcome #progress #current{
-    position: absolute;
-    top: 10%;
-    left: 20%;
     font-size: 120pt;
+    width: fit-content;
 }
 
 #welcome #progress #goal{
-    position: absolute;
-    top: 26%;
-    right: 19%;
+    position: relative;
+    top: 45px;
+    width: max-content;
 }
 
 #workouts{

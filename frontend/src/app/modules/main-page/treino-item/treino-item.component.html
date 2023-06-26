@@ -1,6 +1,5 @@
 <div class="treino">
-  <p class="tipo">Treino {{ treino.tipo }}</p>
-  <p class="nome">{{ treino.nome }}</p>
+  <p class="tipo">Treino {{ treino.tipo }} - {{ treino.nome }}</p>
   <p class="descricao">
     <a *ngFor="let linha of treino.descricao.split('\n')">{{ linha }}<br></a>
   </p>
