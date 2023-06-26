@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Acompanhamento } from 'src/app/models/acompanhamento.model';
 import { Aluno } from 'src/app/models/aluno.model';
-import { Treino } from 'src/app/models/treino.model';
+import { ListTreino, Treino } from 'src/app/models/treino.model';
 import { AcompanhamentoService } from 'src/app/services/acompanhamento/acompanhamento.service';
 import { AlunoService } from 'src/app/services/aluno/aluno.service';
 import { keys } from 'src/app/services/local-storage/keys.json';
@@ -19,6 +19,7 @@ export class AlunoPageComponent implements OnInit {
   email = '';
   cpf = '';
   acompanhamento: Acompanhamento | null;
+  proximosTreinos: Treino[];
   proximoTreino: Treino | null;
   desejarExcluirConta: boolean = false;
 
@@ -48,26 +49,37 @@ export class AlunoPageComponent implements OnInit {
       response.subscribe({
         next: (proximoTreino: Treino) => {
           this.proximoTreino = proximoTreino;
-
-          this.acompanhamentoService.getAcompanhamentoDoAluno(id).subscribe({
-            next: (acompanhamento: Acompanhamento) => {
-              this.acompanhamento = acompanhamento;
-            },
-          });
+          this.getAcompanhamento(id);
+          this.getProximosTreinos(id);
         },
       });
     }
   }
 
+  private getAcompanhamento(id: string): void {
+    this.acompanhamentoService.getAcompanhamentoDoAluno(id).subscribe({
+      next: (acompanhamento: Acompanhamento) => {
+        this.acompanhamento = acompanhamento;
+      },
+    });
+  }
+
+  private getProximosTreinos(id: string): void {
+    this.acompanhamentoService.getProximosTreinos(id).subscribe({
+      next: (treinos: ListTreino) => {
+        this.proximosTreinos = treinos.list;
+      },
+    });
+  }
+
   logOut(): void {
     this.localStorageService.clear();
-    this.router.navigate(['']);
+    this.router.navigate(['/']);
   }
 
   private buildAluno(id: string | null): void {
     if (id) {
       const response = this.alunoService.getAlunoPorId(id);
-
       response.subscribe({
         next: (aluno: Aluno) => {
           this.nome = aluno.nome;
@@ -76,6 +88,7 @@ export class AlunoPageComponent implements OnInit {
           this.acompanhamento = aluno.acompanhamento;
           if (aluno.acompanhamento) {
             this.getProximoTreino(id);
+            this.getProximosTreinos(id);
           }
         },
       });
@@ -85,11 +98,10 @@ export class AlunoPageComponent implements OnInit {
   private formatarCPF(cpf: string): string {
     let cpfFormatado: string = '';
     for (let i = 0; i < 9; i += 4) {
-      cpfFormatado = cpfFormatado.concat(cpf.substring(i,i+3)+'.');
+      cpfFormatado = cpfFormatado.concat(cpf.substring(i, i + 3) + '.');
     }
-    return cpfFormatado.concat('-'+cpf.substring(9))
+    return cpfFormatado.concat('-' + cpf.substring(9));
   }
-
 
   private getProximoTreino(id: string | null): void {
     if (id) {
@@ -103,17 +115,12 @@ export class AlunoPageComponent implements OnInit {
     }
   }
 
-
   public deletarConta(): void {
+    if (!confirm('Tem certeza que deseja excluir sua conta?')) return;
     const id = this.localStorageService.getItem<string>(keys.idKey);
     if (id) {
-      const response = this.alunoService.deletarContaPorId(id);
-
-      response.subscribe((message) => {
-        console.log(message);
-        this.localStorageService.clear()
-        this.router.navigate(['/','']);
-      })
+      this.alunoService.deletarContaPorId(id).subscribe({ error: () => {} });
+      this.logOut();
     }
   }
 }

@@ -2,6 +2,7 @@ package com.projeto_mc322.api.controllers;
 
 import com.projeto_mc322.api.dtos.AcompanhamentoResponseDTO;
 import com.projeto_mc322.api.dtos.CreateAcompanhamentoDTO;
+import com.projeto_mc322.api.dtos.ListTreinoDTO;
 import com.projeto_mc322.api.exceptions.HttpException;
 import com.projeto_mc322.api.models.acompanhamento.Acompanhamento;
 import com.projeto_mc322.api.models.treino.Treino;
@@ -35,6 +36,16 @@ public class AcompanhamentoController {
         }
     }
 
+    @GetMapping("/proximos-treinos/{alunoId}")
+    public ResponseEntity<Object> getProximosTreinos(@PathVariable(name = "alunoId") UUID alunoId) {
+        try {
+            List<Treino> treinos = acompanhamentoService.getProximosTreinos(alunoId);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ListTreinoDTO(treinos));
+        } catch (HttpException e) {
+            return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
+        }
+    }
+
     @PutMapping("/realizar-treino/{alunoId}")
     public ResponseEntity<Object> realizarTreino(@PathVariable(name = "alunoId") UUID alunoId) {
         try {
@@ -48,13 +59,13 @@ public class AcompanhamentoController {
         }
     }
 
-
     @GetMapping("/aluno/{alunoId}")
     public ResponseEntity<Object> getAcompanhamentoAluno(@PathVariable(name = "alunoId") UUID alunoId) {
         try {
             Optional<Acompanhamento> optionalAcompanhamento = acompanhamentoService.getAlunoAcompanhamento(alunoId);
             if (optionalAcompanhamento.isPresent()) {
-                return ResponseEntity.status(HttpStatus.ACCEPTED).body(new AcompanhamentoResponseDTO(optionalAcompanhamento.get()));
+                return ResponseEntity.status(HttpStatus.ACCEPTED)
+                        .body(new AcompanhamentoResponseDTO(optionalAcompanhamento.get()));
             }
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
         } catch (HttpException e) {
@@ -67,7 +78,8 @@ public class AcompanhamentoController {
         try {
             List<Acompanhamento> acompanhamentos = acompanhamentoService.getAcompanhamentosProfessor(professorId);
             List<AcompanhamentoResponseDTO> acompanhamentoResponseDTOS = new ArrayList<>();
-            acompanhamentos.forEach(acompanhamento -> acompanhamentoResponseDTOS.add(new AcompanhamentoResponseDTO(acompanhamento)));
+            acompanhamentos.forEach(
+                    acompanhamento -> acompanhamentoResponseDTOS.add(new AcompanhamentoResponseDTO(acompanhamento)));
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(acompanhamentoResponseDTOS);
         } catch (HttpException e) {
             return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
