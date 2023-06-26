@@ -5,7 +5,17 @@
 
 <body>
     <div id="nav">
+        <div id="conteiner">
+            <p class="informacoes">NOME: nome</p>
+            <p class="informacoes">CPF: 123.456.789-10</p>
+            <p class="informacoes">EMAIL: jeofji@gmial.com </p>
+            <div class="informacoes">
+                <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM472 200H616c13.3 0 24 10.7 24 24s-10.7 24-24 24H472c-13.3 0-24-10.7-24-24s10.7-24 24-24z"/></svg>
+            </div>
+        </div>
+        <input id="userInfo" type="checkbox">
         <div id="profile">
+            <label id="botaoUserInfo" for="userInfo"></label>
             <div id="photo"></div>
             <p id="username">{{nome}}</p>
             <p id="email">{{email}}</p>
@@ -16,19 +26,16 @@
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V17.25C4.75 18.3546 5.64543 19.25 6.75 19.25H15.25"></path>
         </svg>
     </div>
-    <div id="welcome">
+    <div id="welcome" *ngIf="acompanhamento">
         <p id="welcomeMessage">Welcome Back!</p>
         <p id="welcomeName"> {{nome}}</p>
-        <div id="progress" *ngIf="acompanhamento">
+        <div id="progress">
             <h1>Progresso</h1>
             <div id="wrap">
                 <p id="current">{{acompanhamento.treinosRealizados}}</p>
                 <p id="goal">/ {{acompanhamento.treinosMeta * acompanhamento.treinos.length}}</p>
             </div>
         </div>
-    </div>
-    <div *ngIf="!acompanhamento">
-        Um professor irá criar um acompanhamento para você
     </div>
     <div id="workouts" *ngIf="acompanhamento">
         <div class="training" id="today" *ngIf="proximoTreino">
@@ -38,9 +45,12 @@
                     {{line}}<br>
                 </a>
             </p>
-            <button (click)="finalizarTreino()">FINALIZAR TREINO</button>
+            <button (click)="finalizarTreino()">
+                <span>FINALIZAR TREINO</span>
+            </button>
         </div>
         <div id="next">
+            <h2>Próximos Treinos</h2>
             <div class="training" *ngFor="let treino of acompanhamento.treinos">
                 <h1>Treino {{treino.tipo}}</h1>
                 <p class="description">
@@ -53,13 +63,20 @@
     </div>
     <div id="track" *ngIf="acompanhamento">
         <h1>Treinos</h1>
-        <div class="trackWorkouts" *ngFor="let treino of acompanhamento.treinos">
-            <h2>{{treino.tipo}}</h2>
-            <p> 
-                <a *ngFor="let line of treino.descricao.split('\n')">
-                {{line}}<br>
-            </a>
-            </p>
+        <div id="treinoGrid">
+            <div class="trackWorkouts" *ngFor="let treino of acompanhamento.treinos">
+                <h2>{{treino.tipo}}</h2>
+                <p> 
+                    <a *ngFor="let line of treino.descricao.split('\n')">
+                    {{line}}<br>
+                    </a>
+                </p>
+            </div>
         </div>
+    </div>
+    <div id="vazio" *ngIf="!acompanhamento">
+        <h1>BEM VINDO DE VOLTA!</h1>
+        <p id="name"> {{nome}}</p>
+        <p>Um professor irá criar um acompanhamento para você.</p>
     </div>
 </body>

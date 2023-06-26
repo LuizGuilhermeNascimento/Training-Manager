@@ -11,11 +11,13 @@
     <button class="sign" (click)="navigateToRegister()">REGISTRAR</button>
 
     <div class="signIn">
-        <p>HIRE US NOW - WE'RE HERE TO ASSIST YOU. DROP US A LINE, AND WE'LL GET BACK TO YOU IN A BLINK OF AN EYE.</p>
+        <p>Sua jornada continua aqui.<br>
+            Entre para desfrutar de uma <br>
+            experiência personalizada.</p>
         <p id="error">{{errorMessage}}</p>
         <div class="form" (keyup.enter)="onSubmit()">
             <input class="first" type="email" placeholder="E-MAIL" [(ngModel)]="user.email">
-            <input type="password" placeholder="PASSWORD" [(ngModel)]="user.senha">
+            <input type="password" placeholder="SENHA" [(ngModel)]="user.senha">
         </div>
         <button id="enter" (click)="onSubmit()"> 
             <span>ENTER</span>
@@ -23,7 +25,7 @@
     </div>
 
     <div id="call">
-        <p>WELCOME<br>
-            BACK
+        <p>BEM-VINDO<br>
+            DE VOLTA.
     </div>
 </div>

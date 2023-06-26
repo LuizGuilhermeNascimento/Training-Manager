@@ -6,9 +6,6 @@
     --dark-gray: #1c1c1c;
     --intermidiate-gray: #3b3b3b;
     --off-black: #141414;
-    --cian: #1adec8;
-    --purple: #ba86fc;
-    --dark-purple: #261f2d;
 }
 
 ::-webkit-scrollbar {
@@ -28,7 +25,7 @@ body{
     color: var(--off-white);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 80px 1fr;
+    grid-template-rows: 80px 400px 1fr;
     align-items: center;
     justify-items: center;
     user-select: none;
@@ -90,12 +87,110 @@ body{
     height: fit-content;
 }
 
+#userInfo{
+    display: none;
+}
+
+#conteiner{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 75%;
+    left: 5%;
+    display: flex;
+    justify-content: space-between;
+    justify-items: left;
+}
+
+.informacoes{
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    color: transparent;
+    fill: transparent;
+    user-select: none;
+}
+
+#conteiner:has(+ #userInfo:checked) .informacoes{
+    animation: animacaoInfo 700ms linear forwards;
+}
+
+@keyframes animacaoInfo{
+    0%{
+        color: transparent;
+        fill: transparent;
+    }
+    20%{
+        color: transparent;
+        fill: transparent;
+    }
+    60%{
+        color: var(--off-white);
+        fill: var(--off-white);
+    }
+    100%{
+        color: var(--off-white);
+        fill: var(--off-white);
+    }
+}
+
+#conteiner:has(+ #userInfo:checked) .informacoes::after{
+    content: '';
+    height: 110%;
+    background-color: var(--off-white);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: animacao 700ms linear backwards;
+}
+
+@keyframes animacao {
+    0% {
+        width: 0%;
+    }
+    25% {
+        width: 100%;
+    }
+    75% {
+        left: 0;
+        width: 100%;
+    }
+    100% {
+        left: 100%;
+        width: 0;
+    }
+}
+
+.informacoes svg{
+    top: 3px;
+    width: 20px;
+    cursor: pointer;
+    
+    transition: all 300ms ease-out;
+}
+
+.informacoes svg:hover{
+    fill: #ea5959;
+}
+
+#botaoUserInfo{
+    position: absolute;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border: 0;
+    z-index: 1;
+}
+
 #welcome{
-    border: var(--purple) 1px solid;
+    border: #e5e7e9 1px dashed;
     border-radius: 30px;
     grid-column: span 1;
-    width: 90%;
-    height: 90%;
+    grid-row: span 2;
+    width: 95%;
+    height: 95%;
     font-size: 36pt;
     position: relative;
 }
@@ -111,14 +206,14 @@ body{
     left: 14%;
     top: 18%;
     display: inline-block;
-    color: var(--purple);
+    color: #e5e7e9;
 }
 
 #welcomeName::after{
     content: '';
     width: 100%;
     height: 7px;
-    background-color: var(--dark-purple);
+    background-color: #444c53;
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -127,10 +222,9 @@ body{
 
 #welcome #progress{
     position: relative;
-    bottom: -75%;
+    bottom: -76.3%;
     transform: translateY(-100%);
-    background-color: var(--dark-purple);
-    border-top: var(--purple) 1px solid ;
+    background-color: #444c53;
     height: 40%;
     width: 100%;
     border-radius: 30px;
@@ -163,17 +257,19 @@ body{
 }
 
 #workouts{
-    grid-column: span 1;
-    width: 100%;
-    height: 100%;
+    grid-column: span 2;
+    width: 98%;
     position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 380px;
+    justify-items: center;
+    top: 3%;
 }
 
 .training{
     position: relative;
-    border: red 2px solid;
-    height: 260px;
-    width: 90%;
+    height: 300px;
     border-radius: 30px;
 }
 
@@ -189,13 +285,27 @@ body{
     transform: translateX(-50%);
     height: 140px;
     overflow-y: scroll;
+    background-color: #252525;
+    border: var(--intermidiate-gray) 1px solid;
+}
+
+#training .description::-webkit-scrollbar {
+    width: 3px;
+}
+
+#training .description::-webkit-scrollbar-thumb{
+    background-color: var(--intermidiate-gray);
+    border-radius: 3.5px;
 }
 
 #today{
-    position: relative;
-    top: 5%;
-    height: 40%;
-    width: 100%;
+    grid-column: span 1;
+    height: 100%;
+    width: 90%;
+    background-image: url(vazio.jpg);
+    background-image: url(vazio.jpg);
+    background-position: center;
+    text-align: center;
 }
 
 #today button{
@@ -203,26 +313,76 @@ body{
     bottom: 7%;
     left: 50%;
     transform: translateX(-50%);
-    width: 80%;
+    width: 70%;
     height: 13%;
+    border: none;
     outline: none;
+    font-size: 10pt;
+    font-weight: 900;
+    letter-spacing: 3px;
+    right: 0;
+    background-color: var(--off-white);
+    color: var(--dark-gray);
+    padding: 10px 35px 10px 35px;
+    cursor: pointer;
+}
+
+#today .description{
+    background-color: #252525;
+    border: var(--gray) 2px dashed;
+    border-radius: 20px;
+    height: 50%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+
+#today span {
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+   
+#today span:after {
+    content: '✓';
+    position: absolute;
+    opacity: 0;
+    top: -10%;
+    right: -25px;
+    font-size: 11pt;
+    transition: 0.5s;
+}
+   
+#today:hover span {
+    padding-right: 25px;
+}
+   
+#today:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+#next .training{
+    bottom: -30px;
 }
 
 #next{
-    position: absolute;
-    bottom: 0;
-    height: 52%;
-    width: 100%;
-    overflow-y: scroll;
+    grid-column: span 1;
     display: grid;
-    grid-template-columns: 1fr;
-    justify-items: center;
+    grid-auto-flow: column;
+    grid-auto-columns: 70%;
+    column-gap: 20px;
+    overflow-x: scroll;
     padding: 30px 0 0 0;
     row-gap: 40px;
+    height: 380px;
+    width: 100%;
+    scroll-behavior: smooth;
+    overscroll-behavior-inline: contain;
 }
 
 #next::-webkit-scrollbar {
-    width: 3px;
+    height: 5px;
 }
 
 #next::-webkit-scrollbar-thumb{
@@ -230,68 +390,125 @@ body{
     border-radius: 3.5px;
 }
 
-#track{
-    grid-column: span 1;
-    border: blue 2px solid;
-    border-radius: 30px;
-    background-color: var(--off-white);
-    width: 90%;
-    height: 90%;
-    padding: 50px;
-    color: var(--dark-gray);
-    overflow-y: scroll;
-    scroll-behavior: smooth;
+#next h2{
+    position: absolute;
+    padding: 10px 0 0 35px;
 }
 
-track::-webkit-scrollbar {
-    width: 4px;
+#track{
+    grid-column: span 2;
+    border-radius: 30px;
+    background-color: var(--dark-gray);
+    width: 98%;
+    height: 90%;
+    padding: 20px 30px 5px 35px;
+    color: var(--off-white);
 }
 
 #track h1{
     font-size: 36pt;
-    border-bottom: var(--gray) 1px solid;
     padding-bottom: 5px;
+}
+
+#treinoGrid{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 1028px;
+    height: 285px;
 }
 
 .trackWorkouts{
     position: relative;
-    height: 50px;
+    height: 85%;
+    flex: 1;
+    background-color: #222222;
     overflow-y: hidden;
     transition: 0.7s;
+    border-left: var(--off-white) 1px solid;
+    border-right: var(--off-white) 1px solid;
 }
 
 .trackWorkouts h2{
     position: absolute;
     right: 50%;
     transform: translateX(+50%);
+    top: 3%;
 }
 
 .trackWorkouts p{
     position: absolute;
-    top: 60px;
+    top: 23%;
     left: 5%;
+    background-color: #252525;
+    border: var(--intermidiate-gray) 1px solid;
+    padding: 2px 4px 2px 4px;
+    width: 90%;
+    height: 75%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 
-.trackWorkouts::after{
+.trackWorkouts p::-webkit-scrollbar {
+    width: 3px;
+}
+
+.trackWorkouts p::-webkit-scrollbar-thumb{
+    background-color: var(--gray);
+    border-radius: 3.5px;
+}
+
+#track:hover .trackWorkouts{
+    color: var(--lightter-gray);
+}
+
+#track:hover .trackWorkouts:hover{  /* não tem como ajustar a altura ao conteudo, height: auto não funciona*/
+    flex: 3;
+    color: var(--dark-graygray);
+}
+
+#vazio{
+    grid-row: span 2;
+    grid-column: span 3;
+    background-image: url(./vazio.jpg);
+    background-size: cover;
+    background-position: center;
+    width: 80%;
+    height: 80%;
+    border-radius: 30px;
+    text-align: center;
+    color: var(--off-white);
+}
+
+#vazio h1{
+    font-size: 56pt;
+    position: relative;
+    top:18%;
+    text-transform: uppercase;
+}
+
+#vazio #name{
+    font-size: 56pt;
+    position: relative;
+    top:15%;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+#vazio #name::after{
     content: '';
+    display: block;
     width: 100%;
-    height: 1px;
-    background-color: var(--light-gray);
+    height: 4px;
+    background-color: var(--intermidiate-gray);
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
 }
 
-#track:hover .trackWorkouts{
-    color: var(--light-gray);
-}
-
-#track:hover .trackWorkouts::after{
-    background-color: var(--lightter-gray);
-}
-
-#track:hover .trackWorkouts:hover{  /* não tem como ajustar a altura ao conteudo, height: auto não funciona*/
-    height: 500px;
-    color: var(--dark-graygray);
+#vazio p{
+    position: relative;
+    top:30%;
+    font-size: 24pt;
 }

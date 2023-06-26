@@ -38,6 +38,102 @@ body{
     cursor: pointer;
 }
 
+#userInfo{
+    display: none;
+}
+
+#conteiner{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 75%;
+    left: 5%;
+    display: flex;
+    justify-content: space-between;
+    justify-items: left;
+}
+
+.informacoes{
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    color: transparent;
+    fill: transparent;
+    user-select: none;
+}
+
+#conteiner:has(+ #userInfo:checked) .informacoes{
+    animation: animacaoInfo 700ms linear forwards;
+}
+
+@keyframes animacaoInfo{
+    0%{
+        color: transparent;
+        fill: transparent;
+    }
+    20%{
+        color: transparent;
+        fill: transparent;
+    }
+    60%{
+        color: var(--off-white);
+        fill: var(--off-white);
+    }
+    100%{
+        color: var(--off-white);
+        fill: var(--off-white);
+    }
+}
+
+#conteiner:has(+ #userInfo:checked) .informacoes::after{
+    content: '';
+    height: 110%;
+    background-color: var(--off-white);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: animacao 700ms linear backwards;
+}
+
+@keyframes animacao {
+    0% {
+        width: 0%;
+    }
+    25% {
+        width: 100%;
+    }
+    75% {
+        left: 0;
+        width: 100%;
+    }
+    100% {
+        left: 100%;
+        width: 0;
+    }
+}
+
+.informacoes svg{
+    top: 3px;
+    width: 20px;
+    cursor: pointer;
+    
+    transition: all 300ms ease-out;
+}
+
+.informacoes svg:hover{
+    fill: #ea5959;
+}
+
+#botaoUserInfo{
+    position: absolute;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 1;
+}
+
 #profile{
     position: absolute;
     top: 4.5vh;
@@ -153,7 +249,7 @@ input[type="radio"]{
     display: none;
 }
 
-label{
+.newTraining label{
     border: var(--gray) 2px dotted;
     width: 100%;
     height: 40px;
@@ -229,6 +325,7 @@ input[type=radio]:checked + label + input + textarea{
     color: var(--off-white);
     height: 0;
     padding: 0;
+    margin: 0;
     width: 100%;
     resize: none;
     border: #424242 1px solid;

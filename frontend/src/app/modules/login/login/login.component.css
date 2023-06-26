@@ -12,6 +12,7 @@
     background-position: center;
     font-family: 'Lato', 'Space Grotesk';
     color: #141414;
+    user-select: none;
 }
 
 svg{
@@ -69,7 +70,8 @@ svg{
 }
 
 #call {
-    top: 20%;
+    top: 50%;
+    transform: translateY(-50%);
     right: 20%;
     font-family: 'Space Grotesk';
     position: absolute;
@@ -171,7 +173,53 @@ input::placeholder{
 
 #error{
     position: absolute;
-    top: 28%;
+    top: 27%;
     left: 28%;
-    color: #ed4337;
+    color: transparent;
+    width: max-content;
+    animation: animacaoInfo 700ms linear forwards;
+    animation-delay: 1s;
+}
+
+@keyframes animacaoInfo{
+    0%{
+        color: transparent;
+    }
+    50%{
+        color: transparent;
+    }
+    60%{
+        color: #ed4337;
+    }
+    100%{
+        color: #ed4337;
+    }
+}
+
+#error::after{
+    content: '';
+    height: 110%;
+    background-color: #ed4337;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: animacao 500ms linear backwards;
+    animation-delay: 1s;
+}
+
+@keyframes animacao {
+    0% {
+        width: 0%;
+    }
+    50% {
+        width: 100%;
+    }
+    75% {
+        left: 0;
+        width: 100%;
+    }
+    100% {
+        left: 100%;
+        width: 0;
+    }
 }

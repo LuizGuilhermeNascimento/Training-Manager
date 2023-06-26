@@ -101,3 +101,17 @@
     background-color: var(--gray);
     border-radius: 3.5px;
 }
+
+svg{
+    fill:#313131;
+    width: 30px;
+    position: absolute;
+    top: 58px;
+    left: 5%;
+    transition: 300ms ease-out;
+    cursor: pointer;
+}
+
+svg:hover{
+    fill: #56AE57;
+}

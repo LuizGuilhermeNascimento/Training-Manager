@@ -209,7 +209,6 @@ label::after {
 }
 
 .inputs p{
-    color: var(--error);
     font-size: 12pt;
     position: relative;
     left: 20px;
@@ -258,6 +257,54 @@ input::placeholder{
     position: absolute;
     top: 65px;
     left: 25%;
-    color: #ed4337;
     user-select: none;
+}
+
+.error{
+    color: transparent;
+    width: max-content;
+    animation: animacaoInfo 500ms linear forwards;
+    font-weight: 600;
+}
+
+@keyframes animacaoInfo{
+    0%{
+        color: transparent;
+    }
+    50%{
+        color: transparent;
+    }
+    60%{
+        color: #ed4337;
+    }
+    100%{
+        color: #ed4337;
+    }
+}
+
+.error::after{
+    content: '';
+    height: 100%;
+    background-color: #ed4337;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: animacao 400ms linear backwards;
+}
+
+@keyframes animacao {
+    0% {
+        width: 0%;
+    }
+    50% {
+        width: 100%;
+    }
+    75% {
+        left: 0;
+        width: 100%;
+    }
+    100% {
+        left: 100%;
+        width: 0;
+    }
 }
