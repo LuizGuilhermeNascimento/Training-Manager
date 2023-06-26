@@ -45,7 +45,7 @@
                     {{line}}<br>
                 </a>
             </p>
-            <button (click)="finalizarTreino()">
+            <button (click)="finalizarTreino()" [disabled]="metaAtingida">
                 <span>FINALIZAR TREINO</span>
             </button>
         </div>

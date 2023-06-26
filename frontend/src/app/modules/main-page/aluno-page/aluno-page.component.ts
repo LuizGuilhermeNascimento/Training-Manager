@@ -22,6 +22,7 @@ export class AlunoPageComponent implements OnInit {
   proximosTreinos: Treino[];
   proximoTreino: Treino | null;
   desejarExcluirConta: boolean = false;
+  metaAtingida: boolean = false;
 
   constructor(
     private router: Router,
@@ -60,8 +61,15 @@ export class AlunoPageComponent implements OnInit {
     this.acompanhamentoService.getAcompanhamentoDoAluno(id).subscribe({
       next: (acompanhamento: Acompanhamento) => {
         this.acompanhamento = acompanhamento;
+        this.verificarMetaAtingida(acompanhamento);
       },
     });
+  }
+
+  private verificarMetaAtingida(acompanhamento: Acompanhamento): void {
+    this.metaAtingida =
+      acompanhamento.treinosRealizados >=
+      acompanhamento.treinosMeta * acompanhamento.treinos.length;
   }
 
   private getProximosTreinos(id: string): void {
@@ -89,6 +97,7 @@ export class AlunoPageComponent implements OnInit {
           if (aluno.acompanhamento) {
             this.getProximoTreino(id);
             this.getProximosTreinos(id);
+            this.verificarMetaAtingida(aluno.acompanhamento);
           }
         },
       });

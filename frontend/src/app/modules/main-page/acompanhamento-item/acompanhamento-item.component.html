@@ -4,7 +4,7 @@
     </svg>
     <h1 class="name">{{ acompanhamento.nomeAluno }}</h1>
     <p class="current">{{ acompanhamento.treinosRealizados }}</p>
-    <p class="goal">/ {{ acompanhamento.treinosMeta }}</p>
+    <p class="goal">/ {{ acompanhamento.treinosMeta * acompanhamento.treinos.length }}</p>
     <p class="training">training · {{ treinosTipo }}</p>
     <div class="description">
         <div *ngFor="let treino of acompanhamento.treinos">

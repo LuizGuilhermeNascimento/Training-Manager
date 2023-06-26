@@ -174,8 +174,17 @@ export class ProfessorPageComponent implements OnInit {
   }
   verificarCamposVazios() {
     this.campoVazio =
-      this.nomeAlunoNovoAcomp == '' || this.novoAcompanhamento.treinosMeta == 0;
+      this.novoAcompanhamento.treinos.length == 0 ||
+      this.nomeAlunoNovoAcomp == '' ||
+      this.novoAcompanhamento.treinosMeta == 0
+      this.verificarTreinoVazio();
   }
+
+  private verificarTreinoVazio(): boolean {
+    const treino: Treino = this.novoAcompanhamento.treinos[-1];
+    return treino.descricao == "" || treino.nome == "" 
+  }
+
   changeMetaTreinos() {
     let metaAtual: number = parseInt(this.meta.nativeElement.value);
     if (!(metaAtual >= 10 && metaAtual <= 30)) {
@@ -238,6 +247,8 @@ export class ProfessorPageComponent implements OnInit {
     this.verificarCamposVazios();
     this.setAlunoId();
     console.log(this.novoAcompanhamento);
+    if (this.campoVazio) return;
+
     this.acompanhamentoService
       .createAcompanhamento(this.novoAcompanhamento)
       .subscribe({
@@ -246,7 +257,6 @@ export class ProfessorPageComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           // todo error message
-          alert(error.error);
           // console.log(error);
         },
       });
