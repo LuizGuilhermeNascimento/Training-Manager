@@ -114,6 +114,7 @@ body{
     color: transparent;
     fill: transparent;
     user-select: none;
+    right: 5vh;
 }
 
 #conteiner:has(+ #userInfo:checked) .informacoes{

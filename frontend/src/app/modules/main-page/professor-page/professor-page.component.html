@@ -80,7 +80,7 @@
             <h1>Acompanhamentos</h1>
         </div>
         <div class="itens" *ngFor="let acompanhamento of acompanhamentos">
-            <app-acompanhamento-item [acompanhamento]="acompanhamento"></app-acompanhamento-item>
+            <app-acompanhamento-item (deleteAcomp)="restoreAcompanhamentosProfessor()" [acompanhamento]="acompanhamento"></app-acompanhamento-item>
         </div>
     </div>
 </body>

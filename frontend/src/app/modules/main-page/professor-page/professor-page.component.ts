@@ -96,8 +96,15 @@ export class ProfessorPageComponent implements OnInit {
   }
 
   private formatarCPF(cpf: string): string {
-    return cpf.substring(0,3) + "." + cpf.substring(3,6) +
-          "." + cpf.substring(6,9) + "-" + cpf.substring(10);
+    return (
+      cpf.substring(0, 3) +
+      '.' +
+      cpf.substring(3, 6) +
+      '.' +
+      cpf.substring(6, 9) +
+      '-' +
+      cpf.substring(10)
+    );
   }
 
   gerarAcompanhamentoVazio() {
@@ -173,13 +180,13 @@ export class ProfessorPageComponent implements OnInit {
     this.campoVazio =
       this.novoAcompanhamento.treinos.length == 0 ||
       this.nomeAlunoNovoAcomp == '' ||
-      this.novoAcompanhamento.treinosMeta == 0
-      this.verificarTreinoVazio();
+      this.novoAcompanhamento.treinosMeta == 0;
+    this.verificarTreinoVazio();
   }
 
   private verificarTreinoVazio(): boolean {
     const treino: Treino = this.novoAcompanhamento.treinos[-1];
-    return treino.descricao == "" || treino.nome == "" 
+    return treino && (treino.descricao == '' || treino.nome == '');
   }
 
   changeMetaTreinos() {

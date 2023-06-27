@@ -231,7 +231,7 @@ input::-webkit-inner-spin-button {
 
 .newTraining{
     width: 100%;
-    height: 480px;
+    height: 58vh;
     display: grid;
     grid-template-columns: 1fr;
     overflow-y: scroll;
