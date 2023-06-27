@@ -103,7 +103,7 @@ export class ProfessorPageComponent implements OnInit {
       '.' +
       cpf.substring(6, 9) +
       '-' +
-      cpf.substring(10)
+      cpf.substring(9)
     );
   }
 
@@ -209,7 +209,7 @@ export class ProfessorPageComponent implements OnInit {
   alunoExiste(): boolean {
     let existe: boolean = false;
     this.alunosAssociados.forEach((aluno) => {
-      if (aluno.nome == this.nomeAlunoNovoAcomp.trim()) {
+      if (aluno.nome.toLowerCase() == this.nomeAlunoNovoAcomp.trim().toLowerCase()) {
         existe = true;
       }
     });
