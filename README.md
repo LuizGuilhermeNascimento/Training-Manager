@@ -1,27 +1,3 @@
-# projeto_mc322
-Participantes
-  <table>
-      <thead>
-          <tr>
-              <th>Nome</th>
-              <th>RA</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr>
-              <td>Eliel Oliveira da Silva</td>
-              <td>221437</td>
-          </tr>
-          <tr>
-              <td>Luiz Guilherme Nascimento</td>
-              <td>230667</td>
-          </tr>
-          <tr>
-              <td>Victor Wu</td>
-              <td>231467</td>
-          </tr>
-      </tbody>
-  </table>
 
 # Como Executar a Aplicação:
 
