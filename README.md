@@ -1,12 +1,12 @@
-# Como Executar a Aplicação:
+# How to Run the Application:
 
-Versões utilizadas:
+Used versions:
 
   <table>
       <thead>
           <tr>
-              <th>Dependencia</th>
-              <th>Versão</th>
+              <th>Dependency</th>
+              <th>Version</th>
           </tr>
       </thead>
       <tbody>
@@ -29,69 +29,69 @@ Versões utilizadas:
       </tbody>
   </table>
 
-### Executando:
+### Running:
 
-> na pasta projeto_mc322/api
+> in project_mc322/api folder
 ```
 mvn spring-boot:run
 ```
 
-Se tudo der certo, a api deve rodar no localhost:8080. <i>(caso esse comando não funcione, é possível executar pelas IDE's vscode/intellij clicando no botão)</i>
+If all goes well, the api should run on localhost:8080. <i>(if this command doesn't work, you can run it through the IDE's vscode/intellij by clicking on the button)</i>
 
 
-> na pasta projeto_mc322/frontend
+> in project_mc322/frontend folder
 ```
 npm i
 ```
 ```
 npm start
 ```
-ou
+or
 ```
-npx ng serve
+npx ng serves
 ```
 
-Se tudo der certo, o site deve rodar no localhost:4200
+If all goes well, the site should run on localhost:4200
 
-Utilizamos o Intellij para trabalhar na pasta api, e o Visual Studio Code para trabalhar na pasta frontend. No entanto, o Visual Studio Code pode ser utilizado para ambas.
+We use Intellij to work in the api folder, and Visual Studio Code to work in the frontend folder. However, Visual Studio Code can be used for both.
   
-# Frameworks e funcionamento geral do sistema
-O sistema foi dividido em duas partes: o backend (na pasta api), contendo as regras de negócio da aplicação, bem como o gerenciamento dos dados em arquivo, feito com o framework <b>Spring Boot</b> em java, e o frontend (pasta frontend :D), contendo a contrução da parte gráfica utilizando o framework web <b>Angular</b>, em <b>Typescript</b>.
+# Frameworks and general functioning of the system
+The system was divided into two parts: the backend (in the api folder), containing the application's business rules, as well as data management in a file, done with the <b>Spring Boot</b> framework in java, and the frontend (folder frontend :D), containing the construction of the graphic part using the <b>Angular</b> web framework, in <b>Typescript</b>.
 
-Basicamente, o backend consiste em uma <b>API Rest</b>, que permite a criação de rotas especificias para obter e enviar dados, enquanto que essas rotas são acessadas pelo frontend através de requisições <b>HTTP</b> (get, post, delete, put,...)
+Basically, the backend consists of a <b>Rest API</b>, which allows the creation of specific routes to obtain and send data, while these routes are accessed by the frontend through <b>HTTP</b> requests ( get, post, delete, put,...)
 
 ![diagrama-funcionamento-api](https://github.com/LuizGuilhermeNascimento/projeto_mc322/assets/52840354/5b44c84e-6f7b-498a-91cc-943636ac9155)
 
  
  
-># O Projeto
-O projeto consiste em uma aplicação de uma academia, que permite um que um professor acompanhe o desenvolvimento do aluno. O professor receita um treino ao aluno, e quando a meta for atingida, o professor troca o treino do aluno.
+>> The Project
+The project consists of an application of a gym, which allows a teacher to follow the student's development. The teacher prescribes training for the student, and when the goal is reached, the teacher changes the student's training.
 
-Segue o diagrama UML do projeto:
+Here is the UML diagram of the project:
 ![UML_final_322 drawio](https://github.com/LuizGuilhermeNascimento/projeto_mc322/assets/52840354/0f2cad45-95db-4d02-b177-d678ac64e46d)
 
-# Arquivos
+# Files
 
-Os dados são salvos em arquivos .json. Basicamente, os dados ficam salvos na pasta <b>dados/<Nome da Classe do Objeto\>/<id do Objeto\>.json</b>, sendo cada arquivo para um único objeto.
-Pelo diagrama uml, algumas classes implementam a interface JsonSerializable
+Data is saved in .json files. Basically, the data is saved in the folder <b>data/<Object Class Name\>/<Object id\>.json</b>, each file being for a single object.
+By uml diagram, some classes implement JsonSerializable interface
 ```java
 public interface JsonSerializable {
   UUID getId();
   JsonObject writeJson();
 }
 ```
-Como o nome do arquivo recebe o id do objeto, os objetos serializaveis precisam ter um getId. 
+As the file name takes the object id, serializable objects need to have a getId.
 
-Similarmente, cada classe escreve os dados em arquivos de uma forma diferente, por isso o método writeJson existe.
+Similarly, each class writes data to files in a different way, which is why the writeJson method exists.
 
-Assim, o método responsável por gravar o arquivo recebe um JsonSerializable, chamando os dois métodos
+Thus, the method responsible for writing the file receives a JsonSerializable, calling both methods
 
 
-# Manipulação dos Dados
+# Data Manipulation
 ![UML_final_322-Página-2 drawio](https://github.com/LuizGuilhermeNascimento/projeto_mc322/assets/52840354/e9dfd50b-b39d-49bc-b590-af69537aa5d4)
 
-Os dados são salvos e acessados a partir de classes 'Repository'
+Data is saved and accessed from 'Repository' classes
 
-Os Repositories das classes Aluno, Professor e Acompanhamento herdam uma classe abstrata RepositoryBase, contendo implementações genéricas
+The Repositories of the Student, Teacher and Monitoring classes inherit an abstract RepositoryBase class, containing generic implementations
 
-Esses repositories são chamados em classes de serviço, que realizam operações que, por sua vez, são chamadas em classes controllers, que definem as rotas que serão chamadas no site.
+These repositories are called in service classes, which perform operations that, in turn, are called in controller classes, which define the routes that will be called on the site.
