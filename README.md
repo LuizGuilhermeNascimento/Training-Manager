@@ -1,4 +1,3 @@
-
 # Como Executar a Aplicação:
 
 Versões utilizadas:
